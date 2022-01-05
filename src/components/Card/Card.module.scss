@@ -1,6 +1,9 @@
+@import "../../global-styles/media-query-mixin";
+
+
 .card {
-  --cardHight: 20vw;
-  --stackTop : 70px;
+  --cardHight: min(50vw,200px);
+  --stackTop : 20px;
   min-height: 100px;
   height: var(--cardHight);
   width: calc(var(--cardHight) / 2 + 50px);
@@ -50,4 +53,13 @@
 }
 .card.stack:nth-child(4n) {
   transform: rotate(-30deg);
+}
+
+
+@include media("<medium") {
+
+  .card{
+    --cardHight:80px;
+  }
+	
 }

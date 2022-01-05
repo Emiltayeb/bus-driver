@@ -1,0 +1,51 @@
+@import "../../../global-styles/media-query-mixin";
+
+$primary-button-color:rgba(255, 255, 255, 0.8);
+
+.Root{
+	display: flex;
+
+	
+	.buttons{
+		display: flex;
+		flex: 1;
+		width: 100%;
+		justify-content: center;
+		gap: 1rem;
+		
+	}
+	
+	p{
+		font-size: 0.7rem;
+	}
+}
+
+
+
+@include media(">medium") {
+	.Root{
+		align-items: center;
+		
+		.headers{
+			flex: 1;
+			display: flex;
+			justify-content: space-around;
+		}
+	 }
+	
+}
+@include media("<medium") {
+	.Root{
+		flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.headers{
+		display: flex;
+    justify-content: space-around;
+    flex: 1;
+    width: 100%;
+	}
+	 }
+	
+}

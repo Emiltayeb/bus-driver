@@ -1,7 +1,9 @@
+
 import React from 'react'
 import { useCardsContext } from 'context/card-context'
 import CardsGameZone from './cards-game-zone'
 import GameControlsBar from './game-controls-bar'
+import classes from "./game.module.scss";
 
 const GameScreen = function () {
 	const { creatDeck } = useCardsContext()
@@ -11,7 +13,7 @@ const GameScreen = function () {
 		creatDeck()
 	}, [])
 
-	return <div>
+	return <div className={classes.Root}>
 		<GameControlsBar />
 		{/* cards level platform.*/}
 		<CardsGameZone />

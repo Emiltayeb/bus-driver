@@ -1,5 +1,5 @@
 import * as React from "react";
-import classes from "./Card.module.css";
+import classes from "./Card.module.scss";
 import * as CardTypes from "types/card-type";
 
 type CardProps = {

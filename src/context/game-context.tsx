@@ -1,10 +1,10 @@
 import * as React from 'react';
-
+import { LevelOptionsType } from "types/rule-validator-type"
 interface CardContextType {
 	isGameActive: boolean,
 	setIsGameActive: React.Dispatch<React.SetStateAction<boolean>>,
-	level: 1 | 2 | 3,
-	setLevel: React.Dispatch<React.SetStateAction<1 | 2 | 3>>,
+	level: LevelOptionsType,
+	setLevel: React.Dispatch<React.SetStateAction<LevelOptionsType>>,
 }
 
 const GameContext = React.createContext<CardContextType>({
