@@ -1,0 +1,12 @@
+.Root{
+	min-height: 80vh;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.GamePlatform{
+	flex:1
+}
+

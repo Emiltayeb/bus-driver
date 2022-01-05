@@ -1,0 +1,53 @@
+.card {
+  --cardHight: 20vw;
+  --stackTop : 70px;
+  min-height: 100px;
+  height: var(--cardHight);
+  width: calc(var(--cardHight) / 2 + 50px);
+  position: relative;
+  background-color: white;
+  border: 1px solid black;
+  font-size: calc((var(--cardHight) / 2) + 10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card.red {
+  color: red;
+}
+
+.card.black {
+  color: black;
+}
+
+.card::before {
+  font-size: 1rem;
+  position: absolute;
+  content: attr(data-value);
+  bottom: 10px;
+  right: 10px;
+  transform: rotateY(180deg);
+}
+.card::after {
+  font-size: 1rem;
+  position: absolute;
+  content: attr(data-value);
+  top: 10px;
+  left: 10px;
+}
+
+/* cards errors. stack the cards in top of each other */
+.card.stack:not(:first-child):nth-child(odd) {
+  
+  position: absolute;
+  top: var(--stackTop);
+}
+.card.stack:nth-child(even) {
+  position: absolute;
+  top: var(--stackTop);
+  transform: rotate(30deg);
+}
+.card.stack:nth-child(4n) {
+  transform: rotate(-30deg);
+}

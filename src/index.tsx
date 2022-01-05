@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import GameContextProvider from 'context/game-context';
+import CardContextProvider from "context/card-context"
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <GameContextProvider>
+      <CardContextProvider>
+        <App />
+      </CardContextProvider>
+    </GameContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
