@@ -47,7 +47,7 @@ h3 {
   @include fluid-type($min_width, $max_width, $mod_1*$mod_1 *$min_font, $mod_2*$mod_2 *$min_font);
 }
 
-*::after,*::before{
+*,*::after,*::before{
   box-sizing: border-box;
   margin: 0;
   padding: 0;

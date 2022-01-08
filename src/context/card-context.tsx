@@ -1,23 +1,27 @@
 import React, { useState, FC } from "react";
 import { CardType, ColorType, SuitType } from "types/card-type";
 import { Card, SUITS, VALUES } from "helpers/card-helper"
-import { useGameContext } from "./game-context";
+import { cloneDeep } from "lodash"
+
+
 
 interface CardContextType {
   cardsInDeck: CardType[] | null;
   currentCard: CardType | null;
-  cardsInGame: Record<number, CardType[]> | null;
+  cardsInGame: Array<CardType[]>;
   creatDeck: () => void;
   drawCard: (level: number) => void;
+  setCardsInGame: React.Dispatch<React.SetStateAction<CardType[][]>>
 }
 
 const defaultState = {
 
   cardsInDeck: null,
-  cardsInGame: null,
+  cardsInGame: [],
   currentCard: null,
   creatDeck: () => { },
   drawCard: () => null,
+  setCardsInGame: () => { }
 };
 
 
@@ -27,23 +31,11 @@ const CardContext = React.createContext<CardContextType>(defaultState);
 const CardContextProvider: FC = ({ children }) => {
 
   const currentCardIndex = React.useRef(0)
-  const [cardsInGame, setCardsInGame] = useState<Record<number, CardType[]> | null>({});
+  const [cardsInGame, setCardsInGame] = useState<Array<CardType[]>>([]);
   const [cardsInDeck, setCardsInDeck] = useState<null | CardType[]>(null);
   const [currentCard, setCurrentCard] = React.useState<CardType | null>(null)
 
 
-  // React.useEffect(() => {
-  //   // FIXME why this being called twice?
-  //   setCardsInGame((prevCardsInGame: any) => {
-  //     if (prevCardsInGame.length === 0) {
-  //       return [[currentCard]]
-  //     }
-  //     const updatedCardsInGame = [...prevCardsInGame];
-  //     updatedCardsInGame[level - 1].push(currentCard)
-  //     return updatedCardsInGame
-
-  //   })
-  // }, [currentCard])
   const creatDeck = function () {
     const freshDeck = SUITS.map((suit: SuitType) =>
       VALUES.map((value: string) => {
@@ -56,6 +48,8 @@ const CardContextProvider: FC = ({ children }) => {
         return new Card(suit, value, color);
       })
     ).flat().sort(() => Math.random() - 0.5);;
+
+    console.log(freshDeck.slice(0, 5));
     setCardsInDeck(freshDeck)
   }
 
@@ -73,26 +67,20 @@ const CardContextProvider: FC = ({ children }) => {
     if (nextCard) {
       setCurrentCard(nextCard)
 
-      setCardsInGame((prevCards: any) => {
-        if (level === 1) {
-          const updated = prevCards[1]?.length ? [...prevCards[1], nextCard] : [nextCard];
-          return {
-            1: updated,
-          }
-        } else {
-          return {
-            ...prevCards,
-            [level]: nextCard
-          }
+      setCardsInGame((prevCards) => {
+
+        if (prevCards?.length) {
+          const clonedPrev = cloneDeep(prevCards);
+          clonedPrev[level] = [...clonedPrev[level], nextCard];
+          return clonedPrev
         }
+
+        return [[nextCard]]
+
       })
     }
 
 
-
-  }
-
-  const updateCardInGame = (level: number, nextCard: CardType) => {
 
   }
 
@@ -105,6 +93,7 @@ const CardContextProvider: FC = ({ children }) => {
         drawCard,
         currentCard,
         cardsInGame,
+        setCardsInGame
       }}
     >    {children}
     </CardContext.Provider>

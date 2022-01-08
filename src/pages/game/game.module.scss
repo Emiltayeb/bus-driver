@@ -1,4 +1,9 @@
 .Root{
 	max-width: 960px;
+	padding: 0.5rem;
 	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+
 }

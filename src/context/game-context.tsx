@@ -5,13 +5,15 @@ interface CardContextType {
 	setIsGameActive: React.Dispatch<React.SetStateAction<boolean>>,
 	level: LevelOptionsType,
 	setLevel: React.Dispatch<React.SetStateAction<LevelOptionsType>>,
+	resetGame: () => void
 }
 
 const GameContext = React.createContext<CardContextType>({
 	isGameActive: false,
 	setIsGameActive: () => { },
 	level: 1,
-	setLevel: () => { }
+	setLevel: () => { },
+	resetGame: () => { }
 })
 
 
@@ -21,13 +23,17 @@ const GameContext = React.createContext<CardContextType>({
 const GameContextProvider: React.FC = ({ children }) => {
 
 	const [isGameActive, setIsGameActive] = React.useState(false)
-	const [level, setLevel] = React.useState<1 | 2 | 3>(1)
+	const [level, setLevel] = React.useState<LevelOptionsType>(0)
 
+	const resetGame = () => {
+		setLevel(0);
+	}
 	return <GameContext.Provider value={{
 		isGameActive: isGameActive,
 		level,
 		setIsGameActive,
 		setLevel,
+		resetGame
 
 	}}>
 		{children}

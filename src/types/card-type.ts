@@ -1,7 +1,8 @@
 export type SuitType = "♠" | "♥" | "♦" | "♣";
 export type ColorType = "red" | "black";
 export interface CardType {
-  value: number | string;
+  value: string;
   suit: SuitType;
   color: ColorType;
+  isFromPreviousLevel?: boolean
 }

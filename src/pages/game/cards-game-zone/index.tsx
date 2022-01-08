@@ -10,6 +10,7 @@ const CardsGameZone = function () {
 	const { level } = useGameContext()
 	const { cardsInGame } = useCardsContext()
 
+	console.log({ cardsInGame });
 	// ...code
 	return <div className={classes.Root}>
 
@@ -22,11 +23,14 @@ const CardsGameZone = function () {
 
 	then you map over the array based on level. basically only the first level should get stacked,
 */}
-		<div className={classes.GamePlatform}>
-			<h1>Win The Game!</h1>
+		<div className={classes.GamePlatform} data-level={level}>
 			<div className={classes?.cards ?? ""}>
-				{cardsInGame?.[level]?.length && cardsInGame[level].map(card =>
-					<Card stack={level === 1} key={card.value + card.suit} currentCard={card} />)}
+				{
+					cardsInGame?.[level]?.length > 0 && cardsInGame?.[level]?.map(card =>
+						<Card stack={level === 0} key={"" + card?.value + card?.suit} currentCard={card} />)
+				}
+
+
 			</div>
 		</div>
 		{/* show level buttons */}
