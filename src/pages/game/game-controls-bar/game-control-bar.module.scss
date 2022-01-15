@@ -1,55 +1,51 @@
-@import "../../../global-styles/media-query-mixin";
+@import '../../../global-styles/media-query-mixin';
 
-$primary-button-color:rgba(255, 255, 255, 0.8);
+$primary-button-color: rgba(255, 255, 255, 0.8);
 
-.Root{
-
-	display: flex;
-
-	
-	.buttons{
-		display: flex;
-		flex: 1;
-		justify-content: center;
-		align-items: center;
-		gap: 1rem;
-	
-		button{
-			padding: 5px;
-		}
-	}
-	
-	p{
-		font-size: 0.7rem;
-	}
+// global
+.Root {
+  display: flex;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid rgb(207, 207, 207);
+  .buttons {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    button {
+      padding: 5px;
+    }
+  }
+  p {
+    font-size: 0.8rem;
+  }
 }
 
-
-
-@include media(">medium") {
-	.Root{
-		align-items: center;
-		
-		.headers{
-			flex: 1;
-			display: flex;
-			justify-content: space-around;
-		}
-	 }
-	
+@include media('>medium') {
+  .Root {
+    align-items: center;
+    .headers {
+      flex: 1;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
 }
-@include media("<medium") {
-	.Root{
-		flex-direction: column;
-	justify-content: center;
-	align-items: center;
+@include media('<=medium') {
+  .Root {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-	.headers{
-		display: flex;
-    justify-content: space-around;
+    .buttons {
+      margin-top: 10px;
+    }
+    .headers {
+      display: flex;
+      justify-content: space-around;
 
-    width: 100%;
-	}
-	 }
-	
+      width: 100%;
+    }
+  }
 }
