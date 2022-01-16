@@ -7,6 +7,12 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
   display: flex;
   padding-bottom: 0.5em;
   border-bottom: 1px solid rgb(207, 207, 207);
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
   .buttons {
     display: flex;
     flex: 1;
@@ -28,6 +34,7 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
     .headers {
       flex: 1;
       display: flex;
+      align-items: center;
       justify-content: space-around;
     }
   }
@@ -43,8 +50,8 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
     }
     .headers {
       display: flex;
-      justify-content: space-around;
-
+      justify-content: center;
+      gap: 1rem;
       width: 100%;
     }
   }

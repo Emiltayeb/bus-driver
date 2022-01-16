@@ -1,10 +1,8 @@
-@import "../../global-styles/media-query-mixin";
-
+@import '../../global-styles/media-query-mixin';
 
 .card {
-  --cardHight: min(50vw,200px);
-  --stackTop : 20px;
-  min-height: 100px;
+  --cardHight: min(50vw, 300px);
+  --stackTop: 20px;
   height: var(--cardHight);
   width: calc(var(--cardHight) / 2 + 50px);
   position: relative;
@@ -15,8 +13,7 @@
   justify-content: center;
   align-items: center;
 
-  
-  &.fromPreviousLevel{
+  &.fromPreviousLevel {
     grid-row: 2;
     justify-self: center;
   }
@@ -48,7 +45,6 @@
 
 /* cards errors. stack the cards in top of each other */
 .card.stack:not(:first-child):nth-child(odd) {
-  
   position: absolute;
   top: var(--stackTop);
 }
@@ -59,13 +55,4 @@
 }
 .card.stack:nth-child(4n) {
   transform: rotate(-30deg);
-}
-
-
-@include media("<medium") {
-
-  .card{
-    --cardHight:80px;
-  }
-	
 }

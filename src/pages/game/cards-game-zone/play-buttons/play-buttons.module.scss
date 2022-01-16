@@ -1,3 +1,18 @@
+$primary-red-button-bgColor: red;
+$primary-black-button-bgColor: black;
+$primary-blue-button-bgColor: rgb(171, 171, 245);
+
+@mixin icon-button {
+  background: $primary-blue-button-bgColor;
+  position: relative;
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 .Root {
   display: flex;
   justify-content: space-evenly;
@@ -6,6 +21,44 @@
   flex-wrap: wrap;
 
   button {
-    padding: 0.5em 1em;
+    min-width: 200px;
+    &[data-variant='red'] {
+      background: $primary-red-button-bgColor;
+    }
+
+    &[data-variant='black'] {
+      background: $primary-black-button-bgColor;
+    }
+
+    &[data-variant='bellow'] {
+      @include icon-button;
+      &:after {
+        content: '↓';
+      }
+    }
+    &[data-variant='above'] {
+      @include icon-button;
+      &::after {
+        content: '🠑';
+      }
+    }
+    &[data-variant='on'] {
+      @include icon-button;
+      &::after {
+        content: '🎯';
+      }
+    }
+    &[data-variant='inside'] {
+      @include icon-button;
+      &::after {
+        content: '⩹';
+      }
+    }
+    &[data-variant='outside'] {
+      @include icon-button;
+      &::after {
+        content: '⩺';
+      }
+    }
   }
 }

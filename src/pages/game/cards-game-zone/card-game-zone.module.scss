@@ -1,15 +1,18 @@
 .Root {
+  max-height: 70%;
   flex: 2;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   position: relative;
   gap: 0.5rem;
 }
 
 .GamePlatform {
-  position: relative;
   flex: 1;
+
+  position: relative;
 
   &[data-level='0'] {
     .cards {
@@ -24,8 +27,8 @@
   &[data-level='2'],
   &[data-level='3'] {
     .cards {
-      display: grid;
-      grid-template-rows: 2fr 1fr;
+      display: flex;
+      gap: 0.5rem;
       height: 100%;
       align-items: center;
       justify-content: space-evenly;
