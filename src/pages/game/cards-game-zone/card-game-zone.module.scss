@@ -1,37 +1,31 @@
+@import '../../../global-styles/media-query-mixin';
 .Root {
-  max-height: 70%;
-  flex: 2;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: relative;
   gap: 0.5rem;
 }
 
 .GamePlatform {
-  flex: 1;
-
-  position: relative;
-
-  &[data-level='0'] {
-    .cards {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  gap: 0.5rem;
+  .Level {
+    border: 1px solid black;
+    min-height: var(--cardHight);
   }
+}
 
-  &[data-level='1'],
-  &[data-level='2'],
-  &[data-level='3'] {
-    .cards {
-      display: flex;
-      gap: 0.5rem;
-      height: 100%;
-      align-items: center;
-      justify-content: space-evenly;
+@include media('<=tablet') {
+  .GamePlatform {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 1rem;
+    .Level {
+      border: 1px solid black;
+      min-height: 150px;
     }
   }
 }

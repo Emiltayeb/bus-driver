@@ -13,7 +13,7 @@ const GameScreen = function () {
   }, []);
 
   return (
-    <div className={classes.Root}>
+    <div className={`${classes.Root} container mx-auto`}>
       <GameControlsBar />
       {/* cards level platform.*/}
       <CardsGameZone />

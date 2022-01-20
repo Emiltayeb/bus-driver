@@ -1,8 +1,6 @@
-
-
-//  	 _            _           _                           _ _       
-//  	(_)          | |         | |                         | (_)      
-//  	 _ _ __   ___| |_   _  __| | ___   _ __ ___   ___  __| |_  __ _ 
+//  	 _            _           _                           _ _
+//  	(_)          | |         | |                         | (_)
+//  	 _ _ __   ___| |_   _  __| | ___   _ __ ___   ___  __| |_  __ _
 //  	| | '_ \ / __| | | | |/ _` |/ _ \ | '_ ` _ \ / _ \/ _` | |/ _` |
 //  	| | | | | (__| | |_| | (_| |  __/ | | | | | |  __/ (_| | | (_| |
 //  	|_|_| |_|\___|_|\__,_|\__,_|\___| |_| |_| |_|\___|\__,_|_|\__,_|
@@ -10,7 +8,7 @@
 //			Simple, elegant and maintainable media queries in Sass
 //
 //			 			http://include-media.com
-//		
+//
 //	  		 Author: Eduardo Boucas <mail@eduardoboucas.com>
 //
 ///
@@ -22,10 +20,10 @@
 ///  $breakpoints: ('phone': 320px);
 ///
 $breakpoints: (
-	'phone': 320px, 
-  'medium' : 500px,
-	'tablet': 768px, 
-	'desktop': 1024px
+  'phone': 320px,
+  'medium': 500px,
+  'tablet': 768px,
+  'desktop': 1024px
 ) !default;
 
 ///
@@ -39,23 +37,23 @@ $breakpoints: (
 /// @example scss - Creates a static expression with logical disjunction (OR operator)
 ///  $media-expressions: (
 ///		'retina2x': (
-///			'(-webkit-min-device-pixel-ratio: 2)', 
+///			'(-webkit-min-device-pixel-ratio: 2)',
 ///			'(min-resolution: 192dpi)'
 ///		)
 ///	);
 ///
 $media-expressions: (
-	'screen': 'screen', 
-	'print': 'print', 
-	'handheld': 'handheld',
-	'retina2x': (
-		'(-webkit-min-device-pixel-ratio: 2)', 
-		'(min-resolution: 192dpi)'
-	), 
-	'retina3x': (
-		'(-webkit-min-device-pixel-ratio: 3)', 
-		'(min-resolution: 350dpi)'
-	)
+  'screen': 'screen',
+  'print': 'print',
+  'handheld': 'handheld',
+  'retina2x': (
+    '(-webkit-min-device-pixel-ratio: 2)',
+    '(min-resolution: 192dpi)'
+  ),
+  'retina3x': (
+    '(-webkit-min-device-pixel-ratio: 3)',
+    '(min-resolution: 350dpi)'
+  )
 ) !default;
 
 ///
@@ -82,9 +80,9 @@ $media-expressions: (
 ///	 @media (min-width: 2.1rem) {}
 ///
 $unit-intervals: (
-	'px': 1, 
-	'em': 0.01, 
-	'rem': 0.1
+  'px': 1,
+  'em': 0.01,
+  'rem': 0.1
 ) !default;
 ///
 /// Generates a media query based on a list of conditions
@@ -97,23 +95,27 @@ $unit-intervals: (
 ///  @include media(">phone") { }
 ///
 /// @example scss - With two set breakpoints
-///  @include media(">phone", "<=tablet") { } 
+///  @include media(">phone", "<=tablet") { }
 ///
 /// @example scss - With custom values
-///  @include media(">=358px", "<850px") { } 
+///  @include media(">=358px", "<850px") { }
 ///
 /// @example scss - With set breakpoints with custom values
-///  @include media(">desktop", "<=1350px") { } 
+///  @include media(">desktop", "<=1350px") { }
 ///
 /// @example scss - With a static expression
-///  @include media("retina2x") { } 
+///  @include media("retina2x") { }
 ///
 /// @example scss - Mixing everything
-///  @include media(">=350px", "<tablet", "retina3x") { } 
+///  @include media(">=350px", "<tablet", "retina3x") { }
 ///
 @mixin media($conditions...) {
   @for $i from 1 through length($conditions) {
-    $conditions: set-nth($conditions, $i, parse-expression(nth($conditions, $i)));
+    $conditions: set-nth(
+      $conditions,
+      $i,
+      parse-expression(nth($conditions, $i))
+    );
   }
 
   $branches: get-query-branches($conditions);
@@ -172,7 +174,10 @@ $unit-intervals: (
         @each $member in $expression {
           @if ($member != $first) {
             @each $partial in $result {
-              $result: join($result, str-replace-first($first, $member, $partial));
+              $result: join(
+                $result,
+                str-replace-first($first, $member, $partial)
+              );
             }
           }
         }
@@ -229,13 +234,13 @@ $unit-intervals: (
   @if ($is-width) {
     $unit: unit($result);
     $interval: 0;
-    
+
     @if (map-has-key($unit-intervals, $unit)) {
       $interval: map-get($unit-intervals, $unit);
     } @else {
       @warn 'Unknown unit: #{$unit}';
-    } 
-       
+    }
+
     @if ($operator == '>') {
       $element: '(min-width: #{$result + $interval})';
     } @else if ($operator == '<') {
@@ -291,8 +296,8 @@ $unit-intervals: (
 @function to-number($string) {
   // Matrices
   $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
-  $numbers:  0   1   2   3   4   5   6   7   8   9;
-  
+  $numbers: 0 1 2 3 4 5 6 7 8 9;
+
   // Result
   $result: 0;
   $divider: 0;
@@ -302,50 +307,44 @@ $unit-intervals: (
   @for $i from 1 through str-length($string) {
     $character: str-slice($string, $i, $i);
     $index: index($strings, $character);
-    
-  
+
     @if $character == '-' {
       $minus: true;
-    }
-    
-    @else if $character == '.' {
+    } @else if $character == '.' {
       $divider: 1;
-    }
-    
-    @else {
+    } @else {
       @if type-of($index) != 'number' {
         $result: if($minus, $result * -1, $result);
         @return _length($result, str-slice($string, $i));
       }
 
       $number: nth($numbers, $index);
-      
+
       @if $divider == 0 {
         $result: $result * 10;
-      }
-      
-      @else {
+      } @else {
         // Move the decimal dot to the left
         $divider: $divider * 10;
         $number: $number / $divider;
       }
-      
+
       $result: $result + $number;
     }
   }
-  
+
   @return if($minus, $result * -1, $result);
 }
 
 @function _length($number, $unit) {
-  $strings: 'px' 'cm' 'mm' '%' 'ch' 'pica' 'in' 'em' 'rem' 'pt' 'pc' 'ex' 'vw' 'vh' 'vmin' 'vmax';
-  $units:   1px  1cm  1mm  1%  1ch  1pica  1in  1em  1rem  1pt  1pc  1ex  1vw  1vh  1vmin  1vmax;
+  $strings: 'px' 'cm' 'mm' '%' 'ch' 'pica' 'in' 'em' 'rem' 'pt' 'pc' 'ex' 'vw'
+    'vh' 'vmin' 'vmax';
+  $units: 1px 1cm 1mm 1% 1ch 1pica 1in 1em 1rem 1pt 1pc 1ex 1vw 1vh 1vmin 1vmax;
   $index: index($strings, $unit);
-  
+
   @if type-of($index) != 'number' {
     @warn 'Unknown unit `#{$unit}`.';
     @return false;
   }
-  
+
   @return $number * nth($units, $index);
 }

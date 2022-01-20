@@ -4,15 +4,15 @@ import './global-styles/index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GameContextProvider from 'context/game-context';
-import CardContextProvider from "context/card-context"
+import CardContextProvider from 'context/card-context';
 
 ReactDOM.render(
   <React.StrictMode>
-    <GameContextProvider>
-      <CardContextProvider>
+    <CardContextProvider>
+      <GameContextProvider>
         <App />
-      </CardContextProvider>
-    </GameContextProvider>
+      </GameContextProvider>
+    </CardContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
