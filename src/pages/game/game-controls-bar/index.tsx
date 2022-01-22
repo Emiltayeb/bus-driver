@@ -2,7 +2,6 @@ import { useCardsContext } from 'context/card-context';
 import classes from './game-control-bar.module.scss';
 import React from 'react';
 import { useGameContext } from 'context/game-context';
-import Badge from 'components/bedge';
 
 const GameControlsBar = function () {
   const { cardsInDeck, setCardsInGame, creatDeck } = useCardsContext();
@@ -24,7 +23,10 @@ const GameControlsBar = function () {
 
   return (
     <div className={classes.Root}>
-      <div className={classes.headers}>
+      <div className={classes.Container}>
+        {/* logo  */}
+        <h1 className={classes.Logo}>Bus Driver</h1>
+        {/* <div className={classes.headers}>
         <div className={classes.header}>
           <p className="font-bold">Cards Reaming:</p>
           <Badge>{cardsInDeck?.length}</Badge>
@@ -32,21 +34,14 @@ const GameControlsBar = function () {
         <div className={classes.header}>
           <p className="font-bold">Level :</p> <Badge> {level + 1} / 4</Badge>
         </div>
-      </div>
-      <div className={classes.buttons}>
-        <button
-          className="md:px-7 py-2 bg-blue-300 rounded text-white 
-         transition duration-300"
-          onClick={onResetClick}
-        >
-          Reset Game
-        </button>
-        <button
-          className="md:px-7 py-2 bg-blue-300 rounded text-white 
-         transition duration-300"
-        >
-          How To Play?
-        </button>
+      </div> */}
+        {/* config buttons */}
+        <div className={classes.buttons}>
+          <button className="text-xs" onClick={onResetClick}>
+            Reset Game
+          </button>
+          <button className="text-xs">How To Play?</button>
+        </div>
       </div>
     </div>
   );

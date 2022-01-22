@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GameContextProvider from 'context/game-context';
 import CardContextProvider from 'context/card-context';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <CardContextProvider>
       <GameContextProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </GameContextProvider>
     </CardContextProvider>
   </React.StrictMode>,

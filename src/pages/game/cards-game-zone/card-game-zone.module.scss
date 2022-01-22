@@ -1,34 +1,75 @@
 @import '../../../global-styles/media-query-mixin';
+@import '../../../global-styles/colors';
+@import '../../../global-styles/configs';
+
+$max-levels-width: 1250px;
+
 .Root {
-  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   position: relative;
-  gap: 0.5rem;
+  margin: 1rem auto;
+  padding: 0 1rem;
+  gap: 1rem;
+  width: 100%;
+  max-width: $max-levels-width;
 }
 
 .GamePlatform {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 140px);
   justify-content: center;
   gap: 0.5rem;
+
   .Level {
-    border: 1px solid black;
-    min-height: calc(var(--cardHight) + 50px);
+    // todo Add Polifill / !support
+    display: flex;
+    align-items: center;
+
+    // box-shadow: 0 0 10px 10px #fff, /* inner white */ 0 0 10px 6px #f0f,
+    //   /* middle magenta */ 0 0 10px 10px #0ff; /* outer cyan */
+    box-shadow: inset 0 0 30px -1px rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+
     &[data-level='0'] {
       position: relative;
     }
   }
 }
 
-@include media('<=tablet') {
+@supports (aspect-ratio: 1 / 1.5) {
   .GamePlatform {
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 1rem;
     .Level {
-      border: 1px solid black;
-      min-height: 150px;
+      aspect-ratio: 1 / 1.5;
+    }
+  }
+  @include media('>=medium') {
+    .GamePlatform {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+// polyfill for aspect ratio
+@supports not (aspect-ratio: 1 / 1.5) {
+  .GamePlatform {
+    .Level {
+      min-height: $card-height-mobile;
+    }
+  }
+
+  @include media('>=650px') {
+    .GamePlatform {
+      .Level {
+        min-height: $card-height-tablet;
+      }
+    }
+  }
+  @include media('>=desktop') {
+    .GamePlatform {
+      .Level {
+        min-height: $card-height-desktop;
+      }
     }
   }
 }

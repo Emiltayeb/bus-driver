@@ -1,27 +1,27 @@
 import { useGameContext } from 'context/game-context';
 import gameDefaults from 'config/gameConfig';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import classes from './opening-screen.module.scss';
+import AnimatedPage from 'components/aniamtePages';
 
 const OpeningScreen = function () {
-  const { setIsGameActive } = useGameContext();
-
+  const { resetGame } = useGameContext();
+  React.useEffect(() => {
+    resetGame();
+  }, []);
   return (
-    <div className="container mx-auto px-4 ">
+    <AnimatedPage className={`container mx-auto px-4 ${classes.Root}`}>
       <h1
-        className="text-primary font-bold text-3xl
-     
+        className="text-white font-bold text-3xl
       md:text-6xl"
       >
         {gameDefaults.name}
       </h1>
-      <button
-        className="bg-blue-700  px-7 py-2 rounded text-white 
-         transition duration-300"
-        onClick={() => setIsGameActive(true)}
-      >
+      <Link to="/game" className="bg-white  px-7 py-2 rounded">
         Start Game
-      </button>
-    </div>
+      </Link>
+    </AnimatedPage>
   );
 };
 

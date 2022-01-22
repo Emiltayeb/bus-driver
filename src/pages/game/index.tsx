@@ -3,6 +3,7 @@ import { useCardsContext } from 'context/card-context';
 import CardsGameZone from './cards-game-zone';
 import GameControlsBar from './game-controls-bar';
 import classes from './game.module.scss';
+import AnimatedPage from 'components/aniamtePages';
 
 const GameScreen = function () {
   const { creatDeck } = useCardsContext();
@@ -14,11 +15,11 @@ const GameScreen = function () {
   }, []);
 
   return (
-    <div className={`${classes.Root} container mx-auto`}>
+    <AnimatedPage className={classes.Root}>
       <GameControlsBar />
       {/* cards level platform.*/}
       <CardsGameZone />
-    </div>
+    </AnimatedPage>
   );
 };
 

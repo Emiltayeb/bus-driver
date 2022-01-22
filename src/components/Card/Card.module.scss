@@ -1,15 +1,18 @@
 @import '../../global-styles/media-query-mixin';
+@import '../../global-styles/configs';
 
-$stackRotate: 20deg;
-$rotateForth: -30deg;
+$card-size-by-parent: 80%;
+$stackRotate: 10deg;
+$rotateForth: -20deg;
 $stackTop: 60px;
+
 .card {
-  height: var(--cardHight);
-  width: calc(var(--cardHight) / 2 + 50px);
+  height: $card-size-by-parent;
+  width: $card-size-by-parent;
   position: relative;
   background-color: white;
   border: 1px solid black;
-  font-size: calc((var(--cardHight) / 2) + 10px);
+  font-size: calc((#{$card-height-mobile} / 2) + 10px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,6 +24,7 @@ $stackTop: 60px;
   }
 }
 
+// colors
 .card.red {
   color: red;
 }
@@ -29,6 +33,7 @@ $stackTop: 60px;
   color: black;
 }
 
+// suits
 .card::before {
   font-size: 1rem;
   position: absolute;
@@ -44,7 +49,6 @@ $stackTop: 60px;
   top: 10px;
   left: 10px;
 }
-
 /* cards errors. stack the cards in top of each other */
 .card.stack:not(:first-child) {
   position: absolute;
@@ -52,7 +56,7 @@ $stackTop: 60px;
   left: 50%;
 
   &:nth-child(odd) {
-    left: 40%;
+    left: 0%;
     top: 20px;
     transform: rotate($stackRotate);
   }
