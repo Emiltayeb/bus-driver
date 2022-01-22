@@ -6,7 +6,7 @@ import { setCustomCssProperty } from 'utils/global';
 import { breakPoints, cardSizes } from 'config/layout';
 
 type CardProps = {
-  currentCard: CardTypes.CardType | undefined;
+  currentCard?: CardTypes.CardType;
   stack: boolean;
 };
 

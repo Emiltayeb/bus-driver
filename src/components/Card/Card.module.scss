@@ -1,7 +1,8 @@
 @import '../../global-styles/media-query-mixin';
 
 $stackRotate: 20deg;
-$stackTop: 20px;
+$rotateForth: -30deg;
+$stackTop: 60px;
 .card {
   height: var(--cardHight);
   width: calc(var(--cardHight) / 2 + 50px);
@@ -12,6 +13,7 @@ $stackTop: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 
   &.fromPreviousLevel {
     grid-row: 2;
@@ -44,15 +46,20 @@ $stackTop: 20px;
 }
 
 /* cards errors. stack the cards in top of each other */
-.card.stack:not(:first-child):nth-child(odd) {
+.card.stack:not(:first-child) {
   position: absolute;
-  top: $stackTop;
-}
-.card.stack:nth-child(even) {
-  position: absolute;
-  top: $stackTop;
-  transform: rotate($stackRotate);
-}
-.card.stack:nth-child(4n) {
-  transform: rotate(calc(-1 * $stackRotate));
+  top: 0;
+  left: 50%;
+
+  &:nth-child(odd) {
+    left: 40%;
+    top: 20px;
+    transform: rotate($stackRotate);
+  }
+  &:nth-child(even) {
+    transform: rotate((calc(-1 * #{$stackRotate}))) translateX(-50%);
+  }
+  &:nth-child(4n) {
+    transform: rotate($rotateForth) translateX(-50%);
+  }
 }

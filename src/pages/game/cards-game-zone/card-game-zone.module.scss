@@ -14,7 +14,10 @@
   gap: 0.5rem;
   .Level {
     border: 1px solid black;
-    min-height: var(--cardHight);
+    min-height: calc(var(--cardHight) + 50px);
+    &[data-level='0'] {
+      position: relative;
+    }
   }
 }
 

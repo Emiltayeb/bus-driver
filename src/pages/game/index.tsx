@@ -10,6 +10,7 @@ const GameScreen = function () {
   //  on first mount - means game is started. make a new deck
   React.useEffect(() => {
     creatDeck();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

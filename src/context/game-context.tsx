@@ -3,12 +3,13 @@ import * as React from 'react';
 import { useCardsContext } from './card-context';
 interface CardContextType {
   isGameActive: boolean;
-  setIsGameActive: React.Dispatch<React.SetStateAction<boolean>>;
+  isWonGame: boolean;
   level: number;
-  setLevel: React.Dispatch<React.SetStateAction<number>>;
-  handelWinLevel: any;
-  handelLoseLevel?: any;
+  handelWinLevel: () => void;
+  handelLoseLevel: () => void;
   resetGame: () => void;
+  setIsGameActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setLevel: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const GameContext = React.createContext<CardContextType>({
@@ -18,45 +19,37 @@ const GameContext = React.createContext<CardContextType>({
   setLevel: () => {},
   resetGame: () => {},
   handelWinLevel: () => {},
-  handelLoseLevel: () => {}
+  handelLoseLevel: () => {},
+  isWonGame: false
 });
 
 const GameContextProvider: React.FC = ({ children }) => {
   const { setCardsInGame, creatDeck } = useCardsContext();
   const [isGameActive, setIsGameActive] = React.useState(false);
   const [level, setLevel] = React.useState(0);
+  const isWonGame = level === gameDefaults.totalLevels;
 
-  const handelWinLevel = function (currentCard: any, cardsInGame: any) {
+  const handelWinLevel = function () {
     console.log('GAME CONTEXT _ WIN LEVEL');
-    switch (level) {
-      case 1:
-        // won firs level ;
-        break;
-
-      default:
-        break;
-    }
-
-    if (level === gameDefaults.totalLevels - 1) {
-      console.log('WON GAME!');
+    if (isWonGame) {
+      console.log('GAME CONTEXT _  WON GAME!');
       return;
     }
     setLevel((prevLevel) => (prevLevel += 1));
   };
 
-  const handelLoseLevel = function (currentCard: any, cardsInGame: any) {
+  const handelLoseLevel = function () {
     console.log('GAME CONTEXT _ LOSE LEVEL');
     // first level - nothing to do
     if (level === 0) return;
-    // reset deck
-    creatDeck();
-    // reset cards in game
+    // clear cards on the board
     setCardsInGame([]);
     // reset level
     setLevel(0);
   };
   const resetGame = () => {
     setLevel(0);
+    creatDeck();
   };
   return (
     <GameContext.Provider
@@ -67,7 +60,8 @@ const GameContextProvider: React.FC = ({ children }) => {
         setLevel,
         resetGame,
         handelWinLevel,
-        handelLoseLevel
+        handelLoseLevel,
+        isWonGame
       }}
     >
       {children}
