@@ -1,5 +1,5 @@
 import React from 'react';
-import 'global-styles/global.scss';
+import './global-styles/global.scss';
 import GameScreen from 'pages/game';
 import OpeningScreen from 'pages/opening-screen';
 import { Routes, Route, useLocation } from 'react-router-dom';
