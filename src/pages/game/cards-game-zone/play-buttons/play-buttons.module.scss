@@ -16,14 +16,15 @@ $primary-blue-button-bgColor: rgb(171, 171, 245);
 }
 
 .Root {
+  margin-top: 3rem;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  gap: 3rem;
 
   button {
-    min-width: 200px;
+    border-radius: 35px;
+    padding: 0.5rem 3rem;
     &[data-variant='red'] {
       background: $primary-red-button-bgColor;
     }
@@ -65,15 +66,12 @@ $primary-blue-button-bgColor: rgb(171, 171, 245);
   }
 }
 
-@include media('<=tablet') {
+@include media('<medium') {
   .Root {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-
+    gap: 1rem;
     button {
-      min-width: max-content;
+      min-width: 100px;
+      font-size: 0.7rem;
       &[data-variant]::after {
         content: '';
       }
