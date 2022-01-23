@@ -22,7 +22,7 @@ const GameContext = React.createContext<CardContextType>({
 const GameContextProvider: React.FC = ({ children }) => {
   const { setCardsInGame, creatDeck } = useCardsContext();
   const [level, setLevel] = React.useState(0);
-  const isWonGame = level === gameDefaults.totalLevels;
+  const isWonGame = level === gameDefaults.totalLevels - 1;
 
   const handelWinLevel = function () {
     console.log('GAME CONTEXT _ WIN LEVEL');

@@ -31,16 +31,19 @@ const PlayingButtons = function () {
 
   return (
     <div className={classes.Root}>
-      {gameDefaults.levelButtonsOptions[level]?.map((buttonText) => (
+      {gameDefaults.levelButtonsOptions[level]?.map((buttonData) => (
         <button
-          data-variant={buttonText}
+          data-variant={buttonData.text}
           className="px-5  py-2 rounded text-white 
          transition duration-300"
           type="button"
-          key={buttonText}
-          onClick={onPlayButtonClick(buttonText)}
+          key={buttonData.text}
+          onClick={onPlayButtonClick(buttonData.text)}
         >
-          {buttonText.toLocaleUpperCase()}
+          {buttonData.icon && (
+            <img src={buttonData.icon} alt={buttonData.text} />
+          )}
+          <span>{buttonData.text.toLocaleUpperCase()}</span>
         </button>
       ))}
     </div>
