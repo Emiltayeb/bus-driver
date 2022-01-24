@@ -19,24 +19,46 @@ $max-levels-width: 1250px;
   display: grid;
   grid-template-columns: repeat(2, 140px);
   justify-content: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
 
   .Level {
-    // todo Add Polifill / !support
+    // todo Add Polifill / !support box shadow
     display: flex;
     align-items: center;
-
-    // box-shadow: 0 0 10px 10px #fff, /* inner white */ 0 0 10px 6px #f0f,
-    //   /* middle magenta */ 0 0 10px 10px #0ff; /* outer cyan */
     box-shadow: inset 0 0 30px -1px rgba(0, 0, 0, 0.4);
     border-radius: 15px;
+    // inset 0 0 10px -1px #676767;
 
+    &.Active {
+      box-shadow: inset 0 0 10px 1px #676767,
+        0 0 15px 1px rgba(255, 255, 255, 0.393); /* inner white */
+    }
+    &.Passed {
+      animation: wonLevel 1s ease-in-out;
+      box-shadow: inset 0 0 10px 1px #5cdc94,
+        0 0 15px 1px rgba(46, 251, 91, 0.393); /* inner white */
+    }
     &[data-level='0'] {
       position: relative;
     }
   }
 }
 
+@keyframes wonLevel {
+  0% {
+    box-shadow: inset 0 0 10px 1px #676767,
+      0 0 15px 1px rgba(255, 255, 255, 0.393); /* inner white */
+  }
+  30% {
+    box-shadow: inset 0 0 10px 1px #5cdc94,
+      0 0 30px 1px rgba(46, 251, 91, 0.393); /* inner white */
+  }
+  100% {
+    box-shadow: inset 0 0 10px 1px #5cdc94,
+      0 0 15px 1px rgba(46, 251, 91, 0.393); /* inner white */
+  }
+}
+// polyfill for aspect ratio
 @supports (aspect-ratio: 1 / 1.5) {
   .GamePlatform {
     .Level {
@@ -49,8 +71,6 @@ $max-levels-width: 1250px;
     }
   }
 }
-
-// polyfill for aspect ratio
 @supports not (aspect-ratio: 1 / 1.5) {
   .GamePlatform {
     .Level {

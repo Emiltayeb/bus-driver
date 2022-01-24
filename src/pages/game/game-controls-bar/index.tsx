@@ -26,16 +26,6 @@ const GameControlsBar = function () {
       <div className={classes.Container}>
         {/* logo  */}
         <h1 className={classes.Logo}>Bus Driver</h1>
-        {/* <div className={classes.headers}>
-        <div className={classes.header}>
-          <p className="font-bold">Cards Reaming:</p>
-          <Badge>{cardsInDeck?.length}</Badge>
-        </div>
-        <div className={classes.header}>
-          <p className="font-bold">Level :</p> <Badge> {level + 1} / 4</Badge>
-        </div>
-      </div> */}
-        {/* config buttons */}
         <div className={classes.buttons}>
           <button className="text-xs" onClick={onResetClick}>
             Reset Game

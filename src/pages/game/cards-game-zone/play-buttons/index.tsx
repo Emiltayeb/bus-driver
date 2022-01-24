@@ -19,7 +19,7 @@ const PlayingButtons = function () {
     setTimeout(() => {
       const isValid = validateLevel({ level, cardsInGame, userChoice });
       isValid ? handelWinLevel() : handelLoseLevel();
-    }, 1000);
+    }, 500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCard]);
 
