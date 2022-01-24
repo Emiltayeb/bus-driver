@@ -34,8 +34,8 @@ const PlayingButtons = function () {
       {gameDefaults.levelButtonsOptions[level]?.map((buttonData) => (
         <button
           data-variant={buttonData.text}
-          className="px-5  py-2 rounded text-white 
-         transition duration-300"
+          className={`${classes.button} rounded text-white 
+         transition duration-300`}
           type="button"
           key={buttonData.text}
           onClick={onPlayButtonClick(buttonData.text)}

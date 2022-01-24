@@ -33,7 +33,7 @@ $stackTop: 60px;
   color: black;
 }
 
-// suits
+// corners
 .card::before {
   font-size: 1rem;
   position: absolute;
@@ -65,5 +65,11 @@ $stackTop: 60px;
   }
   &:nth-child(4n) {
     transform: rotate($rotateForth) translateX(-50%);
+  }
+}
+
+@include media('>=medium') {
+  .card {
+    font-size: calc((#{$card-height-tablet} / 2) + 10px);
   }
 }

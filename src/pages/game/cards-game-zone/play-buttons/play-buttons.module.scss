@@ -9,50 +9,57 @@ $primary-black-button-bgColor: black;
   justify-content: center;
   align-items: center;
   gap: 1.75rem;
-  flex-wrap: wrap;
+}
+.button {
+  border-radius: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  padding: 0.4rem 0;
+  gap: 10px;
+  font-size: 1rem;
+  transition: background 0.5s ease;
+  background: $primary-black-button-bgColor;
 
-  button {
-    border-radius: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 3rem;
-    font-size: unquote('min(2vw, 1rem)');
-    transition: background 0.5s ease;
+  &[data-variant='red'] {
+    background: $primary-red-button-bgColor;
+  }
+
+  &[data-variant='black'] {
     background: $primary-black-button-bgColor;
+  }
 
-    img {
-      margin-right: 1rem;
-    }
-    &[data-variant='red'] {
-      background: $primary-red-button-bgColor;
-    }
-
-    &[data-variant='black'] {
-      background: $primary-black-button-bgColor;
-    }
-
-    @media (hover: hover) {
-      &:hover {
-        background: rgba(179, 179, 179, 0.768);
-        color: black;
-      }
+  @media (hover: hover) {
+    &:hover {
+      background: rgba(179, 179, 179, 0.768);
+      color: black;
     }
   }
 }
-
-@include media('<medium') {
+@include media('<desktop') {
   .Root {
+    margin-top: 1rem;
     gap: 1rem;
-    button {
-      font-size: 0.7rem;
-      padding: 0.5rem 1.5rem;
-    }
     .headers {
       display: flex;
       justify-content: center;
       gap: 1rem;
       width: 100%;
     }
+  }
+
+  .button {
+    min-width: 170px;
+    font-size: 0.7rem;
+    img {
+      max-width: 15px;
+    }
+  }
+}
+
+@include media('<=560px') {
+  .button {
+    min-width: 100px;
   }
 }
