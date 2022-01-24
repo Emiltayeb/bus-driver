@@ -9,6 +9,7 @@ const OpeningScreen = function () {
   const { resetGame } = useGameContext();
   React.useEffect(() => {
     resetGame();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <AnimatedPage className={`container mx-auto px-4 ${classes.Root}`}>

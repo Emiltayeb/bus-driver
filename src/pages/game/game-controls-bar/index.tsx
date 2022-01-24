@@ -5,7 +5,7 @@ import { useGameContext } from 'context/game-context';
 
 const GameControlsBar = function () {
   const { cardsInDeck, setCardsInGame, creatDeck } = useCardsContext();
-  const { level, resetGame } = useGameContext();
+  const { resetGame } = useGameContext();
 
   // reset game
   const onResetClick = () => {

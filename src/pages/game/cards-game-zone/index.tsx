@@ -4,7 +4,6 @@ import { useCardsContext } from 'context/card-context';
 import PlayingButtons from './play-buttons';
 import classes from './card-game-zone.module.scss';
 import gameDefaults from 'config/gameConfig';
-import Bus from 'components/Bus';
 import GameConfig from './game-config';
 
 const CardsGameZone = function () {
