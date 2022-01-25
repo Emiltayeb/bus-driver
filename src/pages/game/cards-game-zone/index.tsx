@@ -9,22 +9,31 @@ import { useGameContext } from 'context/game-context';
 
 enum LevelStatus {
   ACTIVE = 'Active',
-  PASSED = 'Passed'
+  PASSED = 'Passed',
+  LOSE = 'Lose'
 }
-const getLevelStatus = function (currGameLevel: number, level: number) {
-  if (currGameLevel === level) {
+const getLevelStatus = function (
+  currGameLevel: number,
+  platformLevel: number,
+  currentLostLevel: number | null
+) {
+  console.log({ currGameLevel, platformLevel, currentLostLevel });
+  if (currGameLevel === platformLevel) {
     // its the active one
     return LevelStatus.ACTIVE;
   }
 
-  if (currGameLevel > level) {
+  //
+  if (currGameLevel > platformLevel) {
     return LevelStatus.PASSED;
+  } else if (platformLevel === currentLostLevel) {
+    return LevelStatus.LOSE;
   }
   return '';
 };
 const CardsGameZone = function () {
   const { cardsInGame } = useCardsContext();
-  const { level } = useGameContext();
+  const { level, currentLostLevel } = useGameContext();
   return (
     <div className={classes.Root}>
       <GameConfig />
@@ -33,7 +42,7 @@ const CardsGameZone = function () {
           return (
             <div
               className={`${classes.Level} ${
-                classes[getLevelStatus(level, index)]
+                classes[getLevelStatus(level, index, currentLostLevel)]
               }`}
               key={index}
               data-level={index}

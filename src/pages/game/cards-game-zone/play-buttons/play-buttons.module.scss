@@ -22,6 +22,9 @@ $primary-black-button-bgColor: black;
   transition: background 0.5s ease;
   background: $primary-black-button-bgColor;
 
+  &:disabled {
+    opacity: 0.2;
+  }
   &[data-variant='red'] {
     background: $primary-red-button-bgColor;
   }

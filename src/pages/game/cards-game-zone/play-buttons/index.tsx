@@ -10,7 +10,8 @@ const PlayingButtons = function () {
   const [userChoice, setUserChoice] = React.useState<UserChoiceOptions | null>(
     null
   );
-  const { level, handelWinLevel, handelLoseLevel } = useGameContext();
+  const { level, handelWinLevel, handelLoseLevel, currentLostLevel } =
+    useGameContext();
   const { drawCard, currentCard, cardsInGame } = useCardsContext();
 
   // when user draw card -validate
@@ -33,6 +34,7 @@ const PlayingButtons = function () {
     <div className={classes.Root}>
       {gameDefaults.levelButtonsOptions[level]?.map((buttonData) => (
         <button
+          disabled={currentLostLevel !== null && currentLostLevel !== 0}
           data-variant={buttonData.text}
           className={`${classes.button} rounded text-white 
          transition duration-300`}
