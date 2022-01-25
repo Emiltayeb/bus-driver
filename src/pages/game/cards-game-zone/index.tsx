@@ -17,23 +17,26 @@ const getLevelStatus = function (
   platformLevel: number,
   currentLostLevel: number | null
 ) {
-  console.log({ currGameLevel, platformLevel, currentLostLevel });
+  // console.log({ currGameLevel, platformLevel, currentLostLevel });
+
+  if (platformLevel === currentLostLevel) {
+    return LevelStatus.LOSE;
+  }
   if (currGameLevel === platformLevel) {
     // its the active one
     return LevelStatus.ACTIVE;
   }
 
-  //
   if (currGameLevel > platformLevel) {
     return LevelStatus.PASSED;
-  } else if (platformLevel === currentLostLevel) {
-    return LevelStatus.LOSE;
   }
   return '';
 };
 const CardsGameZone = function () {
   const { cardsInGame } = useCardsContext();
   const { level, currentLostLevel } = useGameContext();
+
+  console.log('render');
   return (
     <div className={classes.Root}>
       <GameConfig />
@@ -42,7 +45,7 @@ const CardsGameZone = function () {
           return (
             <div
               className={`${classes.Level} ${
-                classes[getLevelStatus(level, index, currentLostLevel)]
+                classes[getLevelStatus(level, index, currentLostLevel)] ?? ''
               }`}
               key={index}
               data-level={index}

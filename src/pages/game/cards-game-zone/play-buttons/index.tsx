@@ -17,10 +17,8 @@ const PlayingButtons = function () {
   // when user draw card -validate
   React.useEffect(() => {
     if (!userChoice) return;
-    setTimeout(() => {
-      const isValid = validateLevel({ level, cardsInGame, userChoice });
-      isValid ? handelWinLevel() : handelLoseLevel();
-    }, 500);
+    const isValid = validateLevel({ level, cardsInGame, userChoice });
+    isValid ? handelWinLevel() : handelLoseLevel();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCard]);
 

@@ -42,16 +42,16 @@ const GameContextProvider: React.FC = ({ children }) => {
     // first level - nothing to do
     if (level === 0) return;
     // clear cards on the board
-
-    // reset level
-    setLevel(0);
     // set current lost level for animation
     setLostLevel(level);
+
     // clear lsot level
     setTimeout(() => {
+      setLevel(0);
+      // reset level
       setCardsInGame([]);
       setLostLevel(null);
-    }, 1500);
+    }, 2500);
   };
   const resetGame = () => {
     setLevel(0);
