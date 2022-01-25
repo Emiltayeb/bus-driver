@@ -19,16 +19,19 @@ const getLevelStatus = function (
   isWonGame: boolean
 ) {
   // console.log({ currGameLevel, platformLevel, currentLostLevel });
-
+  if (isWonGame) {
+    return LevelStatus.PASSED;
+  }
   if (platformLevel === currentLostLevel) {
     return LevelStatus.LOSE;
   }
-  if (currGameLevel > platformLevel || isWonGame) {
-    return LevelStatus.PASSED;
-  }
+
   if (currGameLevel === platformLevel) {
     // its the active one
     return LevelStatus.ACTIVE;
+  }
+  if (currGameLevel > platformLevel) {
+    return LevelStatus.PASSED;
   }
 
   return '';
