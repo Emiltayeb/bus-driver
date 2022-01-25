@@ -5,6 +5,13 @@ $header-border-radius: 50px;
 $header-bg: #000000;
 $primary-button-color: rgba(255, 255, 255, 0.8);
 
+@mixin borderMe {
+  border-bottom: transparent 1px solid;
+  transition: border-bottom 0.5s ease-in-out;
+  &:hover {
+    border-color: white;
+  }
+}
 // global
 .Root {
   display: flex;
@@ -24,6 +31,7 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
     flex-wrap: wrap;
 
     .Logo {
+      @include borderMe();
     }
     .header {
       display: flex;
@@ -35,6 +43,10 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
       justify-content: center;
       align-items: center;
       gap: 1rem;
+
+      button {
+        @include borderMe();
+      }
     }
     p {
       font-size: 0.8rem;

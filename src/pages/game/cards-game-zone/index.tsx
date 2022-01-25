@@ -6,7 +6,13 @@ import classes from './card-game-zone.module.scss';
 import gameDefaults from 'config/gameConfig';
 import GameConfig from './game-config';
 import { useGameContext } from 'context/game-context';
+import { AnimatePresence, motion } from 'framer-motion';
 
+const existAnimation = {
+  opacity: 0
+};
+const ANIMATION_DELTA = 1;
+const PlayingButtonsMotion = motion(PlayingButtons);
 enum LevelStatus {
   ACTIVE = 'Active',
   PASSED = 'Passed',
@@ -18,7 +24,6 @@ const getLevelStatus = function (
   currentLostLevel: number | null,
   isWonGame: boolean
 ) {
-  // console.log({ currGameLevel, platformLevel, currentLostLevel });
   if (isWonGame) {
     return LevelStatus.PASSED;
   }
@@ -36,11 +41,11 @@ const getLevelStatus = function (
 
   return '';
 };
+
 const CardsGameZone = function () {
   const { cardsInGame } = useCardsContext();
-  const { level, currentLostLevel, isWonGame } = useGameContext();
+  const { level, currentLostLevel, isWonGame, resetGame } = useGameContext();
 
-  console.log('render');
   return (
     <div className={classes.Root}>
       <GameConfig />
@@ -67,8 +72,25 @@ const CardsGameZone = function () {
           );
         })}
       </div>
-      {/* <Bus /> */}
-      <PlayingButtons />
+
+      <AnimatePresence>
+        {isWonGame ? (
+          <motion.div
+            initial={{ opacity: 0, x: '-100px' }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: ANIMATION_DELTA }}
+            className={classes.WonGameMessage}
+          >
+            <h1>Congress. you finished the game</h1>
+            <button onClick={resetGame}>Replay?</button>
+          </motion.div>
+        ) : (
+          <PlayingButtonsMotion
+            transition={{ duration: ANIMATION_DELTA }}
+            exit={existAnimation}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

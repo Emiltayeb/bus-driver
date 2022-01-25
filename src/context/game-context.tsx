@@ -27,12 +27,15 @@ const GameContextProvider: React.FC = ({ children }) => {
   const { setCardsInGame, creatDeck } = useCardsContext();
   const [level, setLevel] = React.useState(0);
   const [currentLostLevel, setLostLevel] = React.useState<number | null>(null);
-  const isWonGame = level === gameDefaults.totalLevels;
+  const [isWonGame, setIsWonGame] = React.useState(false);
 
   const handelWinLevel = function () {
+    const isWonGame = level + 1 === gameDefaults.totalLevels;
+
     console.log('GAME CONTEXT _ WIN LEVEL');
     if (isWonGame) {
       console.log('GAME CONTEXT _  WON GAME!');
+      setIsWonGame(true);
       return;
     }
     setLevel((prevLevel) => (prevLevel += 1));
@@ -58,6 +61,8 @@ const GameContextProvider: React.FC = ({ children }) => {
     setLevel(0);
     setCardsInGame([]);
     creatDeck();
+    setLostLevel(null);
+    setIsWonGame(false);
   };
   return (
     <GameContext.Provider

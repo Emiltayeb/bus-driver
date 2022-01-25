@@ -91,7 +91,9 @@ const insideOrOutsideValidator = (
 };
 
 const getCardForLevel = (cardsInGame: CardType[][], level: number) => {
-  const currentCard = cardsInGame[level][cardsInGame[level].length - 1];
+  if (!cardsInGame[level]) return;
+
+  const currentCard = cardsInGame[level][cardsInGame[level]?.length - 1];
   switch (level) {
     case Levels.RED_BLACK:
       return currentCard;

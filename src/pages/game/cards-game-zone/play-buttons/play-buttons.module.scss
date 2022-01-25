@@ -1,7 +1,5 @@
 @import '../../../../global-styles/media-query-mixin';
-
-$primary-red-button-bgColor: red;
-$primary-black-button-bgColor: black;
+@import '../../../../global-styles/shared';
 
 .Root {
   margin-top: 3rem;
@@ -11,20 +9,12 @@ $primary-black-button-bgColor: black;
   gap: 1.75rem;
 }
 .button {
-  border-radius: 35px;
+  @include shared-button;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 220px;
-  padding: 0.4rem 0;
-  gap: 10px;
-  font-size: 1rem;
-  transition: background 0.5s ease;
-  background: $primary-black-button-bgColor;
 
-  &:disabled {
-    opacity: 0.2;
-  }
   &[data-variant='red'] {
     background: $primary-red-button-bgColor;
   }
@@ -51,18 +41,9 @@ $primary-black-button-bgColor: black;
       width: 100%;
     }
   }
-
   .button {
-    min-width: 170px;
-    font-size: 0.7rem;
     img {
       max-width: 15px;
     }
-  }
-}
-
-@include media('<=560px') {
-  .button {
-    min-width: 100px;
   }
 }

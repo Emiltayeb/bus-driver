@@ -2,6 +2,7 @@ import { useCardsContext } from 'context/card-context';
 import classes from './game-control-bar.module.scss';
 import React from 'react';
 import { useGameContext } from 'context/game-context';
+import { Link } from 'react-router-dom';
 
 const GameControlsBar = function () {
   const { cardsInDeck, setCardsInGame, creatDeck } = useCardsContext();
@@ -25,7 +26,9 @@ const GameControlsBar = function () {
     <div className={classes.Root}>
       <div className={classes.Container}>
         {/* logo  */}
-        <h1 className={classes.Logo}>Bus Driver</h1>
+        <Link className={classes.Logo} to="/">
+          Bus Driver
+        </Link>
         <div className={classes.buttons}>
           <button className="text-xs" onClick={onResetClick}>
             Reset Game
