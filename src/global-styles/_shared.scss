@@ -28,4 +28,7 @@
   @include media('<=560px') {
     min-width: 100px;
   }
+  @include media('<=phone') {
+    min-width: 80px;
+  }
 }

@@ -77,7 +77,7 @@ const CardsGameZone = function () {
         {isWonGame ? (
           <motion.div
             initial={{ opacity: 0, x: '-100px' }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: ANIMATION_DELTA }}
             className={classes.WonGameMessage}
           >
