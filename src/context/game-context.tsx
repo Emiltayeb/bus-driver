@@ -1,6 +1,7 @@
 import gameDefaults from 'config/gameConfig';
 import * as React from 'react';
 import { useCardsContext } from './card-context';
+const DELAY_BETWEEN_LOST_LEVEL = 1.5;
 
 interface CardContextType {
   isWonGame: boolean;
@@ -51,7 +52,7 @@ const GameContextProvider: React.FC = ({ children }) => {
       // reset level
       setCardsInGame([]);
       setLostLevel(null);
-    }, 2500);
+    }, DELAY_BETWEEN_LOST_LEVEL * 1000);
   };
   const resetGame = () => {
     setLevel(0);

@@ -15,26 +15,27 @@ enum LevelStatus {
 const getLevelStatus = function (
   currGameLevel: number,
   platformLevel: number,
-  currentLostLevel: number | null
+  currentLostLevel: number | null,
+  isWonGame: boolean
 ) {
   // console.log({ currGameLevel, platformLevel, currentLostLevel });
 
   if (platformLevel === currentLostLevel) {
     return LevelStatus.LOSE;
   }
+  if (currGameLevel > platformLevel || isWonGame) {
+    return LevelStatus.PASSED;
+  }
   if (currGameLevel === platformLevel) {
     // its the active one
     return LevelStatus.ACTIVE;
   }
 
-  if (currGameLevel > platformLevel) {
-    return LevelStatus.PASSED;
-  }
   return '';
 };
 const CardsGameZone = function () {
   const { cardsInGame } = useCardsContext();
-  const { level, currentLostLevel } = useGameContext();
+  const { level, currentLostLevel, isWonGame } = useGameContext();
 
   console.log('render');
   return (
@@ -45,7 +46,9 @@ const CardsGameZone = function () {
           return (
             <div
               className={`${classes.Level} ${
-                classes[getLevelStatus(level, index, currentLostLevel)] ?? ''
+                classes[
+                  getLevelStatus(level, index, currentLostLevel, isWonGame)
+                ] ?? ''
               }`}
               key={index}
               data-level={index}
