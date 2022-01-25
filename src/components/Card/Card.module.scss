@@ -68,7 +68,7 @@ $stackTop: 60px;
   }
 }
 
-@include media('>=medium') {
+@include media('>=tablet') {
   .card {
     font-size: calc((#{$card-height-tablet} / 2) + 10px);
   }
