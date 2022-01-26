@@ -14,7 +14,7 @@ const OpeningScreen = function () {
   return (
     <AnimatedPage className={`container mx-auto px-4 ${classes.Root}`}>
       <h1
-        className="text-white font-bold text-3xl
+        className="text-white font-bold text-4xl
       md:text-6xl"
       >
         {gameDefaults.name}
