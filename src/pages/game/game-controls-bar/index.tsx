@@ -3,9 +3,11 @@ import classes from './game-control-bar.module.scss';
 import React from 'react';
 import { useGameContext } from 'context/game-context';
 import { Link } from 'react-router-dom';
+import HelpIcon from 'assets/control-bar-icons/Help.png';
+import ReplayIcon from 'assets/control-bar-icons/Replay.png';
 
 const GameControlsBar = function () {
-  const { cardsInDeck, setCardsInGame, creatDeck } = useCardsContext();
+  const { setCardsInGame, creatDeck } = useCardsContext();
   const { resetGame } = useGameContext();
 
   // reset game
@@ -14,13 +16,6 @@ const GameControlsBar = function () {
     creatDeck();
     resetGame();
   };
-
-  // user lost the game
-  React.useEffect(() => {
-    if (!cardsInDeck) return;
-    console.log('LOST');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cardsInDeck?.length === 0]);
 
   return (
     <div className={classes.Root}>
@@ -31,9 +26,13 @@ const GameControlsBar = function () {
         </Link>
         <div className={classes.buttons}>
           <button className="text-xs" onClick={onResetClick}>
-            Reset Game
+            Restart
+            <img src={ReplayIcon} alt="ReplayIcon" />
           </button>
-          <button className="text-xs">How To Play?</button>
+          <button className="text-xs">
+            How To Play
+            <img src={HelpIcon} alt="HelpIcon" />
+          </button>
         </div>
       </div>
     </div>

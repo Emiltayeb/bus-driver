@@ -1,4 +1,5 @@
 @import '../../../global-styles/media-query-mixin';
+@import '../../../global-styles/shared';
 
 $container-max-width: 1590px;
 $header-border-radius: 50px;
@@ -8,6 +9,7 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
 @mixin borderMe {
   border-bottom: transparent 1px solid;
   transition: border-bottom 0.5s ease-in-out;
+  padding-bottom: 0.2rem;
   &:hover {
     border-color: white;
   }
@@ -46,6 +48,7 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
 
       button {
         @include borderMe();
+        @include button-with-image();
       }
     }
     p {

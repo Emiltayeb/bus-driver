@@ -5,16 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GameContextProvider from 'context/game-context';
 import CardContextProvider from 'context/card-context';
+import StopWatchContextProvider from 'context/timer-context';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <CardContextProvider>
-      <GameContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </GameContextProvider>
+      <StopWatchContextProvider>
+        <GameContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </GameContextProvider>
+      </StopWatchContextProvider>
     </CardContextProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,6 +1,11 @@
 @import './media-query-mixin';
 @import './colors';
 
+@mixin button-with-image {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 @mixin shared-button {
   border-radius: 35px;
   background: $primary-black-button-bgColor;

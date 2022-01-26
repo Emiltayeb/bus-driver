@@ -17,6 +17,7 @@ $lose-primary: #f06262;
   gap: 1rem;
   width: 100%;
   max-width: $max-levels-width;
+  overflow-x: hidden;
 }
 
 .GamePlatform {
@@ -55,14 +56,31 @@ $lose-primary: #f06262;
   }
 }
 
-.WonGameMessage {
-  margin-top: 1rem;
+.CompleteGameMessage {
+  margin-top: 10px;
   color: white;
   text-align: center;
   button {
     @include shared-button;
   }
 }
+
+.ScoreDetails {
+  margin-bottom: 10px;
+
+  .FinalGameScore {
+    background: white;
+    color: black;
+    border-radius: 15px;
+    padding: 3px;
+    margin: 5px;
+  }
+
+  .Calculation {
+    font-size: 0.65rem;
+  }
+}
+
 @keyframes wonLevel {
   0% {
     box-shadow: inset 0 0 10px 1px $shadow-primary,
