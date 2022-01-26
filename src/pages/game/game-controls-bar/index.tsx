@@ -3,8 +3,8 @@ import classes from './game-control-bar.module.scss';
 import React from 'react';
 import { useGameContext } from 'context/game-context';
 import { Link } from 'react-router-dom';
-import HelpIcon from 'assets/control-bar-icons/Help.png';
-import ReplayIcon from 'assets/control-bar-icons/Replay.png';
+import HelpIcon from 'assets/control-bar-icons/Help.svg';
+import ReplayIcon from 'assets/control-bar-icons/Replay.svg';
 
 const GameControlsBar = function () {
   const { setCardsInGame, creatDeck } = useCardsContext();

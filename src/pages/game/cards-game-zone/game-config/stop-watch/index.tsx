@@ -2,7 +2,7 @@ import React from 'react';
 import Timer from './Timer';
 import classes from './stop-watch.module.scss';
 import { useStopWatchContext } from 'context/timer-context';
-import ClockIcon from 'assets/config-icons/sto-watch.png';
+import ClockIcon from 'assets/config-icons/Stop-Watch.svg';
 
 const StopWatch = () => {
   const { isActive, time, setTime } = useStopWatchContext();
