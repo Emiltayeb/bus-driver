@@ -12,7 +12,7 @@ $lose-primary: #f06262;
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 1rem auto;
+  margin: 0 auto;
   padding: 0 1rem;
   gap: 1rem;
   width: 100%;
@@ -67,15 +67,12 @@ $lose-primary: #f06262;
 
 .ScoreDetails {
   margin-bottom: 10px;
-
   .FinalGameScore {
-    background: white;
-    color: black;
-    border-radius: 15px;
-    padding: 3px;
-    margin: 5px;
+    display: block;
+    max-width: max-content;
+    margin: 0 5px;
+    padding: 0 5px;
   }
-
   .Calculation {
     font-size: 0.65rem;
     @include media('<=medium') {
@@ -124,6 +121,14 @@ $lose-primary: #f06262;
   @include media('>=medium') {
     .GamePlatform {
       grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @include media('<400px') {
+    .GamePlatform {
+      .Level {
+        aspect-ratio: 1.1 / 1.5;
+      }
     }
   }
 }

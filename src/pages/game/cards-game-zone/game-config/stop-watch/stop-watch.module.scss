@@ -9,7 +9,6 @@
   align-items: center;
   width: 180px;
   padding: 0 10px;
-
   position: relative;
 
   img {
@@ -20,5 +19,13 @@
 @include media('<=835px') {
   .Root {
     width: 150px;
+    font-size: 10px;
+  }
+}
+
+@include media('<=medium') {
+  .Root {
+    width: 100px;
+    font-size: 10px;
   }
 }

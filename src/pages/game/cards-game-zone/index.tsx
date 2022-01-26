@@ -9,6 +9,7 @@ import { useGameContext } from 'context/game-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStopWatchContext } from 'context/timer-context';
 import { formatTime, getCardUsed } from 'utils/global';
+import Badge from 'components/bedge';
 
 const existAnimation = {
   y: '-100px'
@@ -97,8 +98,8 @@ const CardsGameZone = function () {
             </h1>
             <div className={`${classes.ScoreDetails} text-xs  md:text-sm`}>
               <p>
-                Calculated Score :
-                <span className={classes.FinalGameScore}>{gameScore} </span>
+                Calculated Score:
+                <Badge classes={classes.FinalGameScore}>{gameScore}</Badge>
                 <span className={classes.Calculation}>
                   ({formatTime(time)} seconds + {getCardUsed(cardsInDeck)} Card
                   Used)

@@ -26,10 +26,17 @@
   }
 }
 
-@include media('<=500px') {
-  .Root {
-    flex-direction: column;
+@include media('<=400px') {
+  .GameData {
+    display: flex;
     align-items: center;
-    gap: 10px;
+    flex: 1;
+
+    .Data {
+      text-align: center;
+      &:nth-child(2) {
+        margin: 5px;
+      }
+    }
   }
 }
