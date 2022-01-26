@@ -78,6 +78,10 @@ $lose-primary: #f06262;
 
   .Calculation {
     font-size: 0.65rem;
+    @include media('<=medium') {
+      display: block;
+      margin-top: 5px;
+    }
   }
 }
 

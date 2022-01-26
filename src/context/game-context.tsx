@@ -55,8 +55,8 @@ const GameContextProvider: React.FC = ({ children }) => {
 
   // user lost the game
   React.useEffect(() => {
-    if (cardsInDeck && cardsInDeck?.length > 0) return;
-    setIsLostGame(true);
+    if (!cardsInDeck) return;
+    cardsInDeck?.length === 0 && setIsLostGame(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardsInDeck]);
 

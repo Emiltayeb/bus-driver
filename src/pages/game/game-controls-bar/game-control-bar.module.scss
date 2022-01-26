@@ -59,7 +59,16 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
 
 @include media('<=medium') {
   .Root {
+    padding: 15px;
     border-bottom-left-radius: unset;
     border-bottom-right-radius: unset;
+  }
+}
+
+@include media('<344px') {
+  .Root {
+    .Container {
+      flex-direction: column;
+    }
   }
 }

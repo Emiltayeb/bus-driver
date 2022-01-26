@@ -26,7 +26,7 @@ const CardContext = React.createContext<CardContextType>(defaultState);
 const CardContextProvider: FC = ({ children }) => {
   const currentCardIndex = React.useRef(0);
   const [cardsInGame, setCardsInGame] = useState<Array<CardType[]>>([]);
-  const [cardsInDeck, setCardsInDeck] = useState<null | CardType[]>([]);
+  const [cardsInDeck, setCardsInDeck] = useState<null | CardType[]>(null);
   const [currentCard, setCurrentCard] = React.useState<CardType | null>(null);
 
   const creatDeck = function () {
@@ -42,8 +42,7 @@ const CardContextProvider: FC = ({ children }) => {
       })
     )
       .flat()
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 5);
+      .sort(() => Math.random() - 0.5);
 
     console.log('TEST CARDS', freshDeck.slice(0, 5));
     setCardsInDeck(freshDeck);

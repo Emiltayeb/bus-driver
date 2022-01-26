@@ -26,7 +26,7 @@
   }
 }
 
-@include media('<=393px') {
+@include media('<=500px') {
   .Root {
     flex-direction: column;
     align-items: center;
