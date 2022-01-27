@@ -1,22 +1,13 @@
-@import '../../../global-styles/media-query-mixin';
-@import '../../../global-styles/shared';
+@import '../../../styles/media-query-mixin';
+@import '../../../styles/shared';
 
 $container-max-width: 1590px;
 $header-border-radius: 50px;
 $header-bg: #000000;
 $primary-button-color: rgba(255, 255, 255, 0.8);
 
-@mixin borderMe {
-  border-bottom: transparent 1px solid;
-  transition: border-bottom 0.5s ease-in-out;
-  padding-bottom: 0.2rem;
-  &:hover {
-    border-color: white;
-  }
-}
 // global
 .Root {
-  display: flex;
   padding: 30px;
   background-color: $header-bg;
   color: white;
@@ -25,27 +16,16 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   .Container {
-    margin: 0 auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    @include container($container-max-width);
+    @include flex(null, space-between, center, wrap);
 
     .Logo {
       @include borderMe();
     }
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 0.5em;
-    }
+
     .buttons {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-
+      @include flex(null, center, center, null, 1rem);
       button {
         @include borderMe();
         @include button-with-image();

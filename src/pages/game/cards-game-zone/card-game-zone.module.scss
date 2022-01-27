@@ -1,160 +1,146 @@
-@import '../../../global-styles/media-query-mixin';
-@import '../../../global-styles/colors';
-@import '../../../global-styles/configs';
-@import '../../../global-styles/shared';
-$max-levels-width: 1250px;
+@import '../../../styles/media-query-mixin';
+@import '../../../styles/colors';
+@import '../../../styles/configs';
+@import '../../../styles/shared';
 
+$max-levels-width: 1250px;
 $shadow-primary: #676767;
 $success-primary: hsl(146, 65%, 61%);
 $lose-primary: #f06262;
 
 .Root {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin: 0 auto;
-  padding: 0 1rem;
-  gap: 1rem;
-  width: 100%;
-  max-width: $max-levels-width;
-  overflow-x: hidden;
+ @include container($max-levels-width);
+ padding: 0 1rem;
+ width: 100%;
+ overflow-x: hidden;
 }
 
 .GamePlatform {
-  display: grid;
-  grid-template-columns: repeat(2, 140px);
-  justify-content: center;
-  gap: 1.5rem;
+ margin-top: 1rem;
+ display: grid;
+ grid-template-columns: repeat(2, 140px);
+ justify-content: center;
+ gap: 1.5rem;
 
-  .Level {
-    // todo Add Polifill / !support box shadow
-    display: flex;
-    align-items: center;
-    box-shadow: inset 0 0 30px -1px rgba(0, 0, 0, 0.4);
-    border-radius: 15px;
-    // inset 0 0 10px -1px #676767;
+ .Level {
+  // todo Add Polifill / !support box shadow
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 30px -1px rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
 
-    &.Active {
-      box-shadow: inset 0 0 10px 1px #676767,
-        0 0 15px 1px rgba(255, 255, 255, 0.393); /* inner white */
-    }
-    &.Passed {
-      animation: wonLevel 1s ease-in-out;
-      box-shadow: inset 0 0 10px 1px $success-primary,
-        0 0 15px 1px darken($color: $success-primary, $amount: 2); /* inner white */
-    }
-
-    &.Lose {
-      animation: loseLevel 1s ease-in-out;
-      box-shadow: inset 0 0 10px 1px $lose-primary,
-        0 0 15px 1px darken($color: $lose-primary, $amount: 2); /* inner white */
-    }
-
-    &[data-level='0'] {
-      position: relative;
-    }
+  &.Active {
+   box-shadow: inset 0 0 10px 1px #676767, 0 0 15px 1px rgba(255, 255, 255, 0.393); /* inner white */
   }
+  &.Passed {
+   animation: wonLevel 1s ease-in-out;
+   box-shadow: inset 0 0 10px 1px $success-primary, 0 0 15px 1px darken($color: $success-primary, $amount: 2); /* inner white */
+  }
+
+  &.Lose {
+   animation: loseLevel 1s ease-in-out;
+   box-shadow: inset 0 0 10px 1px $lose-primary, 0 0 15px 1px darken($color: $lose-primary, $amount: 2); /* inner white */
+  }
+
+  &[data-level='0'] {
+   position: relative;
+  }
+ }
 }
 
 .CompleteGameMessage {
-  margin-top: 10px;
-  color: white;
-  text-align: center;
-  button {
-    @include shared-button;
-  }
+ margin-top: 10px;
+ color: white;
+ text-align: center;
+ button {
+  @include shared-button;
+ }
 }
 .ScoreDetails {
-  margin-bottom: 10px;
-  .FinalGameScore {
-    display: inline-block;
-    margin: 0 5px;
-    padding: 0 5px;
+ margin-bottom: 10px;
+ .FinalGameScore {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 0 5px;
+ }
+ .Calculation {
+  font-size: 0.65rem;
+  @include media('<=medium') {
+   display: block;
+   margin-top: 5px;
   }
-  .Calculation {
-    font-size: 0.65rem;
-    @include media('<=medium') {
-      display: block;
-      margin-top: 5px;
-    }
-  }
+ }
 }
 
 // Media
 @include media('<medium') {
-  .Root {
-    margin-top: 0.5rem;
-  }
+ .Root {
+  margin-top: 0.5rem;
+ }
 }
 @keyframes wonLevel {
-  0% {
-    box-shadow: inset 0 0 10px 1px $shadow-primary,
-      0 0 15px 1px rgba(255, 255, 255, 0.393); /* inner white */
-  }
-  30% {
-    box-shadow: inset 0 0 10px 1px $success-primary,
-      0 0 30px 1px darken($color: $success-primary, $amount: 2); /* inner white */
-  }
-  100% {
-    box-shadow: inset 0 0 10px 1px $success-primary,
-      0 0 15px 1px darken($color: $success-primary, $amount: 2); /* inner white */
-  }
+ 0% {
+  box-shadow: inset 0 0 10px 1px $shadow-primary, 0 0 15px 1px rgba(255, 255, 255, 0.393); /* inner white */
+ }
+ 30% {
+  box-shadow: inset 0 0 10px 1px $success-primary, 0 0 30px 1px darken($color: $success-primary, $amount: 2); /* inner white */
+ }
+ 100% {
+  box-shadow: inset 0 0 10px 1px $success-primary, 0 0 15px 1px darken($color: $success-primary, $amount: 2); /* inner white */
+ }
 }
 
 @keyframes loseLevel {
-  0% {
-    box-shadow: inset 0 0 10px 1px $shadow-primary,
-      0 0 15px 1px rgba(255, 255, 255, 0.393); /* inner white */
-  }
-  30% {
-    box-shadow: inset 0 0 10px 1px $lose-primary 0 0 30px 1px
-      darken($color: $lose-primary, $amount: 2); /* inner white */
-  }
-  100% {
-    box-shadow: inset 0 0 10px 1px $lose-primary 0 0 15px 1px
-      darken($color: $lose-primary, $amount: 2); /* inner white */
-  }
+ 0% {
+  box-shadow: inset 0 0 10px 1px $shadow-primary, 0 0 15px 1px rgba(255, 255, 255, 0.393); /* inner white */
+ }
+ 30% {
+  box-shadow: inset 0 0 10px 1px $lose-primary 0 0 30px 1px darken($color: $lose-primary, $amount: 2); /* inner white */
+ }
+ 100% {
+  box-shadow: inset 0 0 10px 1px $lose-primary 0 0 15px 1px darken($color: $lose-primary, $amount: 2); /* inner white */
+ }
 }
 // polyfill for aspect ratio
 @supports (aspect-ratio: 1 / 1.5) {
+ .GamePlatform {
+  .Level {
+   aspect-ratio: 1 / 1.5;
+  }
+ }
+ @include media('>=medium') {
   .GamePlatform {
-    .Level {
-      aspect-ratio: 1 / 1.5;
-    }
+   grid-template-columns: repeat(4, 1fr);
   }
-  @include media('>=medium') {
-    .GamePlatform {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
+ }
 
-  @include media('<400px') {
-    .GamePlatform {
-      .Level {
-        aspect-ratio: 1.1 / 1.5;
-      }
-    }
+ @include media('<400px') {
+  .GamePlatform {
+   .Level {
+    aspect-ratio: 1.1 / 1.5;
+   }
   }
+ }
 }
 @supports not (aspect-ratio: 1 / 1.5) {
-  .GamePlatform {
-    .Level {
-      min-height: $card-height-mobile;
-    }
+ .GamePlatform {
+  .Level {
+   min-height: $card-height-mobile;
   }
+ }
 
-  @include media('>=650px') {
-    .GamePlatform {
-      .Level {
-        min-height: $card-height-tablet;
-      }
-    }
+ @include media('>=650px') {
+  .GamePlatform {
+   .Level {
+    min-height: $card-height-tablet;
+   }
   }
-  @include media('>=desktop') {
-    .GamePlatform {
-      .Level {
-        min-height: $card-height-desktop;
-      }
-    }
+ }
+ @include media('>=desktop') {
+  .GamePlatform {
+   .Level {
+    min-height: $card-height-desktop;
+   }
   }
+ }
 }

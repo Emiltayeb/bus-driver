@@ -1,14 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import './colors';
+@import './configs';
+@import './media-query-mixin';
 
 body {
-  /* Todo set here the desired bg color */
   background-color: $bg-primary;
-}
-
-.container {
-  max-width: 960px;
-  margin: 0 auto;
 }

@@ -1,11 +1,35 @@
 @import './media-query-mixin';
 @import './colors';
 
+// Container
+
+@mixin container($max-width: 960px) {
+  max-width: $max-width;
+  margin: 0 auto;
+}
+// Flex
+@mixin flex($dir: row, $just: center, $align: center, $wrap: no-wrap, $gap: 0) {
+  display: flex;
+  align-items: $align;
+  justify-content: $just;
+  flex-wrap: $wrap;
+  gap: $gap;
+}
+
+// Grid
+
+@mixin center-grid() {
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+// Buttons
 @mixin button-with-image {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
+
 @mixin shared-button {
   border-radius: 35px;
   background: $primary-black-button-bgColor;
@@ -35,5 +59,16 @@
   }
   @include media('<=phone') {
     min-width: 80px;
+  }
+}
+
+// Borders
+
+@mixin borderMe {
+  border-bottom: transparent 1px solid;
+  transition: border-bottom 0.5s ease-in-out;
+  padding-bottom: 0.2rem;
+  &:hover {
+    border-color: white;
   }
 }

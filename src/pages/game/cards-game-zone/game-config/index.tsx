@@ -1,5 +1,5 @@
 import React from 'react';
-import Badge from 'components/bedge';
+import Badge from 'components/badge';
 import classes from './game-config.module.scss';
 import { useGameContext } from 'context/game-context';
 import { useCardsContext } from 'context/card-context';

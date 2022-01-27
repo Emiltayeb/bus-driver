@@ -4,7 +4,6 @@ import CardsGameZone from './cards-game-zone';
 import GameControlsBar from './game-controls-bar';
 import classes from './game.module.scss';
 import AnimatedPage from 'components/aniamtePages';
-
 import { useGameContext } from 'context/game-context';
 
 const GameScreen = function () {

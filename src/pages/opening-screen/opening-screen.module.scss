@@ -1,6 +1,7 @@
+@import '../../styles/shared';
+
 .Root {
-  display: grid;
-  place-content: center;
+  @include center-grid();
   height: 100vh;
   gap: 1rem;
 
