@@ -29,7 +29,7 @@ export type InsideOrOutsideCards = {
  aboveOrBelowLastCard: CardTypes.CardType;
  currentCard: CardTypes.CardType;
 };
-export const formatHighCardValues: Record<string, string> = {
+const formatHighCardValues: Record<string, string> = {
  J: '11',
  Q: '12',
  K: '13',

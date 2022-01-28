@@ -1,13 +1,6 @@
 import { CardType } from 'types/card-type';
 import { UserChoiceOptions } from 'types/rule-validator-type';
-import {
- AboveOrBelowCards,
- formatCard,
- formatHighCardValues,
- InsideOrOutsideCards,
- Levels,
- ValidateLevelType
-} from 'utils/card-helper';
+import { AboveOrBelowCards, formatCard, InsideOrOutsideCards, Levels, ValidateLevelType } from 'utils/card-helper';
 
 // Level - 1
 const redOrBlackValidator = (userChoice: UserChoiceOptions, cardsForLevel: CardType) => {
