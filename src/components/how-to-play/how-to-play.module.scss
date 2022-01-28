@@ -1,0 +1,44 @@
+@import '../../styles//media-query-mixin';
+
+.Levels {
+ display: grid;
+ grid-template-columns: 2fr 1fr;
+ grid-template-rows: 45px 150px;
+ gap: 1rem;
+}
+
+.Content {
+ grid-column: 1 / span 2;
+
+ p {
+  line-height: 1.8;
+ }
+}
+.CardImage {
+ grid-column: 3;
+
+ &.RedOrBlackCards {
+  svg {
+   position: relative;
+   top: -10px;
+  }
+ }
+ &.OnCards {
+  align-self: end;
+ }
+
+ svg {
+  width: fit-content;
+  max-height: 120px;
+ }
+}
+
+@include media('<=700px') {
+ .Levels {
+  grid-template-columns: none;
+  grid-template-rows: none;
+ }
+ svg {
+  display: none;
+ }
+}

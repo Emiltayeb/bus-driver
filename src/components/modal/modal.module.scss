@@ -1,0 +1,46 @@
+@import '../../styles/shared';
+
+.OverLay {
+ background: rgba(black, 0.95);
+ display: grid;
+ place-content: center;
+ position: fixed;
+ inset: 0;
+ height: 100%;
+}
+
+.Modal {
+ @include round-me();
+ color: white;
+ background: black;
+ border: 1px solid white;
+ min-width: unquote('min(95vw, 750px)');
+ aspect-ratio: 1.5 / 1;
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+}
+
+.TopBar {
+ @include round-me(null, 'bottom');
+ background: #292929;
+ padding: 24px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+
+ .Title {
+  font-size: 0.65rem;
+ }
+ .CloseButton {
+  svg:hover [id='Close-Icon'] {
+   fill: black;
+  }
+ }
+}
+
+.Content {
+ padding: 1rem;
+ //pointer-events: none;
+}
