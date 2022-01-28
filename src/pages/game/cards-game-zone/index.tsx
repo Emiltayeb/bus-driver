@@ -7,49 +7,19 @@ import gameDefaults from 'config/gameConfig';
 import GameConfig from './game-config';
 import { useGameContext } from 'context/game-context';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useStopWatchContext } from 'context/timer-context';
-import { formatTime, getCardUsed } from 'utils/global';
+import { formatTime, getCardUsed, getLevelStatus } from 'utils/global';
 import Badge from 'components/badge';
 // transforming custom component to motion.
 const PlayingButtonsMotion = motion(PlayingButtons);
 
-enum LevelStatus {
- ACTIVE = 'Active',
- PASSED = 'Passed',
- LOSE = 'Lose'
-}
-
-// Helpers to set class accordingly
-const getLevelStatus = function (
- currGameLevel: number,
- platformLevel: number,
- currentLostLevel: number | null,
- isWonGame: boolean
-) {
- if (isWonGame) {
-  return LevelStatus.PASSED;
- }
- if (platformLevel === currentLostLevel) {
-  return LevelStatus.LOSE;
- }
- if (currGameLevel === platformLevel) {
-  return LevelStatus.ACTIVE;
- }
- if (currGameLevel > platformLevel) {
-  return LevelStatus.PASSED;
- }
- return '';
-};
-
 const CardsGameZone = function () {
- const { time } = useStopWatchContext();
  const { cardsInGame, cardsInDeck } = useCardsContext();
- const { level, currentLostLevel, isWonGame, resetGame, isLostGame, gameScore } = useGameContext();
+ const { level, currentGameTime, currentLostLevel, isWonGame, resetGame, isLostGame, gameScore } = useGameContext();
 
  return (
   <div className={classes.Root}>
    <GameConfig />
-   {/* creating a div for each levl in the game --  Game Platform **/}
+   {/* creating a div for each level in the game --  Game Platform **/}
    <div className={classes.GamePlatform}>
     {Array.from({
      length: gameDefaults.totalLevels
@@ -61,7 +31,7 @@ const CardsGameZone = function () {
        data-level={index}
       >
        {cardsInGame?.[index]?.map((card) => (
-        <Card stack={true} key={'' + card?.value + card?.suit} currentCard={card} />
+        <Card stack={index === 0} key={'' + card?.value + card?.suit} currentCard={card} />
        ))}
       </div>
      );
@@ -89,7 +59,7 @@ const CardsGameZone = function () {
         Calculated Score:
         <Badge classes={classes.FinalGameScore}>{gameScore}</Badge>
         <span className={classes.Calculation}>
-         ({formatTime(time)} seconds + {getCardUsed(cardsInDeck)} Card Used)
+         ({formatTime(currentGameTime)} seconds + {getCardUsed(cardsInDeck)} Card Used)
         </span>
        </p>
       </div>

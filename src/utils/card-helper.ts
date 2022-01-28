@@ -1,12 +1,48 @@
 import * as CardTypes from 'types/card-type';
+import { UserChoiceOptions } from 'types/rule-validator-type';
 
 export const SUITS: Array<CardTypes.SuitType> = ['♠', '♥', '♦', '♣'];
 export const VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
+export enum Levels {
+ RED_BLACK,
+ ABOVE_BELOW,
+ INSIDE_OUTSIDE,
+ RED_BLACK_FINAL
+}
+
+export type CardsInGame = Array<CardTypes.CardType[]>;
+
+export type ValidateLevelType = {
+ level: number;
+ cardsInGame: CardsInGame;
+ userChoice: UserChoiceOptions;
+};
+
+//cards per level
+export type AboveOrBelowCards = {
+ redOrBlackLastCard: CardTypes.CardType;
+ currentCard: CardTypes.CardType;
+};
+export type InsideOrOutsideCards = {
+ redOrBlackLastCard: CardTypes.CardType;
+ aboveOrBelowLastCard: CardTypes.CardType;
+ currentCard: CardTypes.CardType;
+};
 export const formatHighCardValues: Record<string, string> = {
  J: '11',
  Q: '12',
  K: '13',
  A: '14'
+};
+
+// Format Face Cards
+// get teh value for face cards
+export const formatCard = (card: CardTypes.CardType) => {
+ if (['J', 'Q', 'K', 'A'].includes(card?.value?.toString())) {
+  return formatHighCardValues[card.value];
+ }
+ return card.value;
 };
 
 // create individual card

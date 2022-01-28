@@ -2,7 +2,6 @@ import gameDefaults from 'config/gameConfig';
 import { DELAY_BETWEEN_LOST_LEVEL } from 'config/layout';
 import * as React from 'react';
 import { useCardsContext } from './card-context';
-import { useStopWatchContext } from './timer-context';
 
 interface GameContextInterface {
  isWonGame: boolean;
@@ -14,6 +13,10 @@ interface GameContextInterface {
  currentLostLevel: number | null;
  setLevel: React.Dispatch<React.SetStateAction<number>>;
  gameScore: number | null;
+ currentGameTime: number;
+ resetStopWatch: () => void;
+ isStopWatchActive: boolean;
+ setCurrentGameTime: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const GameContext = React.createContext<GameContextInterface>({
@@ -25,23 +28,33 @@ const GameContext = React.createContext<GameContextInterface>({
  isWonGame: false,
  isLostGame: false,
  currentLostLevel: null,
- gameScore: null
+ gameScore: null,
+ currentGameTime: 0,
+ resetStopWatch: () => {},
+ isStopWatchActive: false,
+ setCurrentGameTime: () => {}
 });
 
 const GameContextProvider: React.FC = ({ children }) => {
  const { setCardsInGame, creatDeck, cardsInDeck } = useCardsContext();
- const { reset: resetStopWatch, setIsActive: setStopWatch, time } = useStopWatchContext();
  const [level, setLevel] = React.useState(0);
  const [currentLostLevel, setLostLevel] = React.useState<number | null>(null);
  const [isWonGame, setIsWonGame] = React.useState(false);
  const [isLostGame, setIsLostGame] = React.useState(false);
  const [gameScore, setGameScore] = React.useState<number | null>(null);
+ //  stop watch
+ const [isStopWatchActive, setIsStopWatchActive] = React.useState(false);
+ const [currentGameTime, setCurrentGameTime] = React.useState(0);
 
+ const resetStopWatch = () => {
+  setCurrentGameTime(0);
+  setIsStopWatchActive(true);
+ };
  // win or lose - here we need to cac score
  React.useEffect(() => {
   if (isWonGame || isLostGame) {
-   setStopWatch(false);
-   const currTime = time / 1000;
+   setIsStopWatchActive(false);
+   const currTime = currentGameTime / 1000;
    const cardUsed = 52 - (cardsInDeck?.length as number);
    const finalScore = parseFloat((currTime + cardUsed).toFixed(2));
    setGameScore(finalScore);
@@ -99,7 +112,11 @@ const GameContextProvider: React.FC = ({ children }) => {
     isWonGame,
     isLostGame,
     currentLostLevel,
-    gameScore
+    gameScore,
+    isStopWatchActive,
+    currentGameTime,
+    resetStopWatch,
+    setCurrentGameTime
    }}
   >
    {children}

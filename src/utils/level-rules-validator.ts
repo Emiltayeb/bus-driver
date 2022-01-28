@@ -1,47 +1,20 @@
 import { CardType } from 'types/card-type';
 import { UserChoiceOptions } from 'types/rule-validator-type';
-import { formatHighCardValues } from 'utils/card-helper';
+import {
+ AboveOrBelowCards,
+ formatCard,
+ formatHighCardValues,
+ InsideOrOutsideCards,
+ Levels,
+ ValidateLevelType
+} from 'utils/card-helper';
 
-export enum Levels {
- RED_BLACK,
- ABOVE_BELOW,
- INSIDE_OUTSIDE,
- RED_BLACK_FINAL
-}
-type CardsInGame = Array<CardType[]>;
-
-type ValidateLevelType = {
- level: number;
- cardsInGame: CardsInGame;
- userChoice: UserChoiceOptions;
-};
-
-//cards per level
-type AboveOrBelowCards = {
- redOrBlackLastCard: CardType;
- currentCard: CardType;
-};
-type InsideOrOutsideCards = {
- redOrBlackLastCard: CardType;
- aboveOrBelowLastCard: CardType;
- currentCard: CardType;
-};
-
-// helpers
-
-// get teh value for face cards
-const formatCard = (card: CardType) => {
- if (['J', 'Q', 'K', 'A'].includes(card?.value?.toString())) {
-  return formatHighCardValues[card.value];
- }
- return card.value;
-};
-
-// handlers
+// Level - 1
 const redOrBlackValidator = (userChoice: UserChoiceOptions, cardsForLevel: CardType) => {
  return userChoice === cardsForLevel.color;
 };
 
+// Level - 2
 const aboveOrBelowValidator = (userChoice: UserChoiceOptions, cardsForLevel: AboveOrBelowCards) => {
  const redOrBlackCard = parseInt(formatCard(cardsForLevel.redOrBlackLastCard));
  const drawnCardValue = parseInt(formatCard(cardsForLevel.currentCard));
@@ -54,6 +27,8 @@ const aboveOrBelowValidator = (userChoice: UserChoiceOptions, cardsForLevel: Abo
   return drawnCardValue === redOrBlackCard;
  }
 };
+
+// Level - 3
 const insideOrOutsideValidator = (userChoice: UserChoiceOptions, cardsForLevel: InsideOrOutsideCards) => {
  let highestCard, lowestCard;
  const redOrBlackCard = parseInt(formatCard(cardsForLevel.redOrBlackLastCard));
@@ -102,6 +77,7 @@ const getCardForLevel = (cardsInGame: CardType[][], level: number) => {
 export function validateLevel({ level, userChoice, cardsInGame }: ValidateLevelType) {
  const cardForLevel = getCardForLevel(cardsInGame, level);
  if (!cardForLevel) return false;
+
  if (level === Levels.RED_BLACK || level === Levels.RED_BLACK_FINAL) {
   return redOrBlackValidator(userChoice, cardForLevel as CardType);
  }

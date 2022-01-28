@@ -8,47 +8,44 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
 
 // global
 .Root {
-  padding: 30px;
-  background-color: $header-bg;
-  color: white;
-  border-bottom-left-radius: $header-border-radius;
-  border-bottom-right-radius: $header-border-radius;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ padding: 30px;
+ background-color: $header-bg;
+ color: white;
+ border-bottom-left-radius: $header-border-radius;
+ border-bottom-right-radius: $header-border-radius;
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-  .Container {
-    @include container($container-max-width);
-    @include flex(null, space-between, center, wrap);
+ .Container {
+  @include container($container-max-width);
+  @include flex(null, space-between, center, wrap);
 
-    .Logo {
-      @include borderMe();
-    }
-
-    .buttons {
-      display: flex;
-      @include flex(null, center, center, null, 1rem);
-      button {
-        @include borderMe();
-        @include button-with-image();
-      }
-    }
-    p {
-      font-size: 0.8rem;
-    }
+  .Logo {
+   @include borderMe();
   }
+
+  .buttons {
+   display: flex;
+   @include flex(null, center, center, null, 1rem);
+   button {
+    @include borderMe();
+    @include button-with-image();
+   }
+  }
+ }
 }
 
 @include media('<=medium') {
-  .Root {
-    padding: 15px;
-    border-bottom-left-radius: unset;
-    border-bottom-right-radius: unset;
-  }
+ .Root {
+  padding: 15px;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
+ }
 }
 
 @include media('<344px') {
-  .Root {
-    .Container {
-      flex-direction: column;
-    }
+ .Root {
+  .Container {
+   flex-direction: column;
   }
+ }
 }

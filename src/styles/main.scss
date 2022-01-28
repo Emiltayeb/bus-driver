@@ -1,11 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import './colors';
 @import './configs';
 @import './layout';
 @import './media-query-mixin';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
  background-color: $bg-primary;

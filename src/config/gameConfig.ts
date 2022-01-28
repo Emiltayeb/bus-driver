@@ -1,8 +1,8 @@
-import belowICon from 'assets/buttons-icons/Bellow.png';
-import AboveIcon from 'assets/buttons-icons/Above.png';
-import InsideIcon from 'assets/buttons-icons/Inside.png';
-import OutsideIcon from 'assets/buttons-icons/Outside.png';
-import OnIcon from 'assets/buttons-icons/On.png';
+import belowICon from 'assets/buttons-icons/Bellow.svg';
+import AboveIcon from 'assets/buttons-icons/Above.svg';
+import InsideIcon from 'assets/buttons-icons/Inside.svg';
+import OutsideIcon from 'assets/buttons-icons/Outside.svg';
+import OnIcon from 'assets/buttons-icons/On.svg';
 import { LevelOptions } from 'types/level-types';
 
 interface GameDefaults {

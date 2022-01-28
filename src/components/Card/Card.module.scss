@@ -7,69 +7,69 @@ $rotateForth: -20deg;
 $stackTop: 60px;
 
 .card {
-  height: $card-size-by-parent;
-  width: $card-size-by-parent;
-  position: relative;
-  background-color: white;
-  border: 1px solid black;
-  font-size: calc((#{$card-height-mobile} / 2) + 10px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
+ height: $card-size-by-parent;
+ width: $card-size-by-parent;
+ position: relative;
+ background-color: white;
+ border: 1px solid black;
+ font-size: calc((#{$card-height-mobile} / 2) + 10px);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin: 0 auto;
 
-  &.fromPreviousLevel {
-    grid-row: 2;
-    justify-self: center;
-  }
+ &.fromPreviousLevel {
+  grid-row: 2;
+  justify-self: center;
+ }
 }
 
 // colors
 .card.red {
-  color: red;
+ color: red;
 }
 
 .card.black {
-  color: black;
+ color: black;
 }
 
 // corners
 .card::before {
-  font-size: 1rem;
-  position: absolute;
-  content: attr(data-value);
-  bottom: 10px;
-  right: 10px;
-  transform: rotateY(180deg);
+ font-size: 1rem;
+ position: absolute;
+ content: attr(data-value);
+ bottom: 10px;
+ right: 10px;
+ transform: rotateY(180deg);
 }
 .card::after {
-  font-size: 1rem;
-  position: absolute;
-  content: attr(data-value);
-  top: 10px;
-  left: 10px;
+ font-size: 1rem;
+ position: absolute;
+ content: attr(data-value);
+ top: 10px;
+ left: 10px;
 }
 /* cards errors. stack the cards in top of each other */
 .card.stack:not(:first-child) {
-  position: absolute;
-  top: 0;
-  left: 50%;
+ position: absolute;
+ top: 0;
+ left: 50%;
 
-  &:nth-child(odd) {
-    left: 0%;
-    top: 20px;
-    transform: rotate($stackRotate);
-  }
-  &:nth-child(even) {
-    transform: rotate((calc(-1 * #{$stackRotate}))) translateX(-50%);
-  }
-  &:nth-child(4n) {
-    transform: rotate($rotateForth) translateX(-50%);
-  }
+ &:nth-child(odd) {
+  left: 15px;
+  top: 20px;
+  transform: rotate($stackRotate);
+ }
+ &:nth-child(even) {
+  transform: rotate((calc(-1 * #{$stackRotate}))) translateX(-50%);
+ }
+ &:nth-child(4n) {
+  transform: rotate($rotateForth) translateX(-50%);
+ }
 }
 
 @include media('>=tablet') {
-  .card {
-    font-size: calc((#{$card-height-tablet} / 2) + 10px);
-  }
+ .card {
+  font-size: calc((#{$card-height-tablet} / 2) + 10px);
+ }
 }

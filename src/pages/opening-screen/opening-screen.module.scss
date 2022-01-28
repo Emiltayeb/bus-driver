@@ -1,11 +1,16 @@
 @import '../../styles/shared';
 
 .Root {
-  @include center-grid();
-  height: 100vh;
-  gap: 1rem;
+ @include center-grid();
+ height: 100vh;
+ gap: 1rem;
 
-  & a {
-    justify-self: center;
+ & a,
+ & button {
+  transition: background 352ms ease-in, color 125ms ease-in;
+  &:hover {
+   background: black;
+   color: white;
   }
+ }
 }
