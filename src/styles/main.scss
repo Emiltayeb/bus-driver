@@ -4,8 +4,9 @@
 
 @import './colors';
 @import './configs';
+@import './layout';
 @import './media-query-mixin';
 
 body {
-  background-color: $bg-primary;
+ background-color: $bg-primary;
 }
