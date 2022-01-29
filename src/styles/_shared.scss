@@ -59,14 +59,15 @@
  gap: 0.5rem;
 }
 
-@mixin shared-button {
+@mixin shared-button($bgColor: $primary-black-button-bgColor, $color: white) {
  border-radius: 35px;
- background: $primary-black-button-bgColor;
+ background: $bgColor;
  min-width: 220px;
  padding: 0.4rem 0;
  gap: 10px;
  font-size: 1rem;
  transition: background 0.5s ease;
+ color: $color;
 
  &:disabled {
   opacity: 0.2;
@@ -86,7 +87,8 @@
  @include media('<=560px') {
   min-width: 100px;
  }
- @include media('<=phone') {
+
+ @include media('<=320px') {
   min-width: 80px;
  }
 }

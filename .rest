@@ -1,0 +1,9 @@
+GET https://bus-driver-8220c-default-rtdb.europe-west1.firebasedatabase.app/leader_board.json 
+
+### Post
+POST https://bus-driver-8220c-default-rtdb.europe-west1.firebasedatabase.app/leader_board.json 
+content-type: application/json
+
+{
+    "dror": 12
+}

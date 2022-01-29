@@ -1,0 +1,48 @@
+@import '../../styles/shared';
+@import '../../styles/media-query-mixin';
+
+.Root {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 1rem;
+
+ input[type='text'] {
+  // @include round-me;
+  padding: 5px;
+  color: black;
+
+  &:focus {
+   border: 3px solid #1c87c9;
+  }
+ }
+ button {
+  @include shared-button(white, black);
+ }
+
+ .Field {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @include media('<=320px') {
+   flex-direction: column;
+  }
+ }
+}
+.SubmitButton {
+ cursor: pointer;
+ @include shared-button(white, black);
+ &:disabled {
+  opacity: 0.1;
+  pointer-events: none;
+ }
+}
+
+.Success {
+ color: $success-primary;
+}
+
+.Error {
+ color: $primary-red-button-bgColor;
+}

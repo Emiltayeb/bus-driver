@@ -18,6 +18,7 @@ interface GameContextInterface {
  isStopWatchActive: boolean;
  setCurrentGameTime: React.Dispatch<React.SetStateAction<number>>;
  setIsStopWatchActive: React.Dispatch<React.SetStateAction<boolean>>;
+ setGameScore: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const GameContext = React.createContext<GameContextInterface>({
@@ -34,7 +35,8 @@ const GameContext = React.createContext<GameContextInterface>({
  resetStopWatch: () => {},
  isStopWatchActive: false,
  setCurrentGameTime: () => {},
- setIsStopWatchActive: () => {}
+ setIsStopWatchActive: () => {},
+ setGameScore: () => {}
 });
 
 const GameContextProvider: React.FC = ({ children }) => {
@@ -59,6 +61,7 @@ const GameContextProvider: React.FC = ({ children }) => {
    const currTime = currentGameTime / 1000;
    const cardUsed = 52 - (cardsInDeck?.length as number);
    const finalScore = parseFloat((currTime + cardUsed).toFixed(2));
+   console.log('setting game scroe', finalScore);
    setGameScore(finalScore);
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -119,7 +122,8 @@ const GameContextProvider: React.FC = ({ children }) => {
     currentGameTime,
     resetStopWatch,
     setCurrentGameTime,
-    setIsStopWatchActive
+    setIsStopWatchActive,
+    setGameScore
    }}
   >
    {children}

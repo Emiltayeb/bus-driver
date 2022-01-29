@@ -10,15 +10,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
  <React.StrictMode>
-  <ModalContextProvider>
-   <CardContextProvider>
-    <GameContextProvider>
+  <CardContextProvider>
+   <GameContextProvider>
+    <ModalContextProvider>
      <BrowserRouter>
       <App />
      </BrowserRouter>
-    </GameContextProvider>
-   </CardContextProvider>
-  </ModalContextProvider>
+    </ModalContextProvider>
+   </GameContextProvider>
+  </CardContextProvider>
  </React.StrictMode>,
  document.getElementById('root')
 );

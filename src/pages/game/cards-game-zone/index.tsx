@@ -9,12 +9,16 @@ import { useGameContext } from 'context/game-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import { formatTime, getCardUsed, getLevelStatus } from 'utils/global';
 import Badge from 'components/badge';
+import SubmitScore from 'components/submit-score';
+import { useModalContext } from 'context/modal.context';
+
 // transforming custom component to motion.
 const PlayingButtonsMotion = motion(PlayingButtons);
 
 const CardsGameZone = function () {
  const { cardsInGame, cardsInDeck } = useCardsContext();
  const { level, currentGameTime, currentLostLevel, isWonGame, resetGame, isLostGame, gameScore } = useGameContext();
+ const { openModal } = useModalContext();
 
  return (
   <div className={classes.Root}>
@@ -63,7 +67,12 @@ const CardsGameZone = function () {
         </span>
        </p>
       </div>
-      <button onClick={resetGame}>Replay?</button>
+      <div className={classes.EndGameButtons}>
+       <button onClick={resetGame}>Replay?</button>
+       {gameScore && (
+        <button onClick={() => openModal({ title: 'submit score', component: <SubmitScore /> })}>Submit score</button>
+       )}
+      </div>
      </motion.div>
     ) : (
      <PlayingButtonsMotion

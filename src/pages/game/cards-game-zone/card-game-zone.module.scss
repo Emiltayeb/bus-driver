@@ -54,7 +54,7 @@ $lose-primary: #f06262;
 }
 
 .CompleteGameMessage {
- margin-top: 10px;
+ margin-top: 1rem;
  color: white;
  text-align: center;
  button {
@@ -76,7 +76,11 @@ $lose-primary: #f06262;
   }
  }
 }
-
+.EndGameButtons {
+ display: flex;
+ gap: 1rem;
+ justify-content: center;
+}
 // Media
 @include media('<medium') {
  .Root {

@@ -26,14 +26,14 @@ const GameControlsBar = function () {
       </button>
       <button
        className="text-xs"
-       onClick={() =>
+       onClick={async () => {
         openModal({
          title: 'How To Play',
          component: <HowToPlayModal />,
          onOpen: () => setIsStopWatchActive(false),
          onClose: () => setIsStopWatchActive(true)
-        })
-       }
+        });
+       }}
       >
        How To Play
        <img src={HelpIcon} alt="HelpIcon" />
