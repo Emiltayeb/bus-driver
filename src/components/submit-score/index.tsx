@@ -1,6 +1,8 @@
 import { useGameContext } from 'context/game-context';
 import { useModalContext } from 'context/modal.context';
-import { auth } from 'firebase-config';
+import { app } from 'firebase-config';
+import { getAuth } from 'firebase/auth';
+
 import React from 'react';
 import useHttps, { HttpsStatus } from 'utils/useHttp';
 import classes from './submit-score.module.scss';
@@ -65,7 +67,7 @@ const SubmitScore = () => {
 
  const handelSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
-  const token = await auth.currentUser?.getIdToken();
+  const token = await getAuth(app).currentUser?.getIdToken();
   postJson({ auth: token }, { [name.replace(/\s/g, '_')]: gameScore });
   setGameScore(null);
  };

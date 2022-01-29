@@ -5,8 +5,9 @@ import classes from './game.module.scss';
 import AnimatedPage from 'components/animatePages';
 import { useGameContext } from 'context/game-context';
 import { signInAnonymously } from '@firebase/auth';
-import 'firebase/database';
-import { auth } from 'firebase-config';
+import { app } from 'firebase-config';
+// import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
 const GameScreen = function () {
  const { resetGame } = useGameContext();
@@ -14,7 +15,7 @@ const GameScreen = function () {
  //  start game on entering game  screen
  React.useEffect(() => {
   //  sign user so he can submit score
-  signInAnonymously(auth);
+  signInAnonymously(getAuth(app));
   resetGame();
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, []);

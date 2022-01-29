@@ -19,7 +19,7 @@ const OpeningScreen = function () {
  return (
   <>
    {/* How To Play Modal */}
-
+   <pre>{JSON.stringify(process.env, undefined, 2)}</pre>
    <AnimatedPage className={`container mx-auto px-4 ${classes.Root}`}>
     {/* Rest */}
     <h1 className="text-white font-bold text-4xl md:text-6xl">{gameDefaults.name}</h1>
