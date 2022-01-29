@@ -11,8 +11,8 @@ import HowToPlayModal from 'components/how-to-play';
 const OpeningScreen = function () {
  const { resetGame } = useGameContext();
  const { openModal } = useModalContext();
+
  React.useEffect(() => {
-  console.log(process.env.REACT_APP_API_KEY);
   resetGame();
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, []);

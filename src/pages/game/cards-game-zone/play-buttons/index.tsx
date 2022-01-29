@@ -39,7 +39,7 @@ const PlayingButtons = React.forwardRef((_props, ref) => {
 
  return (
   <div className={classes.Root} ref={ref as React.MutableRefObject<HTMLDivElement>}>
-   {gameDefaults.levelButtonsOptions[level]?.map((buttonData, index) => {
+   {gameDefaults.levelButtonsOptions[level]?.map(({ text, Icon }, index) => {
     return (
      <motion.button
       variants={variance as any}
@@ -53,15 +53,15 @@ const PlayingButtons = React.forwardRef((_props, ref) => {
        stiffness: 500
       }}
       disabled={currentLostLevel !== null && currentLostLevel !== 0}
-      data-variant={buttonData.text}
+      data-variant={text}
       className={`${classes.button} rounded text-white 
                      transition duration-300`}
       type="button"
-      key={buttonData.text + index + level}
-      onClick={onPlayButtonClick(buttonData.text)}
+      key={text + index + level}
+      onClick={onPlayButtonClick(text)}
      >
-      {buttonData.icon && <img src={buttonData.icon} alt={buttonData.text} />}
-      <span>{buttonData.text.toLocaleUpperCase()}</span>
+      {Icon && <Icon />}
+      <span>{text.toLocaleUpperCase()}</span>
      </motion.button>
     );
    })}

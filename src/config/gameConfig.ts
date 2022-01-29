@@ -1,14 +1,14 @@
-import belowICon from 'assets/buttons-icons/Bellow.svg';
-import AboveIcon from 'assets/buttons-icons/Above.svg';
-import InsideIcon from 'assets/buttons-icons/Inside.svg';
-import OutsideIcon from 'assets/buttons-icons/Outside.svg';
-import OnIcon from 'assets/buttons-icons/On.svg';
+import { ReactComponent as belowICon } from 'assets/buttons-icons/Bellow.svg';
+import { ReactComponent as AboveIcon } from 'assets/buttons-icons/Above.svg';
+import { ReactComponent as InsideIcon } from 'assets/buttons-icons/Inside.svg';
+import { ReactComponent as OutsideIcon } from 'assets/buttons-icons/Outside.svg';
+import { ReactComponent as OnIcon } from 'assets/buttons-icons/On.svg';
 import { LevelOptions } from 'types/level-types';
 
 interface GameDefaults {
  name: string;
  totalLevels: number;
- levelButtonsOptions: Record<number, { text: LevelOptions; icon?: string }[]>;
+ levelButtonsOptions: Record<number, { text: LevelOptions; Icon?: any }[]>;
 }
 
 const gameDefaults: GameDefaults = {
@@ -17,14 +17,14 @@ const gameDefaults: GameDefaults = {
  levelButtonsOptions: {
   0: [{ text: 'red' }, { text: 'black' }],
   1: [
-   { text: 'above', icon: AboveIcon },
-   { text: 'bellow', icon: belowICon },
-   { text: 'on', icon: OnIcon }
+   { text: 'above', Icon: belowICon },
+   { text: 'bellow', Icon: belowICon },
+   { text: 'on', Icon: OnIcon }
   ],
   2: [
-   { text: 'inside', icon: InsideIcon },
-   { text: 'outside', icon: OutsideIcon },
-   { text: 'on', icon: OnIcon }
+   { text: 'inside', Icon: InsideIcon },
+   { text: 'outside', Icon: OutsideIcon },
+   { text: 'on', Icon: OnIcon }
   ],
   3: [{ text: 'red' }, { text: 'black' }]
  }

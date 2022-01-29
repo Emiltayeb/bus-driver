@@ -77,6 +77,11 @@
   &:hover {
    background: $color;
    color: $bgColor;
+
+   svg,
+   path {
+    fill: $bgColor;
+   }
   }
  }
  @include media('<desktop') {

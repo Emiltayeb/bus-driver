@@ -8,15 +8,15 @@ import { useCardsContext } from 'context/card-context';
 const StopWatch = () => {
  const { isStopWatchActive, isLostGame, isWonGame, setCurrentGameTime, setIsStopWatchActive, setGameScore } =
   useGameContext();
- const [currentGameTime, setTime] = React.useState(0);
+
+ const [stopWatchTime, setTime] = React.useState(0);
  const { cardsInDeck } = useCardsContext();
 
  React.useEffect(() => {
-  console.log('setting game time', currentGameTime);
-  setCurrentGameTime(currentGameTime);
+  setCurrentGameTime(stopWatchTime);
   if (isWonGame || isLostGame) {
    setIsStopWatchActive(false);
-   const currTime = currentGameTime / 1000;
+   const currTime = stopWatchTime / 1000;
    const cardUsed = 52 - (cardsInDeck?.length as number);
    const finalScore = parseFloat((currTime + cardUsed).toFixed(2));
    setGameScore(finalScore);
@@ -26,7 +26,6 @@ const StopWatch = () => {
 
  React.useEffect(() => {
   let interval: NodeJS.Timer | null = null;
-
   if (isStopWatchActive) {
    interval = setInterval(() => {
     setTime((currentGameTime) => currentGameTime + 10);
@@ -43,7 +42,7 @@ const StopWatch = () => {
  return (
   <div className={classes.Root}>
    <img src={ClockIcon} alt="Clock Icon" />
-   <Timer time={currentGameTime} />
+   <Timer time={stopWatchTime} />
   </div>
  );
 };

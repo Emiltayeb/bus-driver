@@ -9,7 +9,8 @@ import { useModalContext } from 'context/modal.context';
 import TopPlayers from 'components/top-players/intex';
 
 const GameControlsBar = function () {
- const { resetGame, setIsStopWatchActive } = useGameContext();
+ const { resetGame, setIsStopWatchActive, isLostGame, isWonGame } = useGameContext();
+ const isGameACtive = !isLostGame && !isWonGame;
  const { openModal } = useModalContext();
  return (
   <>
@@ -32,7 +33,7 @@ const GameControlsBar = function () {
          title: 'How To Play',
          component: <HowToPlayModal />,
          onOpen: () => setIsStopWatchActive(false),
-         onClose: () => setIsStopWatchActive(true)
+         onClose: () => isGameACtive && setIsStopWatchActive(true)
         });
        }}
       >
@@ -47,7 +48,7 @@ const GameControlsBar = function () {
          title: 'Top Players',
          component: <TopPlayers />,
          onOpen: () => setIsStopWatchActive(false),
-         onClose: () => setIsStopWatchActive(true)
+         onClose: () => isGameACtive && setIsStopWatchActive(true)
         });
        }}
       >
