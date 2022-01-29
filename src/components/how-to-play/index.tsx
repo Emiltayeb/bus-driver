@@ -5,7 +5,7 @@ import { ReactComponent as OnCards } from 'assets/cards/on-cards.svg';
 
 const HowToPlayModal = () => {
  return (
-  <>
+  <div className={classes.Root}>
    <section className="mb-6">
     <h1 className="font-bold mb-1">Score:</h1>
 
@@ -47,7 +47,7 @@ const HowToPlayModal = () => {
      </li>
     </ol>
    </section>
-  </>
+  </div>
  );
 };
 

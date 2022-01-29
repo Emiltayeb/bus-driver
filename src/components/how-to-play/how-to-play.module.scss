@@ -1,6 +1,10 @@
 @import '../../styles//media-query-mixin';
 
 $card-gap: 10px;
+
+.Root {
+ min-width: unquote('min(80vw, 500px)');
+}
 .Levels {
  display: grid;
  grid-template-columns: 2fr 1fr;
