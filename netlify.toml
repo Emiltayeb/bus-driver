@@ -1,0 +1,8 @@
+[build]
+REACT_APP_API_KEY= AIzaSyD41sGH8Upe-DnUXJslzxdbI5zAv5QQo1k
+REACT_APP_AUTH_DOMAIN= bus-driver-8220c.firebaseapp.com
+REACT_APP_PROJECT_ID= bus-driver-8220c
+REACT_APP_STORAGE_BUCKET= bus-driver-8220c.appspot.com
+REACT_APP_SENDER_ID= 706257397120
+RREACT_APP_APP_ID= 1:706257397120:web:e509d1dab5582c0c934d65
+REACT_APP_API_ENDPOINT = https://bus-driver-8220c-default-rtdb.europe-west1.firebasedatabase.app/leader_board.json
