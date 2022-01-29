@@ -19,9 +19,14 @@ $lose-primary: #f06262;
  margin-top: 1rem;
  display: grid;
  grid-template-columns: repeat(2, 140px);
+
  justify-content: center;
  gap: 1.5rem;
 
+ //  Very small screens
+ @include media('<320px') {
+  grid-template-columns: repeat(2, 40vw);
+ }
  .Level {
   // todo Add Polifill / !support box shadow
   display: flex;

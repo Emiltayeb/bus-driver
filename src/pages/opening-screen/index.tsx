@@ -19,7 +19,6 @@ const OpeningScreen = function () {
   <>
    {/* How To Play Modal */}
 
-   <HowToPlayModal />
    <AnimatedPage className={`container mx-auto px-4 ${classes.Root}`}>
     {/* Rest */}
     <h1 className="text-white font-bold text-4xl md:text-6xl">{gameDefaults.name}</h1>
@@ -27,7 +26,11 @@ const OpeningScreen = function () {
      Start Game
     </Link>
     <button className="bg-white  px-7 py-2 rounded-full ">Leader Board</button>
-    <button onClick={openModal} className="bg-white  px-7 py-2 rounded-full ">
+    {/* openModal({title:"..",component:'<HowToPaly/>}) */}
+    <button
+     onClick={() => openModal({ title: 'How To Play', component: <HowToPlayModal /> })}
+     className="bg-white  px-7 py-2 rounded-full "
+    >
      How To Play?
     </button>
    </AnimatedPage>

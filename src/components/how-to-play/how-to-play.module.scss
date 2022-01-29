@@ -1,5 +1,6 @@
 @import '../../styles//media-query-mixin';
 
+$card-gap: 10px;
 .Levels {
  display: grid;
  grid-template-columns: 2fr 1fr;
@@ -14,17 +15,20 @@
   line-height: 1.8;
  }
 }
+
 .CardImage {
  grid-column: 3;
 
  &.RedOrBlackCards {
   svg {
    position: relative;
-   top: -10px;
+   top: calc(-1 *#{$card-gap});
   }
  }
  &.OnCards {
   align-self: end;
+  position: relative;
+  top: $card-gap;
  }
 
  svg {
@@ -37,8 +41,8 @@
  .Levels {
   grid-template-columns: none;
   grid-template-rows: none;
- }
- svg {
-  display: none;
+  svg {
+   display: none;
+  }
  }
 }

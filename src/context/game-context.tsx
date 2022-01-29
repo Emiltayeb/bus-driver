@@ -17,6 +17,7 @@ interface GameContextInterface {
  resetStopWatch: () => void;
  isStopWatchActive: boolean;
  setCurrentGameTime: React.Dispatch<React.SetStateAction<number>>;
+ setIsStopWatchActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const GameContext = React.createContext<GameContextInterface>({
@@ -32,7 +33,8 @@ const GameContext = React.createContext<GameContextInterface>({
  currentGameTime: 0,
  resetStopWatch: () => {},
  isStopWatchActive: false,
- setCurrentGameTime: () => {}
+ setCurrentGameTime: () => {},
+ setIsStopWatchActive: () => {}
 });
 
 const GameContextProvider: React.FC = ({ children }) => {
@@ -116,7 +118,8 @@ const GameContextProvider: React.FC = ({ children }) => {
     isStopWatchActive,
     currentGameTime,
     resetStopWatch,
-    setCurrentGameTime
+    setCurrentGameTime,
+    setIsStopWatchActive
    }}
   >
    {children}

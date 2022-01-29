@@ -1,42 +1,36 @@
 @import '../../../../styles/media-query-mixin.scss';
 
 .Root {
-  color: white;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin: 1rem 0;
+ color: white;
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ flex-wrap: wrap;
+ margin: 1rem 0;
 }
 
 .GameData {
+ display: flex;
+ align-items: center;
+ flex: 1;
+ gap: 1rem;
+}
+
+@include media('<medium') {
+ .Root {
+  margin: 0;
+ }
+}
+
+@include media('<=400px') {
+ .GameData {
   display: flex;
   align-items: center;
   flex: 1;
 
   .Data {
-    &:nth-child(2) {
-      margin: 0 1rem;
-    }
+   text-align: center;
+   font-size: 3vw;
   }
-}
-
-@include media('<medium') {
-  .Root {
-    margin: 0;
-  }
-}
-
-@include media('<=400px') {
-  .GameData {
-    display: flex;
-    align-items: center;
-    flex: 1;
-
-    .Data {
-      text-align: center;
-      &:nth-child(2) {
-        margin: 5px;
-      }
-    }
-  }
+ }
 }
