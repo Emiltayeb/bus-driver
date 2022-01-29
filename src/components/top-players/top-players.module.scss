@@ -1,3 +1,6 @@
 .Root {
  min-width: unquote('min(80vw, 500px)');
+ min-height: 400px;
+ max-height: 500px;
+ overflow-y: auto;
 }

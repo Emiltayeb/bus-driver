@@ -64,17 +64,6 @@ const GameContextProvider: React.FC = ({ children }) => {
 
  const { getJson } = useHttps();
  // win or lose - here we need to cac score
- React.useEffect(() => {
-  if (isWonGame || isLostGame) {
-   setIsStopWatchActive(false);
-   const currTime = currentGameTime / 1000;
-   const cardUsed = 52 - (cardsInDeck?.length as number);
-   const finalScore = parseFloat((currTime + cardUsed).toFixed(2));
-   console.log('setting game scroe', finalScore);
-   setGameScore(finalScore);
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
- }, [isLostGame, isWonGame]);
 
  // user lost the game
  React.useEffect(() => {

@@ -20,6 +20,7 @@ const CardsGameZone = function () {
  const { level, currentGameTime, currentLostLevel, isWonGame, resetGame, isLostGame, gameScore } = useGameContext();
  const { openModal } = useModalContext();
 
+ console.log(currentGameTime);
  return (
   <div className={classes.Root}>
    <GameConfig />
