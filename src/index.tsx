@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './styles/main.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import StopWatchContextProvider from 'context/stop-watch';
 import GameContextProvider from 'context/game-context';
 import CardContextProvider from 'context/card-context';
 import ModalContextProvider from 'context/modal.context';
@@ -11,13 +12,15 @@ import { BrowserRouter } from 'react-router-dom';
 ReactDOM.render(
  <React.StrictMode>
   <CardContextProvider>
-   <GameContextProvider>
-    <ModalContextProvider>
-     <BrowserRouter>
-      <App />
-     </BrowserRouter>
-    </ModalContextProvider>
-   </GameContextProvider>
+   <StopWatchContextProvider>
+    <GameContextProvider>
+     <ModalContextProvider>
+      <BrowserRouter>
+       <App />
+      </BrowserRouter>
+     </ModalContextProvider>
+    </GameContextProvider>
+   </StopWatchContextProvider>
   </CardContextProvider>
  </React.StrictMode>,
  document.getElementById('root')

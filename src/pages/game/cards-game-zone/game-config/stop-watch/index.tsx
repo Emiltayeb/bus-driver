@@ -4,12 +4,12 @@ import classes from './stop-watch.module.scss';
 import ClockIcon from 'assets/config-icons/Stop-Watch.svg';
 import { useGameContext } from 'context/game-context';
 import { useCardsContext } from 'context/card-context';
+import { useStopWatchContext } from 'context/stop-watch';
 
 const StopWatch = () => {
- const { isStopWatchActive, isLostGame, isWonGame, setCurrentGameTime, setIsStopWatchActive, setGameScore } =
-  useGameContext();
-
- const [stopWatchTime, setTime] = React.useState(0);
+ const { isLostGame, isWonGame, setGameScore } = useGameContext();
+ const { isStopWatchActive, setIsStopWatchActive, isReset, setIsReset, setCurrentGameTime } = useStopWatchContext();
+ const [stopWatchTime, setStopWatchTime] = React.useState(0);
  const { cardsInDeck } = useCardsContext();
 
  React.useEffect(() => {
@@ -28,7 +28,7 @@ const StopWatch = () => {
   let interval: NodeJS.Timer | null = null;
   if (isStopWatchActive) {
    interval = setInterval(() => {
-    setTime((currentGameTime) => currentGameTime + 10);
+    setStopWatchTime((currentGameTime) => currentGameTime + 10);
    }, 10);
   } else {
    interval && clearInterval(interval);
@@ -38,6 +38,13 @@ const StopWatch = () => {
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [isStopWatchActive]);
+
+ React.useEffect(() => {
+  if (!isReset) return;
+  setStopWatchTime(0);
+  setIsReset(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, [isReset]);
 
  return (
   <div className={classes.Root}>

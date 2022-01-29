@@ -2,6 +2,7 @@ import * as React from 'react';
 import gameDefaults from 'config/gameConfig';
 import { DELAY_BETWEEN_LOST_LEVEL } from 'config/layout';
 import { useCardsContext } from './card-context';
+import { useStopWatchContext } from './stop-watch';
 
 interface GameContextInterface {
  isWonGame: boolean;
@@ -13,11 +14,6 @@ interface GameContextInterface {
  currentLostLevel: number | null;
  setLevel: React.Dispatch<React.SetStateAction<number>>;
  gameScore: number | null;
- currentGameTime: number;
- resetStopWatch: () => void;
- isStopWatchActive: boolean;
- setCurrentGameTime: React.Dispatch<React.SetStateAction<number>>;
- setIsStopWatchActive: React.Dispatch<React.SetStateAction<boolean>>;
  setGameScore: React.Dispatch<React.SetStateAction<number | null>>;
  topPlayers: Record<string, number>[];
  setTopPlayers: React.Dispatch<React.SetStateAction<Record<string, number>[]>>;
@@ -33,11 +29,6 @@ const GameContext = React.createContext<GameContextInterface>({
  isLostGame: false,
  currentLostLevel: null,
  gameScore: null,
- currentGameTime: 0,
- resetStopWatch: () => {},
- isStopWatchActive: false,
- setCurrentGameTime: () => {},
- setIsStopWatchActive: () => {},
  setGameScore: () => {},
  topPlayers: [],
  setTopPlayers: () => {}
@@ -50,9 +41,8 @@ const GameContextProvider: React.FC = ({ children }) => {
  const [isWonGame, setIsWonGame] = React.useState(false);
  const [isLostGame, setIsLostGame] = React.useState(false);
  const [gameScore, setGameScore] = React.useState<number | null>(null);
+ const { reset: resetStopWatch } = useStopWatchContext();
  //  stop watch
- const [isStopWatchActive, setIsStopWatchActive] = React.useState(false);
- const [currentGameTime, setCurrentGameTime] = React.useState(0);
  const [topPlayers, setTopPlayers] = React.useState<Record<string, number>[]>([]);
 
  // win or lose - here we need to cac score
@@ -62,11 +52,6 @@ const GameContextProvider: React.FC = ({ children }) => {
   cardsInDeck?.length === 0 && setIsLostGame(true);
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [cardsInDeck]);
-
- const resetStopWatch = () => {
-  setCurrentGameTime(0);
-  setIsStopWatchActive(true);
- };
 
  const handelWinLevel = function () {
   //  level + 1 because we start our level as 0 to give a better access to arrays.
@@ -113,11 +98,6 @@ const GameContextProvider: React.FC = ({ children }) => {
     isLostGame,
     currentLostLevel,
     gameScore,
-    isStopWatchActive,
-    currentGameTime,
-    resetStopWatch,
-    setCurrentGameTime,
-    setIsStopWatchActive,
     setGameScore,
     topPlayers,
     setTopPlayers

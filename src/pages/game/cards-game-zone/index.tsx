@@ -11,14 +11,16 @@ import { formatTime, getCardUsed, getLevelStatus } from 'utils/global';
 import Badge from 'components/badge';
 import SubmitScore from 'components/submit-score';
 import { useModalContext } from 'context/modal.context';
+import { useStopWatchContext } from 'context/stop-watch';
 
 // transforming custom component to motion.
 const PlayingButtonsMotion = motion(PlayingButtons);
 
 const CardsGameZone = function () {
  const { cardsInGame, cardsInDeck } = useCardsContext();
- const { level, currentGameTime, currentLostLevel, isWonGame, resetGame, isLostGame, gameScore } = useGameContext();
+ const { level, currentLostLevel, isWonGame, resetGame, isLostGame, gameScore } = useGameContext();
  const { openModal } = useModalContext();
+ const { currentGameTime } = useStopWatchContext();
 
  return (
   <div className={classes.Root}>

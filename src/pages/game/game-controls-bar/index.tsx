@@ -7,11 +7,14 @@ import ReplayIcon from 'assets/control-bar-icons/Replay.svg';
 import HowToPlayModal from 'components/how-to-play';
 import { useModalContext } from 'context/modal.context';
 import TopPlayers from 'components/top-players/intex';
+import { useStopWatchContext } from 'context/stop-watch';
 
 const GameControlsBar = function () {
- const { resetGame, setIsStopWatchActive, isLostGame, isWonGame } = useGameContext();
+ const { resetGame, isLostGame, isWonGame } = useGameContext();
+ const { setIsStopWatchActive } = useStopWatchContext();
  const isGameACtive = !isLostGame && !isWonGame;
  const { openModal } = useModalContext();
+
  return (
   <>
    {/* Content */}

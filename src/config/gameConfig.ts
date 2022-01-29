@@ -17,7 +17,7 @@ const gameDefaults: GameDefaults = {
  levelButtonsOptions: {
   0: [{ text: 'red' }, { text: 'black' }],
   1: [
-   { text: 'above', Icon: belowICon },
+   { text: 'above', Icon: AboveIcon },
    { text: 'bellow', Icon: belowICon },
    { text: 'on', Icon: OnIcon }
   ],
