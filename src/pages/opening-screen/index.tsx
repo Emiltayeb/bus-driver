@@ -17,25 +17,21 @@ const OpeningScreen = function () {
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, []);
  return (
-  <>
-   {/* How To Play Modal */}
-   <pre>{JSON.stringify(process.env, undefined, 2)}</pre>
-   <AnimatedPage className={`container mx-auto px-4 ${classes.Root}`}>
-    {/* Rest */}
-    <h1 className="text-white font-bold text-4xl md:text-6xl">{gameDefaults.name}</h1>
-    <Link to="/game" className="bg-white  px-7 py-2  font-bold rounded-full">
-     Start Game
-    </Link>
-    <button className="bg-white  px-7 py-2 rounded-full ">Leader Board</button>
-    {/* openModal({title:"..",component:'<HowToPaly/>}) */}
-    <button
-     onClick={() => openModal({ title: 'How To Play', component: <HowToPlayModal /> })}
-     className="bg-white  px-7 py-2 rounded-full "
-    >
-     How To Play?
-    </button>
-   </AnimatedPage>
-  </>
+  <AnimatedPage className={`container mx-auto px-4 ${classes.Root}`}>
+   {/* Rest */}
+   <h1 className="text-white font-bold text-4xl md:text-6xl">{gameDefaults.name}</h1>
+   <Link to="/game" className="bg-white  px-7 py-2  font-bold rounded-full">
+    Start Game
+   </Link>
+   <button className="bg-white  px-7 py-2 rounded-full ">Leader Board</button>
+   {/* openModal({title:"..",component:'<HowToPaly/>}) */}
+   <button
+    onClick={() => openModal({ title: 'How To Play', component: <HowToPlayModal /> })}
+    className="bg-white  px-7 py-2 rounded-full "
+   >
+    How To Play?
+   </button>
+  </AnimatedPage>
  );
 };
 
