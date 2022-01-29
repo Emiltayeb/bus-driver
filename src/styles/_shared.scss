@@ -75,8 +75,8 @@
 
  @media (hover: hover) {
   &:hover {
-   background: rgba(179, 179, 179, 0.768);
-   color: black;
+   background: $color;
+   color: $bgColor;
   }
  }
  @include media('<desktop') {

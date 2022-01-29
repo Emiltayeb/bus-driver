@@ -4,22 +4,21 @@
 .Root {
  display: flex;
  flex-direction: column;
- align-items: center;
- gap: 1rem;
+ align-items: flex-start;
 
- min-width: unquote('min(80vw, 300px)');
+ gap: 1rem;
+ min-width: unquote('min(80vw, 320px)');
+ margin: 0 auto;
 
  input[type='text'] {
-  // @include round-me;
+  @include round-me;
   padding: 5px;
   color: black;
+  max-width: 50%;
 
   &:focus {
    border: 3px solid #1c87c9;
   }
- }
- button {
-  @include shared-button(white, black);
  }
 
  .Field {
@@ -27,24 +26,29 @@
   align-items: center;
   gap: 1rem;
   font-size: 0.75rem;
-
-  // @include media('<=320px') {
-  // }
  }
-}
-.SubmitButton {
- cursor: pointer;
- @include shared-button(white, black);
- &:disabled {
-  opacity: 0.3;
-  pointer-events: none;
+
+ .SubmitButton,
+ button {
+  cursor: pointer;
+  @include shared-button(white, black);
+  border: 1px transparent solid;
+  width: 100%;
+
+  &:hover {
+   border: 1px white solid;
+  }
+  &:disabled {
+   opacity: 0.3;
+   pointer-events: none;
+  }
  }
-}
 
-.Success {
- color: $success-primary;
-}
+ .Success {
+  color: $success-primary;
+ }
 
-.Error {
- color: $primary-red-button-bgColor;
+ .Error {
+  color: $primary-red-button-bgColor;
+ }
 }

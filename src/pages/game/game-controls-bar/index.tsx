@@ -45,7 +45,9 @@ const GameControlsBar = function () {
        onClick={async () => {
         openModal({
          title: 'Top Players',
-         component: <TopPlayers />
+         component: <TopPlayers />,
+         onOpen: () => setIsStopWatchActive(false),
+         onClose: () => setIsStopWatchActive(true)
         });
        }}
       >

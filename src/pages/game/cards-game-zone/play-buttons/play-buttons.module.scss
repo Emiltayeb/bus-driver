@@ -2,48 +2,42 @@
 @import '../../../../styles/shared';
 
 .Root {
-  margin-top: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.75rem;
+ margin-top: 3rem;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ gap: 1.75rem;
 }
 .button {
-  @include shared-button;
+ @include shared-button;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+ display: flex;
+ align-items: center;
+ justify-content: center;
 
-  &[data-variant='red'] {
-    background: $primary-red-button-bgColor;
-  }
+ &[data-variant='red'] {
+  background: $primary-red-button-bgColor;
+  @include shared-button($primary-red-button-bgColor, white);
+ }
 
-  &[data-variant='black'] {
-    background: $primary-black-button-bgColor;
-  }
-
-  @media (hover: hover) {
-    &:hover {
-      background: rgba(179, 179, 179, 0.768);
-      color: black;
-    }
-  }
+ &[data-variant='black'] {
+  @include shared-button($primary-black-button-bgColor, white);
+ }
 }
 @include media('<desktop') {
-  .Root {
-    margin-top: 1rem;
-    gap: 1rem;
-    .headers {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      width: 100%;
-    }
+ .Root {
+  margin-top: 1rem;
+  gap: 1rem;
+  .headers {
+   display: flex;
+   justify-content: center;
+   gap: 1rem;
+   width: 100%;
   }
-  .button {
-    img {
-      max-width: 15px;
-    }
+ }
+ .button {
+  img {
+   max-width: 15px;
   }
+ }
 }

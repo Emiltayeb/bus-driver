@@ -1,8 +1,6 @@
+import * as React from 'react';
 import gameDefaults from 'config/gameConfig';
 import { DELAY_BETWEEN_LOST_LEVEL } from 'config/layout';
-import * as React from 'react';
-import getTopScores from 'utils/getTopScores';
-import useHttps from 'utils/useHttp';
 import { useCardsContext } from './card-context';
 
 interface GameContextInterface {
@@ -22,7 +20,7 @@ interface GameContextInterface {
  setIsStopWatchActive: React.Dispatch<React.SetStateAction<boolean>>;
  setGameScore: React.Dispatch<React.SetStateAction<number | null>>;
  topPlayers: Record<string, number>[];
- getTopPlayers: () => void;
+ setTopPlayers: React.Dispatch<React.SetStateAction<Record<string, number>[]>>;
 }
 
 const GameContext = React.createContext<GameContextInterface>({
@@ -42,7 +40,7 @@ const GameContext = React.createContext<GameContextInterface>({
  setIsStopWatchActive: () => {},
  setGameScore: () => {},
  topPlayers: [],
- getTopPlayers: () => {}
+ setTopPlayers: () => {}
 });
 
 const GameContextProvider: React.FC = ({ children }) => {
@@ -57,20 +55,18 @@ const GameContextProvider: React.FC = ({ children }) => {
  const [currentGameTime, setCurrentGameTime] = React.useState(0);
  const [topPlayers, setTopPlayers] = React.useState<Record<string, number>[]>([]);
 
- const resetStopWatch = () => {
-  setCurrentGameTime(0);
-  setIsStopWatchActive(true);
- };
-
- const { getJson } = useHttps();
  // win or lose - here we need to cac score
 
- // user lost the game
  React.useEffect(() => {
   if (!cardsInDeck) return;
   cardsInDeck?.length === 0 && setIsLostGame(true);
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [cardsInDeck]);
+
+ const resetStopWatch = () => {
+  setCurrentGameTime(0);
+  setIsStopWatchActive(true);
+ };
 
  const handelWinLevel = function () {
   //  level + 1 because we start our level as 0 to give a better access to arrays.
@@ -105,12 +101,6 @@ const GameContextProvider: React.FC = ({ children }) => {
   setIsLostGame(false);
  };
 
- const getTopPlayers = async function () {
-  const data = await getJson({ url: `${process.env.REACT_APP_API_ENDPOINT}` });
-  const formattersLeaders = await getTopScores(data);
-  setTopPlayers(formattersLeaders);
- };
-
  return (
   <GameContext.Provider
    value={{
@@ -130,7 +120,7 @@ const GameContextProvider: React.FC = ({ children }) => {
     setIsStopWatchActive,
     setGameScore,
     topPlayers,
-    getTopPlayers
+    setTopPlayers
    }}
   >
    {children}

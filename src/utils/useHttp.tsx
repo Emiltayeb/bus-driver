@@ -15,15 +15,14 @@ export enum HttpsStatus {
 }
 const useHttps = function () {
  const [status, setStatus] = React.useState(HttpsStatus.INITIAL);
- const [data, setData] = React.useState<any>(null);
  const [error, setError] = React.useState<any>(null);
 
- const postJson = async function ({ queryParams, body, url }: UseHttpProps) {
+ const postJson = async function ({ queryParams, body, url, method = 'POST' }: UseHttpProps) {
   let searchParams = new URLSearchParams(queryParams);
   try {
    setStatus(HttpsStatus.LOADING);
    const res = await fetch(`${url}?${searchParams.toString()}`, {
-    method: 'POST',
+    method,
     body: JSON.stringify(body),
     headers: {
      'Content-Type': 'application/json'
@@ -32,18 +31,18 @@ const useHttps = function () {
    if (!res.ok) {
     throw Error;
    }
-
    setStatus(HttpsStatus.COMPLETED);
   } catch (error: any) {
    setStatus(HttpsStatus.ERROR);
    console.log(error.message);
+  } finally {
+   setStatus(HttpsStatus.COMPLETED);
   }
  };
  const getJson = async function ({ url, method = 'GET', body }: UseHttpProps) {
   if (!url) return;
   try {
    setStatus(HttpsStatus.LOADING);
-
    const res = await fetch(url, {
     method,
     body: JSON.stringify(body),
@@ -56,16 +55,16 @@ const useHttps = function () {
     throw Error;
    }
    const data = await res.json();
-   setStatus(HttpsStatus.COMPLETED);
-
    return data;
   } catch (error: any) {
    setError(error.message);
    setStatus(HttpsStatus.ERROR);
+  } finally {
+   setStatus(HttpsStatus.COMPLETED);
   }
  };
 
- return { status, data, error, postJson, getJson };
+ return { status, error, postJson, getJson };
 };
 
 export default useHttps;

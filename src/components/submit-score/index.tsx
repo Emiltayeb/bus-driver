@@ -71,7 +71,8 @@ const SubmitScore = () => {
   postJson({
    url: `${process.env.REACT_APP_API_ENDPOINT}`,
    body: { [name.replace(/\s/g, '_')]: gameScore },
-   queryParams: { auth: token }
+   queryParams: { auth: token },
+   method: 'POST'
   });
   setGameScore(null);
  };
