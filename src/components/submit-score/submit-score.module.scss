@@ -7,6 +7,8 @@
  align-items: center;
  gap: 1rem;
 
+ min-width: unquote('min(80vw, 300px)');
+
  input[type='text'] {
   // @include round-me;
   padding: 5px;

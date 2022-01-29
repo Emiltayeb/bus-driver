@@ -4,6 +4,7 @@ import { ReactComponent as RedOrBlackCards } from 'assets/cards/red-or-black.svg
 import { ReactComponent as OnCards } from 'assets/cards/on-cards.svg';
 
 const HowToPlayModal = () => {
+ console.log('how to play modal');
  return (
   <div className={classes.Root}>
    <section className="mb-6">

@@ -11,7 +11,6 @@ import { getAuth } from 'firebase/auth';
 
 const GameScreen = function () {
  const { resetGame } = useGameContext();
-
  //  start game on entering game  screen
  React.useEffect(() => {
   //  sign user so he can submit score

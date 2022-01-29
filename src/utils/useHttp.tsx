@@ -3,7 +3,8 @@ import React from 'react';
 type UseHttpProps = {
  url?: string;
  method?: string;
- body?: BodyInit | null | undefined;
+ body?: any;
+ queryParams?: Record<string, any>;
 };
 
 export enum HttpsStatus {
@@ -12,12 +13,12 @@ export enum HttpsStatus {
  ERROR,
  COMPLETED
 }
-const useHttps = function ({ url, method = 'GET', body }: UseHttpProps) {
+const useHttps = function () {
  const [status, setStatus] = React.useState(HttpsStatus.INITIAL);
  const [data, setData] = React.useState<any>(null);
  const [error, setError] = React.useState<any>(null);
 
- const postJson = async function (queryParams?: Record<string, any>, body?: any) {
+ const postJson = async function ({ queryParams, body, url }: UseHttpProps) {
   let searchParams = new URLSearchParams(queryParams);
   try {
    setStatus(HttpsStatus.LOADING);
@@ -31,15 +32,18 @@ const useHttps = function ({ url, method = 'GET', body }: UseHttpProps) {
    if (!res.ok) {
     throw Error;
    }
+
    setStatus(HttpsStatus.COMPLETED);
   } catch (error: any) {
    setStatus(HttpsStatus.ERROR);
    console.log(error.message);
   }
  };
- const getJson = async function () {
+ const getJson = async function ({ url, method = 'GET', body }: UseHttpProps) {
   if (!url) return;
   try {
+   setStatus(HttpsStatus.LOADING);
+
    const res = await fetch(url, {
     method,
     body: JSON.stringify(body),
@@ -52,8 +56,9 @@ const useHttps = function ({ url, method = 'GET', body }: UseHttpProps) {
     throw Error;
    }
    const data = await res.json();
-   setData(data);
    setStatus(HttpsStatus.COMPLETED);
+
+   return data;
   } catch (error: any) {
    setError(error.message);
    setStatus(HttpsStatus.ERROR);

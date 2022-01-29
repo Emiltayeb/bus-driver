@@ -6,6 +6,7 @@ import HelpIcon from 'assets/control-bar-icons/Help.svg';
 import ReplayIcon from 'assets/control-bar-icons/Replay.svg';
 import HowToPlayModal from 'components/how-to-play';
 import { useModalContext } from 'context/modal.context';
+import TopPlayers from 'components/top-players/intex';
 
 const GameControlsBar = function () {
  const { resetGame, setIsStopWatchActive } = useGameContext();
@@ -37,6 +38,18 @@ const GameControlsBar = function () {
       >
        How To Play
        <img src={HelpIcon} alt="HelpIcon" />
+      </button>
+
+      <button
+       className="text-xs"
+       onClick={async () => {
+        openModal({
+         title: 'Top Players',
+         component: <TopPlayers />
+        });
+       }}
+      >
+       Top Players
       </button>
      </div>
     </div>

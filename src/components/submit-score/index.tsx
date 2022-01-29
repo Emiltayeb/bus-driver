@@ -36,7 +36,7 @@ const getMEssage = function (
    return (
     <>
      <span>
-      <span className={classes.Success}> Score saved! </span>
+      <p className={classes.Success}> Score saved! </p>
       go ahead and play again.
      </span>
      <button
@@ -59,7 +59,7 @@ const getMEssage = function (
 };
 
 const SubmitScore = () => {
- const { postJson, status } = useHttps({ url: `${process.env.REACT_APP_API_ENDPOINT}` });
+ const { postJson, status } = useHttps();
  const { gameScore, setGameScore, resetGame } = useGameContext();
  const [name, setName] = React.useState('');
  const nameInputRef = React.useRef<HTMLInputElement | null>(null);
@@ -68,7 +68,11 @@ const SubmitScore = () => {
  const handelSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
   const token = await getAuth(app).currentUser?.getIdToken();
-  postJson({ auth: token }, { [name.replace(/\s/g, '_')]: gameScore });
+  postJson({
+   url: `${process.env.REACT_APP_API_ENDPOINT}`,
+   body: { [name.replace(/\s/g, '_')]: gameScore },
+   queryParams: { auth: token }
+  });
   setGameScore(null);
  };
 
