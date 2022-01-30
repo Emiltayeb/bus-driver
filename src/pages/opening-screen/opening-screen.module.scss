@@ -7,10 +7,13 @@
 
  & a,
  & button {
-  transition: background 352ms ease-in, color 125ms ease-in;
-  &:hover {
-   background: black;
-   color: white;
-  }
+  @include shared-button(white, black, false);
+ }
+
+ .LoginOptions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
  }
 }

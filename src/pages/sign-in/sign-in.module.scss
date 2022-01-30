@@ -1,0 +1,10 @@
+@import '../../styles/shared';
+
+.Root {
+ @include container;
+
+ height: 100vh;
+ display: grid;
+ place-content: center;
+ text-align: center;
+}

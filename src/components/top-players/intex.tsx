@@ -5,6 +5,7 @@ import StopWatchIcon from 'assets/config-icons/Stop-Watch.svg';
 import { ReactComponent as CrownIcon } from 'assets/top-players/crown.svg';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from 'firebase-config';
+import getTopPlayers from 'utils/getTopPlayers';
 
 const TopPlayers = () => {
  const [loading, setLoading] = React.useState(true);
@@ -25,11 +26,7 @@ const TopPlayers = () => {
 
  React.useEffect(() => {
   setLoading(true);
-  const topPlayers: any = [];
-  snapShot?.docs.forEach((doc: any) => {
-   topPlayers.push({ ...doc.data(), id: doc.id });
-  });
-  setTopPlayers(topPlayers);
+  setTopPlayers(getTopPlayers(snapShot?.docs));
   setLoading(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [snapShot]);

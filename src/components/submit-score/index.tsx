@@ -1,9 +1,10 @@
 import TopPlayers from 'components/top-players/intex';
 import { useGameContext } from 'context/game-context';
 import { useModalContext } from 'context/modal.context';
-import { db } from 'firebase-config';
-import { addDoc, collection } from 'firebase/firestore';
+import { auth, db } from 'firebase-config';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import classes from './submit-score.module.scss';
 
 enum LoadingStatus {
@@ -14,7 +15,6 @@ enum LoadingStatus {
 }
 const getMEssage = function getMEssage(
  status: number,
- name: string,
  gameScore: number | null,
  resetGame: () => void,
  closeModal: () => void,
@@ -40,7 +40,6 @@ const getMEssage = function getMEssage(
     </>
    );
   case LoadingStatus.COMPLETED: {
-   console.log('saved..');
    return (
     <>
      <span>
@@ -69,67 +68,53 @@ const getMEssage = function getMEssage(
    );
   }
   default:
-   return (
-    <input
-     type="submit"
-     className={classes.SubmitButton}
-     value="Submit"
-     disabled={name.length === 0 || !gameScore}
-    />
-   );
+   break;
  }
 };
 
 const SubmitScore = () => {
- const { gameScore, setGameScore, resetGame } = useGameContext();
+ const { gameScore, setGameScore, resetGame, topPlayers } = useGameContext();
+ const [user] = useAuthState(auth);
  const [loading, setLoading] = React.useState(LoadingStatus.INITIAL);
- const [name, setName] = React.useState('');
- const nameInputRef = React.useRef<HTMLInputElement | null>(null);
  const { closeModal, openModal } = useModalContext();
 
- const handelSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
-  e.preventDefault();
+ const submitScore = async function () {
   setLoading(LoadingStatus.LOADING);
   const colRef = collection(db, 'players');
-  addDoc(colRef, {
-   name,
-   score: gameScore
-  })
-   .then(() => {
-    setGameScore(null);
+  const currentPlayer = topPlayers.find(
+   (player) => player.name === user?.displayName
+  );
+
+  try {
+   if (currentPlayer) {
+    const updateDocREf = doc(db, 'players', currentPlayer.id);
+    await updateDoc(updateDocREf, {
+     score: gameScore
+    });
     setLoading(LoadingStatus.COMPLETED);
-   })
-   .catch(() => {
-    setLoading(LoadingStatus.ERROR);
-   });
+   } else {
+    addDoc(colRef, {
+     name: user?.displayName,
+     score: gameScore
+    });
+    setLoading(LoadingStatus.COMPLETED);
+   }
+  } catch (error) {
+   setLoading(LoadingStatus.ERROR);
+  } finally {
+   setGameScore(null);
+  }
  };
 
  React.useEffect(() => {
-  if (!nameInputRef.current) return;
-  nameInputRef.current.focus();
- }, [nameInputRef]);
+  submitScore();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, []);
 
  return (
-  <form onSubmit={handelSubmit} className={classes.Root}>
-   {gameScore && (
-    <>
-     <fieldset className={classes.Field}>
-      <label htmlFor="name">Score:</label> <span>{gameScore}</span>
-     </fieldset>
-     <fieldset className={classes.Field}>
-      <label htmlFor="name">Name:</label>
-      <input
-       ref={nameInputRef}
-       maxLength={12}
-       type="text"
-       onChange={(e) => setName(e.target.value)}
-       className="text-black"
-      />
-     </fieldset>
-    </>
-   )}
-   {getMEssage(loading, name, gameScore, resetGame, closeModal, openModal)}
-  </form>
+  <div className={classes.Root}>
+   {getMEssage(loading, gameScore, resetGame, closeModal, openModal)}
+  </div>
  );
 };
 

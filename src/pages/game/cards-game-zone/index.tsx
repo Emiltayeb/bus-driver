@@ -18,7 +18,14 @@ const PlayingButtonsMotion = motion(PlayingButtons);
 
 const CardsGameZone = function () {
  const { cardsInGame, cardsInDeck } = useCardsContext();
- const { level, currentLostLevel, isWonGame, resetGame, isLostGame, gameScore } = useGameContext();
+ const {
+  level,
+  currentLostLevel,
+  isWonGame,
+  resetGame,
+  isLostGame,
+  gameScore
+ } = useGameContext();
  const { openModal } = useModalContext();
  const { currentGameTime } = useStopWatchContext();
 
@@ -32,12 +39,18 @@ const CardsGameZone = function () {
     }).map((_, index) => {
      return (
       <div
-       className={`${classes.Level} ${classes[getLevelStatus(level, index, currentLostLevel, isWonGame)] ?? ''}`}
+       className={`${classes.Level} ${
+        classes[getLevelStatus(level, index, currentLostLevel, isWonGame)] ?? ''
+       }`}
        key={index}
        data-level={index}
       >
        {cardsInGame?.[index]?.map((card) => (
-        <Card stack={index === 0} key={'' + card?.value + card?.suit} currentCard={card} />
+        <Card
+         stack={index === 0}
+         key={'' + card?.value + card?.suit}
+         currentCard={card}
+        />
        ))}
       </div>
      );
@@ -59,20 +72,35 @@ const CardsGameZone = function () {
       }}
       className={classes.CompleteGameMessage}
      >
-      <h1 className={classes.Header}>{isWonGame ? 'Well Done!' : 'You Lost.'}</h1>
+      <h1 className={classes.Header}>
+       {isWonGame ? 'Well Done!' : 'You Lost.'}
+      </h1>
       <div className={`${classes.ScoreDetails} text-xs  md:text-sm`}>
        <p>
-        Calculated Score:
-        <Badge classes={classes.FinalGameScore}>{gameScore}</Badge>
-        <span className={classes.Calculation}>
-         ({formatTime(currentGameTime)} seconds + {getCardUsed(cardsInDeck)} Card Used)
-        </span>
+        {gameScore && (
+         <>
+          Calculated Score:
+          <Badge classes={classes.FinalGameScore}>{gameScore}</Badge>
+          <span className={classes.Calculation}>
+           ({formatTime(currentGameTime)} seconds + {getCardUsed(cardsInDeck)}{' '}
+           Card Used)
+          </span>
+         </>
+        )}
        </p>
       </div>
       <div className={classes.EndGameButtons}>
        <button onClick={resetGame}>Replay?</button>
        {gameScore && isWonGame && (
-        <button onClick={() => openModal({ title: 'submit score', component: <SubmitScore /> })}>Submit score</button>
+        // Todo: no need to submit after the player submited
+        // in addition, you should tell the user thats it ihis new high score by querying the db.
+        <button
+         onClick={() =>
+          openModal({ title: 'submit score', component: <SubmitScore /> })
+         }
+        >
+         Submit score
+        </button>
        )}
       </div>
      </motion.div>
