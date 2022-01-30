@@ -71,7 +71,7 @@ const CardsGameZone = function () {
       </div>
       <div className={classes.EndGameButtons}>
        <button onClick={resetGame}>Replay?</button>
-       {gameScore && (
+       {gameScore && isWonGame && (
         <button onClick={() => openModal({ title: 'submit score', component: <SubmitScore /> })}>Submit score</button>
        )}
       </div>

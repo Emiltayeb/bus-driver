@@ -17,7 +17,12 @@ const useHttps = function () {
  const [status, setStatus] = React.useState(HttpsStatus.INITIAL);
  const [error, setError] = React.useState<any>(null);
 
- const postJson = async function ({ queryParams, body, url, method = 'POST' }: UseHttpProps) {
+ const postJson = async function ({
+  queryParams,
+  body,
+  url,
+  method = 'POST'
+ }: UseHttpProps) {
   let searchParams = new URLSearchParams(queryParams);
   try {
    setStatus(HttpsStatus.LOADING);
@@ -35,8 +40,6 @@ const useHttps = function () {
   } catch (error: any) {
    setStatus(HttpsStatus.ERROR);
    console.log(error.message);
-  } finally {
-   setStatus(HttpsStatus.COMPLETED);
   }
  };
  const getJson = async function ({ url, method = 'GET', body }: UseHttpProps) {
@@ -55,12 +58,11 @@ const useHttps = function () {
     throw Error;
    }
    const data = await res.json();
+   setStatus(HttpsStatus.COMPLETED);
    return data;
   } catch (error: any) {
    setError(error.message);
    setStatus(HttpsStatus.ERROR);
-  } finally {
-   setStatus(HttpsStatus.COMPLETED);
   }
  };
 

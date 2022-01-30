@@ -6,7 +6,10 @@ import classes from './opening-screen.module.scss';
 import AnimatedPage from 'components/animatePages';
 import '../../styles/main.scss';
 import { useModalContext } from 'context/modal.context';
-import HowToPlayModal from 'components/how-to-play';
+import HowToPlay from 'components/how-to-play';
+import TopPlayers from 'components/top-players/intex';
+import { signInAnonymously } from 'firebase/auth';
+import { auth } from 'firebase-config';
 
 const OpeningScreen = function () {
  const { resetGame } = useGameContext();
@@ -14,6 +17,9 @@ const OpeningScreen = function () {
 
  React.useEffect(() => {
   resetGame();
+  try {
+   signInAnonymously(auth);
+  } catch (error) {}
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, []);
  return (
@@ -23,10 +29,15 @@ const OpeningScreen = function () {
    <Link to="/game" className="bg-white  px-7 py-2  font-bold rounded-full">
     Start Game
    </Link>
-   <button className="bg-white  px-7 py-2 rounded-full ">Leader Board</button>
+   <button
+    className="bg-white  px-7 py-2 rounded-full "
+    onClick={() => openModal({ title: 'How To Play', component: <TopPlayers /> })}
+   >
+    Leader Board
+   </button>
    {/* openModal({title:"..",component:'<HowToPaly/>}) */}
    <button
-    onClick={() => openModal({ title: 'How To Play', component: <HowToPlayModal /> })}
+    onClick={() => openModal({ title: 'How To Play', component: <HowToPlay /> })}
     className="bg-white  px-7 py-2 rounded-full "
    >
     How To Play?

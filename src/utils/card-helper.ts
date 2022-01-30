@@ -17,6 +17,7 @@ export type ValidateLevelType = {
  level: number;
  cardsInGame: CardsInGame;
  userChoice: UserChoiceOptions;
+ setIsWonGame: any;
 };
 
 //cards per level

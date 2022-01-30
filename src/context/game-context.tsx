@@ -3,7 +3,7 @@ import gameDefaults from 'config/gameConfig';
 import { DELAY_BETWEEN_LOST_LEVEL } from 'config/layout';
 import { useCardsContext } from './card-context';
 import { useStopWatchContext } from './stop-watch';
-
+export type TopScore = { id: string; name: string; score: number };
 interface GameContextInterface {
  isWonGame: boolean;
  isLostGame: boolean;
@@ -15,8 +15,9 @@ interface GameContextInterface {
  setLevel: React.Dispatch<React.SetStateAction<number>>;
  gameScore: number | null;
  setGameScore: React.Dispatch<React.SetStateAction<number | null>>;
- topPlayers: Record<string, number>[];
- setTopPlayers: React.Dispatch<React.SetStateAction<Record<string, number>[]>>;
+ topPlayers: TopScore[];
+ setTopPlayers: React.Dispatch<React.SetStateAction<TopScore[]>>;
+ setIsWonGame: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const GameContext = React.createContext<GameContextInterface>({
@@ -31,7 +32,8 @@ const GameContext = React.createContext<GameContextInterface>({
  gameScore: null,
  setGameScore: () => {},
  topPlayers: [],
- setTopPlayers: () => {}
+ setTopPlayers: () => {},
+ setIsWonGame: () => {}
 });
 
 const GameContextProvider: React.FC = ({ children }) => {
@@ -43,7 +45,7 @@ const GameContextProvider: React.FC = ({ children }) => {
  const [gameScore, setGameScore] = React.useState<number | null>(null);
  const { reset: resetStopWatch } = useStopWatchContext();
  //  stop watch
- const [topPlayers, setTopPlayers] = React.useState<Record<string, number>[]>([]);
+ const [topPlayers, setTopPlayers] = React.useState<TopScore[]>([]);
 
  // win or lose - here we need to cac score
 
@@ -100,7 +102,8 @@ const GameContextProvider: React.FC = ({ children }) => {
     gameScore,
     setGameScore,
     topPlayers,
-    setTopPlayers
+    setTopPlayers,
+    setIsWonGame
    }}
   >
    {children}

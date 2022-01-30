@@ -1,43 +1,33 @@
+import TopPlayers from 'components/top-players/intex';
 import { useGameContext } from 'context/game-context';
 import { useModalContext } from 'context/modal.context';
-import { app } from 'firebase-config';
-import { getAuth } from 'firebase/auth';
-
+import { db } from 'firebase-config';
+import { addDoc, collection } from 'firebase/firestore';
 import React from 'react';
-import useHttps, { HttpsStatus } from 'utils/useHttp';
 import classes from './submit-score.module.scss';
 
-const getMEssage = function (
+enum LoadingStatus {
+ LOADING,
+ INITIAL,
+ COMPLETED,
+ ERROR
+}
+const getMEssage = function getMEssage(
  status: number,
  name: string,
  gameScore: number | null,
  resetGame: () => void,
- closeModal: () => void
+ closeModal: () => void,
+ openModal: ({ title, component, open, onOpen, onClose }: any) => void
 ) {
  switch (status) {
-  case HttpsStatus.LOADING:
+  case LoadingStatus.LOADING:
    return <span>Submitting...</span>;
-  case HttpsStatus.ERROR:
+  case LoadingStatus.ERROR:
    return (
     <>
-     <span className={classes.Error}>Sorry, result wasn't save. try again later.</span>
-     <button
-      onClick={() => {
-       closeModal();
-       resetGame();
-      }}
-     >
-      Replay?
-     </button>
-    </>
-   );
-  case HttpsStatus.COMPLETED: {
-   console.log('saved..');
-   return (
-    <>
-     <span>
-      <p className={classes.Success}> Score saved! </p>
-      go ahead and play again.
+     <span className={classes.Error}>
+      Sorry, result wasn't save. try again later.
      </span>
      <button
       onClick={() => {
@@ -45,36 +35,73 @@ const getMEssage = function (
        resetGame();
       }}
      >
-      {' '}
       Replay?
      </button>
+    </>
+   );
+  case LoadingStatus.COMPLETED: {
+   console.log('saved..');
+   return (
+    <>
+     <span>
+      <p className={classes.Success}> Score saved! </p>go ahead and play again
+     </span>
+     <div className={classes.ActionButtons}>
+      <button
+       onClick={() => {
+        closeModal();
+        resetGame();
+       }}
+      >
+       {' '}
+       Replay?
+      </button>
+
+      <button
+       onClick={() => {
+        openModal({ title: 'How To Play', component: <TopPlayers /> });
+       }}
+      >
+       Top Players
+      </button>
+     </div>
     </>
    );
   }
   default:
    return (
-    <input type="submit" className={classes.SubmitButton} value="Submit" disabled={name.length === 0 || !gameScore} />
+    <input
+     type="submit"
+     className={classes.SubmitButton}
+     value="Submit"
+     disabled={name.length === 0 || !gameScore}
+    />
    );
  }
 };
 
 const SubmitScore = () => {
- const { postJson, status } = useHttps();
  const { gameScore, setGameScore, resetGame } = useGameContext();
+ const [loading, setLoading] = React.useState(LoadingStatus.INITIAL);
  const [name, setName] = React.useState('');
  const nameInputRef = React.useRef<HTMLInputElement | null>(null);
- const { closeModal } = useModalContext();
+ const { closeModal, openModal } = useModalContext();
 
  const handelSubmit = async function (e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
-  const token = await getAuth(app).currentUser?.getIdToken();
-  postJson({
-   url: `${process.env.REACT_APP_API_ENDPOINT}`,
-   body: { [name.replace(/\s/g, '_')]: gameScore },
-   queryParams: { auth: token },
-   method: 'POST'
-  });
-  setGameScore(null);
+  setLoading(LoadingStatus.LOADING);
+  const colRef = collection(db, 'players');
+  addDoc(colRef, {
+   name,
+   score: gameScore
+  })
+   .then(() => {
+    setGameScore(null);
+    setLoading(LoadingStatus.COMPLETED);
+   })
+   .catch(() => {
+    setLoading(LoadingStatus.ERROR);
+   });
  };
 
  React.useEffect(() => {
@@ -87,8 +114,7 @@ const SubmitScore = () => {
    {gameScore && (
     <>
      <fieldset className={classes.Field}>
-      <label htmlFor="name">Score:</label>
-      <span>{gameScore}</span>
+      <label htmlFor="name">Score:</label> <span>{gameScore}</span>
      </fieldset>
      <fieldset className={classes.Field}>
       <label htmlFor="name">Name:</label>
@@ -102,7 +128,7 @@ const SubmitScore = () => {
      </fieldset>
     </>
    )}
-   {getMEssage(status, name, gameScore, resetGame, closeModal)}
+   {getMEssage(loading, name, gameScore, resetGame, closeModal, openModal)}
   </form>
  );
 };

@@ -20,13 +20,13 @@ const variance: Record<string, AnimationControls | TargetAndTransition> = {
 
 const PlayingButtons = React.forwardRef((_props, ref) => {
  const [userChoice, setUserChoice] = React.useState<UserChoiceOptions | null>(null);
- const { level, handelWinLevel, handelLoseLevel, currentLostLevel } = useGameContext();
+ const { level, handelWinLevel, handelLoseLevel, currentLostLevel, setIsWonGame } = useGameContext();
  const { drawCard, currentCard, cardsInGame } = useCardsContext();
 
  // when user draw card -validate
  React.useEffect(() => {
   if (!userChoice) return;
-  const isValid = validateLevel({ level, cardsInGame, userChoice });
+  const isValid = validateLevel({ level, cardsInGame, userChoice, setIsWonGame });
   isValid ? handelWinLevel() : handelLoseLevel();
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [currentCard]);

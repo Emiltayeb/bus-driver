@@ -1,7 +1,12 @@
 GET https://bus-driver-8220c-default-rtdb.europe-west1.firebasedatabase.app/leader_board.json 
 
 ### Post
-POST https://bus-driver-8220c-default-rtdb.europe-west1.firebasedatabase.app/leader_board.json 
+POST https://identitytoolkit.googleapis.com/v1/accounts:signUp?key= AIzaSyD41sGH8Upe-DnUXJslzxdbI5zAv5QQo1k
+content-type: application/json
+
+
+### Post
+POST https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel?database=projects%2Fbus-driver-8220c%2Fdatabases%2F(default)&VER=8&gsessionid=pR-LFj91sm77iRfEsXQy1d5kucX96IdEVrJ_FKAxpag&SID=-XG7OrBSIXogwXfaUD14XA&RID=44169&AID=1&zx=1jkfp58oxdm&t=1
 content-type: application/json
 
 {

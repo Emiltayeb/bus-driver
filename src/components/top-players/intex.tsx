@@ -1,32 +1,45 @@
 import React from 'react';
 import { useGameContext } from 'context/game-context';
 import classes from './top-players.module.scss';
-import useHttps, { HttpsStatus } from 'utils/useHttp';
 import StopWatchIcon from 'assets/config-icons/Stop-Watch.svg';
 import { ReactComponent as CrownIcon } from 'assets/top-players/crown.svg';
-import getTopScores from 'utils/getTopScores';
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { db } from 'firebase-config';
 
 const TopPlayers = () => {
- const { topPlayers, setTopPlayers } = useGameContext();
- const { status, getJson } = useHttps();
+ const [loading, setLoading] = React.useState(true);
+ const { setTopPlayers, topPlayers } = useGameContext();
+ const [snapShot, setSnapshot] = React.useState<any>(null);
 
  React.useEffect(() => {
-  (async function () {
-   const data = await getJson({ url: `${process.env.REACT_APP_API_ENDPOINT}` });
-   const formattersLeaders = await getTopScores(data);
-   setTopPlayers(formattersLeaders);
-  })();
+  const colRef = collection(db, 'players');
+  const q = query(colRef, orderBy('score', 'asc'));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+   setSnapshot(querySnapshot);
+  });
+  return () => {
+   unsubscribe();
+  };
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, []);
 
+ React.useEffect(() => {
+  setLoading(true);
+  const topPlayers: any = [];
+  snapShot?.docs.forEach((doc: any) => {
+   topPlayers.push({ ...doc.data(), id: doc.id });
+  });
+  setTopPlayers(topPlayers);
+  setLoading(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, [snapShot]);
+
  return (
   <div className={classes.Root}>
-   {status === HttpsStatus.LOADING ? (
+   {loading ? (
     <span>Loading...</span>
    ) : (
     <div>
-     <h1 className="text-xl font-bold"> Leaders</h1>
-
      <table>
       <tbody className={classes.Players}>
        <tr>
@@ -39,15 +52,13 @@ const TopPlayers = () => {
        </tr>
        {topPlayers.map((player, index) => {
         const isWinner = index === 0;
-        const [name] = Object.keys(player);
-        const score = player[name];
         return (
-         <tr key={`${name}_${score}`}>
+         <tr key={`${player.id}`}>
           <td className={`text-xs  ${isWinner ? classes.WithImage : ''}`}>
            {isWinner && <CrownIcon />}
-           {name}
+           {player.name}
           </td>
-          <td className="text-xs ">{score}</td>
+          <td className="text-xs ">{player.score}</td>
          </tr>
         );
        })}

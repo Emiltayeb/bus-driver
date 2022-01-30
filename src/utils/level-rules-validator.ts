@@ -8,7 +8,7 @@ const redOrBlackValidator = (userChoice: UserChoiceOptions, cardsForLevel: CardT
 };
 
 // Level - 2
-const aboveOrBelowValidator = (userChoice: UserChoiceOptions, cardsForLevel: AboveOrBelowCards) => {
+const aboveOrBelowValidator = (userChoice: UserChoiceOptions, cardsForLevel: AboveOrBelowCards, setIsWonGame: any) => {
  const redOrBlackCard = parseInt(formatCard(cardsForLevel.redOrBlackLastCard));
  const drawnCardValue = parseInt(formatCard(cardsForLevel.currentCard));
 
@@ -17,12 +17,17 @@ const aboveOrBelowValidator = (userChoice: UserChoiceOptions, cardsForLevel: Abo
  } else if (userChoice === 'bellow') {
   return drawnCardValue < redOrBlackCard;
  } else {
+  setIsWonGame(true);
   return drawnCardValue === redOrBlackCard;
  }
 };
 
 // Level - 3
-const insideOrOutsideValidator = (userChoice: UserChoiceOptions, cardsForLevel: InsideOrOutsideCards) => {
+const insideOrOutsideValidator = (
+ userChoice: UserChoiceOptions,
+ cardsForLevel: InsideOrOutsideCards,
+ setIsWonGame: any
+) => {
  let highestCard, lowestCard;
  const redOrBlackCard = parseInt(formatCard(cardsForLevel.redOrBlackLastCard));
  const aboveOrBelowCard = parseInt(formatCard(cardsForLevel.aboveOrBelowLastCard));
@@ -37,6 +42,7 @@ const insideOrOutsideValidator = (userChoice: UserChoiceOptions, cardsForLevel: 
  } else if (userChoice === 'inside') {
   return currentCard < highestCard && currentCard > lowestCard;
  } else {
+  setIsWonGame(true);
   return currentCard === redOrBlackCard || currentCard === aboveOrBelowCard;
  }
 };
@@ -67,7 +73,7 @@ const getCardForLevel = (cardsInGame: CardType[][], level: number) => {
   }
  }
 };
-export function validateLevel({ level, userChoice, cardsInGame }: ValidateLevelType) {
+export function validateLevel({ level, userChoice, cardsInGame, setIsWonGame }: ValidateLevelType) {
  const cardForLevel = getCardForLevel(cardsInGame, level);
  if (!cardForLevel) return false;
 
@@ -75,10 +81,10 @@ export function validateLevel({ level, userChoice, cardsInGame }: ValidateLevelT
   return redOrBlackValidator(userChoice, cardForLevel as CardType);
  }
  if (level === Levels.ABOVE_BELOW) {
-  return aboveOrBelowValidator(userChoice, cardForLevel as AboveOrBelowCards);
+  return aboveOrBelowValidator(userChoice, cardForLevel as AboveOrBelowCards, setIsWonGame);
  }
  if (level === Levels.INSIDE_OUTSIDE) {
-  return insideOrOutsideValidator(userChoice, cardForLevel as InsideOrOutsideCards);
+  return insideOrOutsideValidator(userChoice, cardForLevel as InsideOrOutsideCards, setIsWonGame);
  }
  return false;
 }

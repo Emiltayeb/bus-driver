@@ -5,7 +5,6 @@
  display: flex;
  flex-direction: column;
  align-items: flex-start;
-
  gap: 1rem;
  min-width: unquote('min(80vw, 320px)');
  margin: 0 auto;
@@ -43,7 +42,11 @@
    pointer-events: none;
   }
  }
-
+ .ActionButtons {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+ }
  .Success {
   color: $success-primary;
  }
