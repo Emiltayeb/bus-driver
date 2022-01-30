@@ -50,7 +50,6 @@
     ]
   },
   "devDependencies": {
-    "@types/gsap": "^3.0.0",
     "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "^16.11.17",
