@@ -10,8 +10,12 @@ const HowToPlayModal = () => {
    <section className="mb-6">
     <h1 className="font-bold mb-1">Score:</h1>
 
-    <p className="text-xs">Your score is calculated by the total game time + number of cards used.</p>
-    <p className="text-xs">Your goal is to finish all 4 levels at the shortest time.</p>
+    <p className="text-xs">
+     Your score is calculated by the total game time + number of cards used.
+    </p>
+    <p className="text-xs">
+     Your goal is to finish all 4 levels at the shortest time.
+    </p>
    </section>
 
    <section className={classes.LevelsSection}>
@@ -21,7 +25,8 @@ const HowToPlayModal = () => {
     <ol className={classes.Levels}>
      <li className={classes.Content}>
       <p className="text-xs">
-       1: <span className="text-red-600">Red</span> Or Black? that's it. nothing complicated here.
+       1: <span className="text-red-600">Red</span> Or Black? that's it. nothing
+       complicated here.
       </p>
      </li>
      <li className={`${classes.CardImage} ${classes.RedOrBlackCards}`}>
@@ -30,9 +35,13 @@ const HowToPlayModal = () => {
 
      <li className={`${classes.Content} self-center`}>
       <p className="text-xs ">2: Above, Below or On?</p>
-      <p className="text-xs ">Will the next card be higher, lower or exactly the value of the card from level 1</p>
-
-      <p className="text-xs font-bold">Pay &hearts; choosing "on" and Guessing correctly win the game!</p>
+      <p className="text-xs ">
+       Will the next card be higher, lower or exactly the value of the card from
+       level 1
+      </p>
+      <p className="text-xs font-bold">
+       Pay &hearts; choosing "on" and Guessing correctly win the game!
+      </p>
      </li>
      <li className={`${classes.CardImage} ${classes.OnCards}`}>
       <OnCards />
@@ -40,7 +49,9 @@ const HowToPlayModal = () => {
 
      <li className={classes.Content}>
       <p className="text-xs">3: Inside, Outside or On?</p>
-      <p className="text-xs ">Will the next card be higher, lower or exactly the value of the card from level 1</p>
+      <p className="text-xs ">
+       Will the next card be higher, lower or equal to the card from level 1.
+      </p>
      </li>
 
      <li className={classes.Content}>

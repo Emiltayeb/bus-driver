@@ -39,6 +39,7 @@ const GameScreen = function () {
    console.log(currentHighScore);
    setCurrentUserHighScore(currentHighScore);
   });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [loading]);
  return (
   <AnimatedPage className={classes.Root}>
