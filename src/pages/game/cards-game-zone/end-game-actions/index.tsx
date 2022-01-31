@@ -27,12 +27,13 @@ const shouldDisplayHighScore = function (
  return { show: false, newRecord: false };
 };
 
+// TODO: Too messt with prettier.
+
 const EndGameActions = (props: any) => {
  const { openModal } = useModalContext();
  const { resetGame } = useGameContext();
  const { currentGameTime } = useStopWatchContext();
  const [user] = useAuthState(auth);
-
  const { isWonGame, gameScore, cardsInDeck, currentUserHighScore } = props;
 
  const { show: showFinalScore, newRecord } = shouldDisplayHighScore(
@@ -40,6 +41,7 @@ const EndGameActions = (props: any) => {
   gameScore,
   isWonGame
  );
+
  return (
   <motion.div
    initial={{ opacity: 0, x: '10px' }}

@@ -13,7 +13,7 @@ interface GameDefaults {
 
 const gameDefaults: GameDefaults = {
  name: 'Bus Driver',
- totalLevels: 1,
+ totalLevels: 4,
  levelButtonsOptions: {
   0: [{ text: 'red' }, { text: 'black' }],
   1: [
