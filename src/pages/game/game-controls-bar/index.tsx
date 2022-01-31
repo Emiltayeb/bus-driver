@@ -4,6 +4,7 @@ import { useGameContext } from 'context/game-context';
 import { Link } from 'react-router-dom';
 import HelpIcon from 'assets/control-bar-icons/Help.svg';
 import ReplayIcon from 'assets/control-bar-icons/Replay.svg';
+import TopPlayersIcon from 'assets/control-bar-icons/top-players.svg';
 import HowToPlayModal from 'components/how-to-play';
 import { useModalContext } from 'context/modal.context';
 import TopPlayers from 'components/top-players/intex';
@@ -45,7 +46,7 @@ const GameControlsBar = function () {
       </button>
 
       <button
-       className="text-xs"
+       className={`text-xs ${classes.TopPlayers}`}
        onClick={async () => {
         openModal({
          title: 'Top Players',
@@ -56,6 +57,7 @@ const GameControlsBar = function () {
        }}
       >
        Top Players
+       <img src={TopPlayersIcon} alt="Top PLayers Icon" />
       </button>
      </div>
     </div>

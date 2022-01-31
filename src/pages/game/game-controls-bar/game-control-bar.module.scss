@@ -17,19 +17,35 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
 
  .Container {
   @include container($container-max-width);
-  @include flex(null, space-between, center, wrap);
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1.5fr 1.5fr;
+  // @include flex(null, space-between, center, wrap);
+ }
 
-  .Logo {
-   @include borderMe();
-  }
+ .Logo {
+  @include borderMe();
+  justify-self: flex-start;
+ }
 
-  .buttons {
-   display: flex;
-   @include flex(null, center, center, null, 1rem);
-   button {
-    @include borderMe();
-    @include button-with-image();
+ .buttons {
+  display: flex;
+  @include flex(null, space-evenly, center, null, 1rem);
+  button {
+   &:first-child {
+    flex: 0.5;
    }
+   flex: 1;
+
+   justify-content: center;
+
+   &.TopPlayers {
+    img {
+     max-width: 50px;
+    }
+   }
+   @include borderMe();
+   @include button-with-image();
   }
  }
 }
@@ -42,10 +58,34 @@ $primary-button-color: rgba(255, 255, 255, 0.8);
  }
 }
 
-@include media('<344px') {
+@include media('<=756px') {
  .Root {
   .Container {
-   flex-direction: column;
+   grid-template-columns: 1fr 2fr;
+  }
+  .buttons button {
+   font-size: 13px;
+   &.TopPlayers {
+    img {
+     max-width: 30px;
+    }
+   }
+  }
+ }
+}
+
+@include media('<=561px') {
+ .Root {
+  .Container {
+   grid-template-columns: 1fr;
+   justify-content: center;
+  }
+
+  .Logo {
+   justify-self: center;
+  }
+  .buttons button {
+   font-size: 3vw;
   }
  }
 }

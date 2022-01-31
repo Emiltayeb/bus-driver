@@ -7,4 +7,10 @@
  display: grid;
  place-content: center;
  text-align: center;
+
+ a {
+  @include shared-button;
+  width: fit-content;
+  margin: 0 auto;
+ }
 }

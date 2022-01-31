@@ -15,7 +15,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 const OpeningScreen = function () {
  const { resetGame } = useGameContext();
  const { openModal } = useModalContext();
- const [user] = useAuthState(auth);
+ const [user, loading] = useAuthState(auth);
 
  React.useEffect(() => {
   resetGame();
@@ -55,7 +55,13 @@ const OpeningScreen = function () {
     {gameDefaults.name}
    </h1>
 
-   {user ? withUser : noUser}
+   {loading ? (
+    <span className="text-white">Loading Sign in methods..</span>
+   ) : user ? (
+    withUser
+   ) : (
+    noUser
+   )}
    <button
     className="bg-white  px-7 py-2 rounded-full "
     onClick={() =>
@@ -64,7 +70,6 @@ const OpeningScreen = function () {
    >
     Leader Board
    </button>
-   {/* openModal({title:"..",component:'<HowToPaly/>}) */}
    <button
     onClick={() =>
      openModal({ title: 'How To Play', component: <HowToPlay /> })

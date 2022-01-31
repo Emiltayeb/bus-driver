@@ -33,7 +33,7 @@ const TopPlayers = () => {
 
  return (
   <div className={classes.Root}>
-   {loading ? (
+   {loading || topPlayers.length === 0 ? (
     <span>Loading...</span>
    ) : (
     <div>

@@ -7,6 +7,9 @@ import { auth } from 'firebase-config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import classes from './sign-in.module.scss';
+import { Link } from 'react-router-dom';
+
+// TODO:  if you allow email and password - make sure to daa (allready have an acoount?..)
 
 // Configure FirebaseUI.
 const uiConfig = {
@@ -36,6 +39,9 @@ function SignInScreen() {
    {user === null && (
     <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
    )}
+   <Link to="/" className="text-white text-xl">
+    Back to home
+   </Link>
   </div>
  );
 }

@@ -18,6 +18,8 @@ interface GameContextInterface {
  topPlayers: TopScore[];
  setTopPlayers: React.Dispatch<React.SetStateAction<TopScore[]>>;
  setIsWonGame: React.Dispatch<React.SetStateAction<boolean>>;
+ currentUserHighScore: number | null;
+ setCurrentUserHighScore: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const GameContext = React.createContext<GameContextInterface>({
@@ -33,19 +35,24 @@ const GameContext = React.createContext<GameContextInterface>({
  setGameScore: () => {},
  topPlayers: [],
  setTopPlayers: () => {},
- setIsWonGame: () => {}
+ setIsWonGame: () => {},
+ currentUserHighScore: null,
+ setCurrentUserHighScore: () => {}
 });
 
 const GameContextProvider: React.FC = ({ children }) => {
  const { setCardsInGame, creatDeck, cardsInDeck } = useCardsContext();
+ const { reset: resetStopWatch } = useStopWatchContext();
  const [level, setLevel] = React.useState(0);
  const [currentLostLevel, setLostLevel] = React.useState<number | null>(null);
  const [isWonGame, setIsWonGame] = React.useState(false);
  const [isLostGame, setIsLostGame] = React.useState(false);
  const [gameScore, setGameScore] = React.useState<number | null>(null);
- const { reset: resetStopWatch } = useStopWatchContext();
- //  stop watch
  const [topPlayers, setTopPlayers] = React.useState<TopScore[]>([]);
+ const [currentUserHighScore, setCurrentUserHighScore] = React.useState<
+  number | null
+ >(null);
+ //  stop watch
 
  // win or lose - here we need to cac score
 
@@ -103,7 +110,9 @@ const GameContextProvider: React.FC = ({ children }) => {
     setGameScore,
     topPlayers,
     setTopPlayers,
-    setIsWonGame
+    setIsWonGame,
+    currentUserHighScore,
+    setCurrentUserHighScore
    }}
   >
    {children}
