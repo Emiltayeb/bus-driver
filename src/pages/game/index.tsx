@@ -36,7 +36,6 @@ const GameScreen = function () {
   getDocs(highScoreQuery).then((doc) => {
    const currentHighScore = doc.docs[0].data().score;
    if (!currentHighScore) return;
-   console.log(currentHighScore);
    setCurrentUserHighScore(currentHighScore);
   });
   // eslint-disable-next-line react-hooks/exhaustive-deps

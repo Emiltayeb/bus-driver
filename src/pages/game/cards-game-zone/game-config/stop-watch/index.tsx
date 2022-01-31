@@ -8,7 +8,13 @@ import { useStopWatchContext } from 'context/stop-watch';
 
 const StopWatch = () => {
  const { isLostGame, isWonGame, setGameScore } = useGameContext();
- const { isStopWatchActive, setIsStopWatchActive, isReset, setIsReset, setCurrentGameTime } = useStopWatchContext();
+ const {
+  isStopWatchActive,
+  setIsStopWatchActive,
+  isReset,
+  setIsReset,
+  setCurrentGameTime
+ } = useStopWatchContext();
  const [stopWatchTime, setStopWatchTime] = React.useState(0);
  const { cardsInDeck } = useCardsContext();
 
@@ -24,6 +30,7 @@ const StopWatch = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [isLostGame, isWonGame]);
 
+ console.log(isReset);
  React.useEffect(() => {
   let interval: NodeJS.Timer | null = null;
   if (isStopWatchActive) {
@@ -35,6 +42,7 @@ const StopWatch = () => {
   }
   return () => {
    interval && clearInterval(interval);
+   setIsReset(false);
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [isStopWatchActive]);

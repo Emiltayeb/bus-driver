@@ -8,6 +8,8 @@ import { useModalContext } from 'context/modal.context';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'firebase-config';
 import { Link } from 'react-router-dom';
+import { useGameContext } from 'context/game-context';
+import { useStopWatchContext } from 'context/stop-watch';
 
 const shouldDisplayHighScore = function (
  currentUserHighScore: number | null,
@@ -27,16 +29,11 @@ const shouldDisplayHighScore = function (
 
 const EndGameActions = (props: any) => {
  const { openModal } = useModalContext();
+ const { resetGame } = useGameContext();
+ const { currentGameTime } = useStopWatchContext();
  const [user] = useAuthState(auth);
 
- const {
-  isWonGame,
-  gameScore,
-  currentGameTime,
-  cardsInDeck,
-  resetGame,
-  currentUserHighScore
- } = props;
+ const { isWonGame, gameScore, cardsInDeck, currentUserHighScore } = props;
 
  const { show: showFinalScore, newRecord } = shouldDisplayHighScore(
   currentUserHighScore,

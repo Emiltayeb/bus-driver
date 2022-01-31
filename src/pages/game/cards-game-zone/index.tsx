@@ -5,7 +5,6 @@ import classes from './card-game-zone.module.scss';
 import GameConfig from './game-config';
 import { useGameContext } from 'context/game-context';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useStopWatchContext } from 'context/stop-watch';
 import GamePlatform from './game-platform';
 import EndGameActions from './end-game-actions';
 
@@ -16,14 +15,12 @@ const CardsGameZone = function () {
  const { cardsInDeck, cardsInGame } = useCardsContext();
  const {
   isWonGame,
-  resetGame,
   isLostGame,
   gameScore,
   currentLostLevel,
   level,
   currentUserHighScore
  } = useGameContext();
- const { currentGameTime } = useStopWatchContext();
 
  return (
   <div className={classes.Root}>
@@ -42,9 +39,7 @@ const CardsGameZone = function () {
      <EndGameActions
       isWonGame={isWonGame}
       gameScore={gameScore}
-      currentGameTime={currentGameTime}
       cardsInDeck={cardsInDeck}
-      resetGame={resetGame}
       currentUserHighScore={currentUserHighScore}
      />
     ) : (

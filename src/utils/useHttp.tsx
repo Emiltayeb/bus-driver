@@ -39,7 +39,6 @@ const useHttps = function () {
    setStatus(HttpsStatus.COMPLETED);
   } catch (error: any) {
    setStatus(HttpsStatus.ERROR);
-   console.log(error.message);
   }
  };
  const getJson = async function ({ url, method = 'GET', body }: UseHttpProps) {
