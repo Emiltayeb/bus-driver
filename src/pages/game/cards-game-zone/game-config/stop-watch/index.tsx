@@ -30,7 +30,6 @@ const StopWatch = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [isLostGame, isWonGame]);
 
- console.log(isReset);
  React.useEffect(() => {
   let interval: NodeJS.Timer | null = null;
   if (isStopWatchActive) {

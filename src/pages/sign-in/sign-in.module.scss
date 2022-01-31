@@ -8,9 +8,18 @@
  place-content: center;
  text-align: center;
 
+ a,
+ button {
+  @include round-me(35px);
+  padding: 0.5rem;
+  justify-self: center;
+ }
  a {
-  @include shared-button;
-  width: fit-content;
-  margin: 0 auto;
+  background: black;
+  color: white;
+ }
+ .SwitchAccount {
+  background: white;
+  color: black;
  }
 }

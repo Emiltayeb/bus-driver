@@ -54,28 +54,34 @@ const EndGameActions = (props: any) => {
    className={classes.CompleteGameMessage}
   >
    <h1 className={classes.Header}>
-    {newRecord && user
-     ? 'New High Score!'
-     : isWonGame
-     ? 'Well Done! '
-     : 'You Lost.'}
+    {newRecord && user ? (
+     <span>
+      New High Score!{' '}
+      <Badge classes={classes.FinalGameScore}>{gameScore}</Badge>
+     </span>
+    ) : isWonGame ? (
+     'Well Done! '
+    ) : (
+     'You Lost.'
+    )}
    </h1>
    <div className={`${classes.ScoreDetails} text-xs  md:text-sm`}>
-    <p>
-     Calculated Score:
-     <Badge classes={classes.FinalGameScore}>{gameScore}</Badge>
-     <span className={classes.Calculation}>
-      ({formatTime(currentGameTime)} seconds + {getCardUsed(cardsInDeck)} Card
-      Used)
-     </span>
-    </p>
-    {!newRecord && user && (
-     <p>
-      {' '}
-      You didn't beat your current Record <Badge>{currentUserHighScore}</Badge>
-     </p>
+    {!newRecord && (
+     <>
+      Score:
+      <Badge classes={classes.FinalGameScore}>{gameScore}</Badge>
+     </>
     )}
+    <span className={classes.Calculation}>
+     ({formatTime(currentGameTime)} seconds + {getCardUsed(cardsInDeck)} Card
+     Used)
+    </span>
    </div>
+   {!newRecord && user && (
+    <p className="text-xs  md:text-sm">
+     You didn't beat your current Record <Badge>{currentUserHighScore}</Badge>
+    </p>
+   )}
    <div className={classes.EndGameButtons}>
     <button onClick={resetGame}>Replay?</button>
     {showFinalScore &&

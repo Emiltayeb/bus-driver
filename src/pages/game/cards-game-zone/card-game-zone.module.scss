@@ -64,6 +64,8 @@ $lose-primary: #f06262;
  a {
   @include shared-button;
  }
+ @include media('<=tablet') {
+ }
 }
 .ScoreDetails {
  margin-bottom: 10px;
@@ -71,6 +73,12 @@ $lose-primary: #f06262;
   display: inline-block;
   margin: 0 5px;
   padding: 0 5px;
+ }
+
+ @include media('<=tablet') {
+  display: flex;
+  align-items: center;
+  justify-content: center;
  }
  .Calculation {
   font-size: 0.65rem;
@@ -81,6 +89,7 @@ $lose-primary: #f06262;
  }
 }
 .EndGameButtons {
+ margin-top: 5px;
  display: flex;
  gap: 1rem;
  justify-content: center;
