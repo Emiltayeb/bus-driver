@@ -25,9 +25,7 @@ const StopWatch = () => {
  React.useEffect(() => {
   switch (stopWatchState) {
    case StopWatchState.ACTIVE:
-    console.log('Active');
     stopWatchIntervalRef.current = setInterval(() => {
-     console.log('clock ticking..');
      setStopWatchTime((currentGameTime) => currentGameTime + 10);
     }, 10);
     break;
@@ -35,7 +33,6 @@ const StopWatch = () => {
     clearInterval(stopWatchIntervalRef.current);
     break;
    case StopWatchState.RESET:
-    console.log('reset :(');
     setStopWatchTime(0);
     clearInterval(stopWatchIntervalRef.current);
     setStopWatchState(StopWatchState.ACTIVE);

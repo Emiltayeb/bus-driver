@@ -10,10 +10,10 @@ const HowToPlayModal = () => {
     <h1 className="font-bold mb-1">Score:</h1>
 
     <p className="text-xs">
-     Your score is calculated by the total game time + number of cards used.
+     Your Score is based on total game time + number of cards used.
     </p>
     <p className="text-xs">
-     Your goal is to finish all 4 levels at the shortest time.
+     The goal is to complete all 4 levels in the shortest time possible.
     </p>
    </section>
 
@@ -24,8 +24,8 @@ const HowToPlayModal = () => {
     <ol className={classes.Levels}>
      <li className={classes.Content}>
       <p className="text-xs">
-       1: <span className="text-red-600">Red</span> Or Black? that's it. nothing
-       complicated here.
+       1: <span className="text-red-600">Red</span> Or Black? That's all. Easy
+       peasy.
       </p>
      </li>
      <li className={`${classes.CardImage} ${classes.RedOrBlackCards}`}>
@@ -35,11 +35,11 @@ const HowToPlayModal = () => {
      <li className={`${classes.Content} self-center`}>
       <p className="text-xs ">2: Above, Below or On?</p>
       <p className="text-xs ">
-       Will the next card be higher, lower or exactly the value of the card from
-       level 1
+       Does the next card have a higher, lower, or exactly the same value as the
+       one from level 1?
       </p>
       <p className="text-xs font-bold">
-       Pay &hearts; choosing "on" and Guessing correctly win the game!
+       Pay &hearts; If you correctly guess "on", you win!
       </p>
      </li>
      <li className={`${classes.CardImage} ${classes.OnCards}`}>
@@ -48,8 +48,11 @@ const HowToPlayModal = () => {
 
      <li className={classes.Content}>
       <p className="text-xs">3: Inside, Outside or On?</p>
-      <p className="text-xs ">
-       Will the next card be higher, lower or equal to the card from level 1.
+      <p className="text-xs">
+       The next card will be within or outside the range between the card from
+       level 1 and the card from level 2?
+       <br />
+       Or will it be the exact value of each card?
       </p>
      </li>
 
