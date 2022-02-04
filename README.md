@@ -1,4 +1,4 @@
-<img src ="../bus-driver/src/assets/cards/on-cards.svg" style="max-height:100px;display:inline"/>
+<img src ="./src/assets/cards/on-cards.svg" style="max-height:100px;display:inline"/>
 
 # [Buss Driver](https://bus-driver.netlify.app/)- card game
 
