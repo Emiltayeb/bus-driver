@@ -6,8 +6,8 @@ import 'firebase/compat/auth';
 import { auth } from 'firebase-config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import classes from './sign-in.module.scss';
-import { Link } from 'react-router-dom';
-import { FacebookAuthProvider, signOut } from 'firebase/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import { FacebookAuthProvider } from 'firebase/auth';
 
 // TODO:  if you allow email and password - make sure to daa (allready have an acoount?..)
 
@@ -25,6 +25,14 @@ const uiConfig = {
 
 function SignInScreen() {
  const [user] = useAuthState(auth);
+
+ const navigate = useNavigate();
+
+ React.useEffect(() => {
+  if (!user) return;
+  navigate('/');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, [user]);
  return (
   <div className={classes.Root}>
    {user === null && (
@@ -34,28 +42,9 @@ function SignInScreen() {
     </>
    )}
 
-   {user ? (
-    <div className="text-white text-center flex flex-col items-center justify-center">
-     <img
-      src={user.photoURL as string}
-      className="rounded-full mb-2"
-      alt="User Profile"
-     />
-     <h1 className="md:text-4xl text-3xl mb-2">Hey {user.displayName}</h1>
-     <div className="w-full flex gap-4">
-      <Link to="/game" className={classes.StartGame}>
-       Start Game
-      </Link>
-      <button className={classes.SwitchAccount} onClick={() => signOut(auth)}>
-       Switch Account
-      </button>
-     </div>
-    </div>
-   ) : (
-    <Link to="/" className="text-white text-sm">
-     Back to home
-    </Link>
-   )}
+   <Link to="/" className="text-white text-sm">
+    Back to home
+   </Link>
   </div>
  );
 }

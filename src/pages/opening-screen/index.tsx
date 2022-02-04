@@ -51,12 +51,15 @@ const OpeningScreen = function () {
  return (
   <AnimatedPage className={`container mx-auto px-4 ${classes.Root}`}>
    {/* Rest */}
-   {user && user.photoURL && (
-    <img
-     src={user.photoURL as string}
-     className="rounded-full m-auto"
-     alt="Profile"
-    />
+   {user && (
+    <div className="flex items-center justify-center gap-3">
+     <img
+      src={user.photoURL as string}
+      className="rounded-full max-h-10"
+      alt="Profile"
+     />
+     <h2 className="text-white">{user.displayName}</h2>
+    </div>
    )}
    <h1 className="text-white font-bold text-4xl md:text-6xl">
     {gameDefaults.name}
