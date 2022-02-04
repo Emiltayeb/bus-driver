@@ -13,6 +13,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 const GameScreen = function () {
  const { resetGame, setTopPlayers, setCurrentUserHighScore } = useGameContext();
  const [user, loading] = useAuthState(auth);
+
  //  start game on entering game  screen
  React.useEffect(() => {
   //  sign user so he can submit score
@@ -34,7 +35,7 @@ const GameScreen = function () {
   const colRef = collection(db, 'players');
   const highScoreQuery = query(colRef, where('name', '==', user?.displayName));
   getDocs(highScoreQuery).then((doc) => {
-   const currentHighScore = doc.docs[0].data().score;
+   const currentHighScore = doc.docs[0]?.data?.()?.score;
    if (!currentHighScore) return;
    setCurrentUserHighScore(currentHighScore);
   });

@@ -9,7 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'firebase-config';
 import { Link } from 'react-router-dom';
 import { useGameContext } from 'context/game-context';
-import { useStopWatchContext } from 'context/stop-watch';
+import { StopWatchState, useStopWatchContext } from 'context/stop-watch';
 
 const shouldDisplayHighScore = function (
  currentUserHighScore: number | null,
@@ -32,15 +32,19 @@ const shouldDisplayHighScore = function (
 const EndGameActions = (props: any) => {
  const { openModal } = useModalContext();
  const { resetGame } = useGameContext();
- const { currentGameTime } = useStopWatchContext();
+ const { currentGameTime, setStopWatchState } = useStopWatchContext();
  const [user] = useAuthState(auth);
  const { isWonGame, gameScore, cardsInDeck, currentUserHighScore } = props;
-
  const { show: showFinalScore, newRecord } = shouldDisplayHighScore(
   currentUserHighScore,
   gameScore,
   isWonGame
  );
+
+ const onResetClick = function () {
+  resetGame();
+  setStopWatchState(StopWatchState.RESET);
+ };
 
  return (
   <motion.div
@@ -79,13 +83,13 @@ const EndGameActions = (props: any) => {
      Used)
     </span>
    </div>
-   {!newRecord && user && (
+   {!newRecord && user && currentUserHighScore && (
     <p className="text-xs  md:text-sm">
      You didn't beat your current Record <Badge>{currentUserHighScore}</Badge>
     </p>
    )}
    <div className={classes.EndGameButtons}>
-    <button onClick={resetGame}>Replay?</button>
+    <button onClick={onResetClick}>Replay?</button>
     {showFinalScore &&
      (user ? (
       <button

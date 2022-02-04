@@ -8,14 +8,18 @@ import TopPlayersIcon from 'assets/control-bar-icons/top-players.svg';
 import HowToPlayModal from 'components/how-to-play';
 import { useModalContext } from 'context/modal.context';
 import TopPlayers from 'components/top-players/intex';
-import { useStopWatchContext } from 'context/stop-watch';
+import { StopWatchState, useStopWatchContext } from 'context/stop-watch';
 
 const GameControlsBar = function () {
  const { resetGame, isLostGame, isWonGame } = useGameContext();
- const { setIsStopWatchActive } = useStopWatchContext();
+ const { setStopWatchState } = useStopWatchContext();
  const isGameACtive = !isLostGame && !isWonGame;
  const { openModal } = useModalContext();
 
+ const onResetClick = function () {
+  setStopWatchState(StopWatchState.RESET);
+  resetGame();
+ };
  return (
   <>
    {/* Content */}
@@ -26,7 +30,7 @@ const GameControlsBar = function () {
       Bus Driver
      </Link>
      <div className={classes.buttons}>
-      <button className="text-xs" onClick={resetGame}>
+      <button className="text-xs" onClick={onResetClick}>
        Restart
        <img src={ReplayIcon} alt="ReplayIcon" />
       </button>
@@ -36,8 +40,8 @@ const GameControlsBar = function () {
         openModal({
          title: 'How To Play',
          component: <HowToPlayModal />,
-         onOpen: () => setIsStopWatchActive(false),
-         onClose: () => isGameACtive && setIsStopWatchActive(true)
+         onOpen: () => setStopWatchState(StopWatchState.PAUSED),
+         onClose: () => isGameACtive && setStopWatchState(StopWatchState.ACTIVE)
         });
        }}
       >
@@ -51,8 +55,8 @@ const GameControlsBar = function () {
         openModal({
          title: 'Top Players',
          component: <TopPlayers />,
-         onOpen: () => setIsStopWatchActive(false),
-         onClose: () => isGameACtive && setIsStopWatchActive(true)
+         onOpen: () => setStopWatchState(StopWatchState.PAUSED),
+         onClose: () => isGameACtive && setStopWatchState(StopWatchState.ACTIVE)
         });
        }}
       >

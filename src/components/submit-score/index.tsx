@@ -1,6 +1,7 @@
 import TopPlayers from 'components/top-players/intex';
 import { useGameContext } from 'context/game-context';
 import { useModalContext } from 'context/modal.context';
+import { StopWatchState, useStopWatchContext } from 'context/stop-watch';
 import { auth, db } from 'firebase-config';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import React from 'react';
@@ -16,9 +17,8 @@ enum LoadingStatus {
 const getMEssage = function getMEssage(
  status: number,
  gameScore: number | null,
- resetGame: () => void,
- closeModal: () => void,
- openModal: ({ title, component, open, onOpen, onClose }: any) => void
+ openModal: ({ title, component, open, onOpen, onClose }: any) => void,
+ onReplayClick: () => void
 ) {
  switch (status) {
   case LoadingStatus.LOADING:
@@ -29,14 +29,7 @@ const getMEssage = function getMEssage(
      <span className={classes.Error}>
       Sorry, result wasn't save. try again later.
      </span>
-     <button
-      onClick={() => {
-       closeModal();
-       resetGame();
-      }}
-     >
-      Replay?
-     </button>
+     <button onClick={onReplayClick}>Replay?</button>
     </>
    );
   case LoadingStatus.COMPLETED: {
@@ -46,15 +39,7 @@ const getMEssage = function getMEssage(
       <p className={classes.Success}> Score saved! </p>go ahead and play again
      </span>
      <div className={classes.ActionButtons}>
-      <button
-       onClick={() => {
-        closeModal();
-        resetGame();
-       }}
-      >
-       {' '}
-       Replay?
-      </button>
+      <button onClick={onReplayClick}>Replay?</button>
 
       <button
        onClick={() => {
@@ -74,6 +59,7 @@ const getMEssage = function getMEssage(
 
 const SubmitScore = () => {
  const { gameScore, setGameScore, resetGame, topPlayers } = useGameContext();
+ const { setStopWatchState } = useStopWatchContext();
  const [user] = useAuthState(auth);
  const [loading, setLoading] = React.useState(LoadingStatus.INITIAL);
  const { closeModal, openModal } = useModalContext();
@@ -106,6 +92,12 @@ const SubmitScore = () => {
   }
  };
 
+ const onReplayClick = () => {
+  closeModal();
+  resetGame();
+  setStopWatchState(StopWatchState.RESET);
+ };
+
  React.useEffect(() => {
   submitScore();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -113,7 +105,7 @@ const SubmitScore = () => {
 
  return (
   <div className={classes.Root}>
-   {getMEssage(loading, gameScore, resetGame, closeModal, openModal)}
+   {getMEssage(loading, gameScore, openModal, onReplayClick)}
   </div>
  );
 };

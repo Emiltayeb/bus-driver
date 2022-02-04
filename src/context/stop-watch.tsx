@@ -1,37 +1,44 @@
 import React from 'react';
 
+export enum StopWatchState {
+ PAUSED,
+ RESET,
+ ACTIVE
+}
 interface StopWatchContextType {
  isStopWatchActive: boolean;
  setIsStopWatchActive: React.Dispatch<React.SetStateAction<boolean>>;
  setCurrentGameTime: React.Dispatch<React.SetStateAction<number>>;
  currentGameTime: number;
- reset: any;
- isReset: boolean;
- setIsReset: React.Dispatch<React.SetStateAction<boolean>>;
+ stopWatchState: StopWatchState;
+ setStopWatchState: React.Dispatch<React.SetStateAction<StopWatchState>>;
 }
 const StopWatchContext = React.createContext<StopWatchContextType>({
  isStopWatchActive: false,
  setIsStopWatchActive: () => {},
  currentGameTime: 0,
  setCurrentGameTime: () => {},
- reset: () => {},
- isReset: false,
- setIsReset: () => {}
+ stopWatchState: StopWatchState.ACTIVE,
+ setStopWatchState: () => {}
 });
 
 export const StopWatchContextProvider: React.FC = function ({ children }) {
- const [isStopWatchActive, setIsStopWatchActive] = React.useState(false);
+ const [isStopWatchActive, setIsStopWatchActive] = React.useState(true);
  const [currentGameTime, setCurrentGameTime] = React.useState(0);
- const [isReset, setIsReset] = React.useState(false);
+ const [stopWatchState, setStopWatchState] = React.useState(
+  StopWatchState.ACTIVE
+ );
 
- const reset = function () {
-  setCurrentGameTime(0);
-  setIsStopWatchActive(true);
-  setIsReset(true);
- };
  return (
   <StopWatchContext.Provider
-   value={{ isStopWatchActive, setIsStopWatchActive, setCurrentGameTime, currentGameTime, reset, isReset, setIsReset }}
+   value={{
+    isStopWatchActive,
+    setIsStopWatchActive,
+    setCurrentGameTime,
+    currentGameTime,
+    stopWatchState,
+    setStopWatchState
+   }}
   >
    {children}
   </StopWatchContext.Provider>

@@ -2,7 +2,6 @@ import * as React from 'react';
 import gameDefaults from 'config/gameConfig';
 import { DELAY_BETWEEN_LOST_LEVEL } from 'config/layout';
 import { useCardsContext } from './card-context';
-import { useStopWatchContext } from './stop-watch';
 export type TopScore = { id: string; name: string; score: number };
 interface GameContextInterface {
  isWonGame: boolean;
@@ -42,7 +41,6 @@ const GameContext = React.createContext<GameContextInterface>({
 
 const GameContextProvider: React.FC = ({ children }) => {
  const { setCardsInGame, creatDeck, cardsInDeck } = useCardsContext();
- const { reset: resetStopWatch } = useStopWatchContext();
  const [level, setLevel] = React.useState(0);
  const [currentLostLevel, setLostLevel] = React.useState<number | null>(null);
  const [isWonGame, setIsWonGame] = React.useState(false);
@@ -86,7 +84,6 @@ const GameContextProvider: React.FC = ({ children }) => {
  };
 
  const resetGame = () => {
-  resetStopWatch();
   setLevel(0);
   setCardsInGame([]);
   creatDeck();
