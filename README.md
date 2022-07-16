@@ -8,7 +8,7 @@ Bus driver is a well known drinking game, but its also a fun game to play regard
 
 ## Game Rules
 
-The game have 4 levels.
+Bus Driver have 4 levels:
 
 1. <span style="color:red">Red</span>. Or Black? that's it. That's all. Easy
    peasy.
